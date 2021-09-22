@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label id="label_email">WhatsApp / Telegram</label>
-                        <input type="text" class="form-control telefoneform"  name="whatsapp" id="whatsapp" onblur="verificaSeExisteEmail()" >
+                        <input type="text" class="form-control telefoneform"  name="whatsapp">
                         <div class="invalid-feedback">
                             Este campo é obrigatório.
                         </div>

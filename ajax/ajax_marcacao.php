@@ -3,6 +3,7 @@
     require '../../../../wp-load.php';
     require ( get_template_directory() . '/inc/model_marcacao.php' );
     require ( get_template_directory() . '/inc/model_clientes.php' );
+    require ( get_template_directory() . '/inc/model_empresa_config.php' );
 
     /* 1 tela/load da marcação - ao clicar em Continuar na tela de Marcações */
     /* Verificando quem é o cliente e montando o JSON dos dados cadastrais. */
@@ -25,6 +26,7 @@
         $cnpjMarcacao = $_SESSION['dados_empresa'][0]->cnpj;
         $valorMarcacao = $_POST['valor'];
         $tipoMarcacao = $_POST['tipoMarcacao'];
+        
                
         $dadosMarcacao = [
             "cpf"  => $cpfMarcacao,
@@ -76,17 +78,7 @@
             echo "<pre>";
             var_dump($qtdMarcacoes);
             echo "</pre>";
-            
-            if ($configEmpresa[0]->tipo_marcacao == 'qtd'){
-                
-                if ( $configEmpresa[0]->qtd_frequencia == $qtdMarcacoes ) {
-                    echo "<br/>";
-                    echo "Cliente com Bonus. Atingiu a quantidade de $qtdMarcacoes marcações";
-                    echo "<br/>";
-                }
-                
-            }
-                           
+                                      
             
         endif;
         

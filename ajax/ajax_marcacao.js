@@ -6,7 +6,6 @@ $('#confirma_marcacaoConfere').hide();
 $('#btcVoltarMarcacaoConfere').hide();
 $('#btnMarcarConfere').hide();
 $('#btcVoltarVazio').hide();
-
 $('#confirma_marcacaoConfereSucesso').hide();
 $('#btnNovaMarcacao').hide();
 

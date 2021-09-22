@@ -7,7 +7,8 @@
     $listarCliente = listarDadosCompletosClientesLigados($_SESSION['dados_empresa'][0]->cnpj);
     $configEmpresa = listarConfiguracaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
-   
+    $percentualDaEmpresa = $configEmpresa[0]->percentual_vlrcompra;
+    
 ?>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -16,7 +17,13 @@
     </div>  
     <br/>
     
-    <?php //var_dump($configEmpresa[0]); ?>
+    <?php 
+    /*
+        echo "<pre>";
+        var_dump($configEmpresa[0]->percentual_vlrcompra);
+        echo "</pre>";
+    */
+    ?>
     
     <form>
         <div class="form-row align-items-center">
@@ -51,17 +58,14 @@
             
                 <?php 
                     $marcacoes = listarMarcacaoCliente($value->CPF,  $_SESSION['dados_empresa'][0]->cnpj); 
-                    $qtdMarcacoes = count($marcacoes);
-                    $qtdFreq = $configEmpresa[0]->qtd_frequencia;
-                    $tipoMarc = $configEmpresa[0]->tipo_marcacao == 'qtd';                   
+                    $qtdMarcacoes = count($marcacoes);                  
                 ?>
                          
-                <tr class="<?= ($qtdMarcacoes >= $qtdFreq && $tipoMarc=='qtd' ) ? "table-success" : "" ?>">                    
+                <tr>                    
                     <td><?= $value->NOME ?></td>
                     <td><?= $value->CPF ?></td>
                     <td> 
                         <?= date("d/m/Y H:i", strtotime($value->ULTMARC)) ; ?> 
-                        <?= ($qtdMarcacoes >= $qtdFreq && $tipoMarc=='qtd' ) ? ' &nbsp; <a href="#" > <i class="fa fa-star-o" aria-hidden="true"></i></a>': '' ?>                        
                     </td>
                     <td>
                         <a href="#" data-toggle="modal" data-target="#exampleModal<?= $value->id ?>">
@@ -81,21 +85,10 @@
                             </div>
                             <div class="modal-body">
                                 
-                                <?php                                 
+                                <?php  
                                     $marcacoes = listarMarcacaoCliente($value->CPF, $_SESSION['dados_empresa'][0]->cnpj);                                   
                                     $totalValor = 0;
-                                    
-                                    foreach ($marcacoes as $key => $value) {
-                                        $totalValor = doubleval($value->valormarcacao) + $totalValor;
-                                    }
-                                    
-                                    if ( ($configEmpresa[0]->tipo_marcacao) == 'cash' ) : 
-                                        $pesoPt = intval($configEmpresa[0]->ind_vlr) ;
-                                        $indPt = intval($configEmpresa[0]->ind_pontos);
-                                        $calcularPontos = ($totalValor/$pesoPt) * $indPt ;
-                                    endif;
-                                                                                                                                                                                 
-                                    $qtdMarcacoes = count($marcacoes);                                                                    
+                                                                                                                                                                                                                   
                                 ?>
                                 
                                 <div class="col-lg-12 order-lg-12 mb-4">
@@ -117,9 +110,21 @@
                                                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                                                         <div>
                                                           <h6 class="my-0"><?= date("d/m/Y H:i", strtotime($value1->datamarcacao)) ; ?></h6>
-                                                          <small class="text-muted">Outra obvervação(se precisar)</small>
+                                                          <small class="text-muted">R$ <?= $value1->valormarcacao ?> </small>
                                                         </div>
-                                                        <span class="text-muted">R$ <?= $value1->valormarcacao ?> </span>
+                                                        <span class="text-muted">
+                                                            
+                                                            <?php 
+                                                            
+                                                                $pontos = ($value1->valormarcacao *  ($percentualDaEmpresa /100));
+                                                                $pontos = number_format($pontos, 2);
+                                                                echo $pontos ." Pontos";
+                                                                $totalValor = $pontos + $totalValor;
+                                                                                                                        
+                                                            ?>
+                                                            
+                                                            
+                                                        </span>
                                                     </li>  
                                                     <?php endforeach; ?>
                                                 </ul> 
@@ -129,19 +134,12 @@
                                     
                                     <hr/>
                                     
-                                    <h5 class="d-flex justify-content-between align-items-center mb-3">                                       
-                                        <p class="text-muted">Valor Total</p>
-                                        <span class="badge badge-secondary badge-pill"> R$.: <?= $totalValor ?></span>
-                                    </h5>
-                                    
-                                    <hr/>
-                                    
                                     <?php if ( ($configEmpresa[0]->tipo_marcacao) == 'cash' ) : ?>
                                     
                                     <h5 class="d-flex justify-content-between align-items-center mb-3">                                       
                                         <p class="text-muted" >Pontos Acumulados</p>
                                         <span class="badge badge-secondary badge-pill">
-                                            PT.: <?= number_format($calcularPontos, 1); ?>
+                                           <?= number_format($totalValor, 2); ?>
                                         </span>
                                     </h5>
                                     

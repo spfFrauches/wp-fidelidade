@@ -5,31 +5,29 @@
     $carregarConfiguracaoEmpresa = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
     $tipoMarcacao = $carregarConfiguracaoEmpresa[0]->tipo_marcacao ;
+    $logoEmpresa = $_SESSION['dados_empresa'][0]->logoempsrc;
     
     if ($tipoMarcacao == 'cash') {
         $tipoMarcacao = "Cashback";
     }
-    
-    if ($tipoMarcacao == 'qtd') {
-        $tipoMarcacao = "Frequência/Qtdade";
-    }
-    
+     
 ?>
 <style>
-    
     @media (max-width:550px){      
         .topo{
             margin-top: -50px;
         }
-    }
-    
+    }  
 </style>
 
 <br/><br/>  
 
-<div class="container">
-     
+<div class="container">    
     <div class="py-5 text-center topo"> 
+        
+        <?php 
+        // var_dump($_SESSION['dados_empresa'][0]->logoempsrc);
+        ?>
         
         <?php if (!$tipoMarcacao): ?>
             <div class="alert alert-danger" role="alert">
@@ -38,8 +36,14 @@
         <?php endif; ?>
         
         <br/>
-        <!--<img class="d-block mx-auto mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72"> -->
-        <i class="fa fa-adn fa-5x" aria-hidden="true"></i>
+        
+        <?php if ($logoEmpresa != ''): ?>
+            <img class="d-block mx-auto mb-4" src="<?= $logoEmpresa ?>" alt="" width="92" height="92">
+        <?php endif; ?>
+        <?php if (empty($logoEmpresa)): ?>
+            <i class="fa fa-adn fa-5x" aria-hidden="true"></i>    
+        <?php endif; ?>
+        
         <h2>Web 
             <small> 
                 Marcações 
@@ -58,7 +62,7 @@
                 <div class="col-lg-3 col-1"></div>
                 <div class="col-lg-6 col-10">
                     <input type="text" class="form-control" size="5" id="cpf_marcacao" name="cpf_marcacao" aria-describedby="emailHelp" required="">
-                    <small id="cpfHelp" class="form-text text-muted">Subtitulo complementar (se necessário).</small>
+                    <small id="cpfHelp" class="form-text text-muted">CPF do cliente (precisa estar cadastrado na plataforma).</small>
                 </div>
                 <div class="col-lg-3 col-1"></div>
             </div>    
@@ -84,13 +88,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
                     <div class="form-group text-center">
                         <label>Valor(R$)  </label>
                         <input type="text" class="form-control dinheiro" id="valorMarcacao" placeholder="R$"/>
                         <input type="hidden" name="tipo_marcacao" id="tipoMarcacao" value="<?= $carregarConfiguracaoEmpresa[0]->tipo_marcacao?>"/>
                     </div>       
                 </div>
+                <div class="col-lg-3"></div>
             </div>        
         </div>
         

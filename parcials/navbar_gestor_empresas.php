@@ -64,6 +64,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= get_bloginfo('url')  ?>/minha-empresa-alterar-senha/">
+                            <span data-feather="shopping-cart"></span>
+                            Alterar Senha
+                        </a>
+                    </li>
                     
                     <li class="nav-item">
                         <a class="nav-link" href="#">
