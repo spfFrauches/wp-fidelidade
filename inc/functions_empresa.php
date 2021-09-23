@@ -16,4 +16,34 @@ function configurarTipoMarcacao() {
 }
 
 
+
+function alterarSenhaDashBoard() {
+    
+    if (isset($_POST['novasenha']) && isset($_POST['novasenha_confirma']) ): 
+        
+        if ($_POST['novasenha'] == $_POST['novasenha_confirma']):  
+            
+            if (isset($_POST['senhaatual'])):   
+                
+                if (autenticarLoginEmpresa($_SESSION['dados_empresa'][0]->cnpj, $_POST['senhaatual'])):
+                    
+                    if (alterarSenhaEmpresa($_POST['novasenha'], $_SESSION['dados_empresa'][0]->cnpj)):
+                        return "SenhaAlterada";
+                    endif;
+                    
+                else :
+                    return "SenhaAtualInvalida";
+                endif;
+            endif;
+            
+        else:
+            
+            return "NovasSenhasInvalidas";
+            
+        endif;      
+    endif;
+    
+}
+
+
 ?>

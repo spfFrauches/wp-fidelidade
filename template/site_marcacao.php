@@ -1,11 +1,16 @@
 <?php 
     /* Template Name: Site Marcação cartão */ 
     get_header('marcacao'); 
-    include( get_template_directory() . '/inc/model_empresa_config.php' ); 
+    include( get_template_directory() . '/inc/model_empresa_config.php' );
+    include( get_template_directory() . '/inc/model_empresa.php' );
+    
+    $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";  
+    
     $carregarConfiguracaoEmpresa = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+    $dadosEmpresa = buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
     $tipoMarcacao = $carregarConfiguracaoEmpresa[0]->tipo_marcacao ;
-    $logoEmpresa = $_SESSION['dados_empresa'][0]->logoempsrc;
+    $logoEmpresa = $dadosEmpresa[0]->logoempsrc;
     
     if ($tipoMarcacao == 'cash') {
         $tipoMarcacao = "Cashback";
@@ -25,10 +30,6 @@
 <div class="container">    
     <div class="py-5 text-center topo"> 
         
-        <?php 
-        // var_dump($_SESSION['dados_empresa'][0]->logoempsrc);
-        ?>
-        
         <?php if (!$tipoMarcacao): ?>
             <div class="alert alert-danger" role="alert">
                 O tipo de marcação não foi configurado. Vá em Configurações e defina.
@@ -38,21 +39,30 @@
         <br/>
         
         <?php if ($logoEmpresa != ''): ?>
-            <img class="d-block mx-auto mb-4" src="<?= $logoEmpresa ?>" alt="" width="92" height="92">
+            <img class="d-block mx-auto mb-4" src="<?= $logoEmpresa ?>" alt="" height="102">
         <?php endif; ?>
         <?php if (empty($logoEmpresa)): ?>
             <i class="fa fa-adn fa-5x" aria-hidden="true"></i>    
         <?php endif; ?>
         
-        <h2>Web 
-            <small> 
-                Marcações 
-                <span class="badge badge-secondary">
-                    <?= $tipoMarcacao; ?>
-                </span>
-            </small>
+        <h2>
+            Web <small> Marcações <span class="badge badge-secondary"> <?= $tipoMarcacao; ?></span></small>
         </h2>
         <br/>
+       
+        <!-- ---------------------------------------------------------------------------------- -->
+        <!-- Efeito de Load --------------------                                                -->
+        <!-- ---------------------------------------------------------------------------------- -->
+        
+        <div class="form-group" id="load_form_marcacao">
+            <div class="spinner-border text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        
+        <!-- ---------------------------------------------------------------------------------- -->
+        <!-- Parte 1 - Pegando o CPF do Cliente                                                 -->
+        <!-- ---------------------------------------------------------------------------------- -->
         
         <div class="form-group cpf_form_marcacao card p-2">
             <p class="lead" style="margin-top: 25px; margin-bottom: 20px" id="info_form">
@@ -62,23 +72,21 @@
                 <div class="col-lg-3 col-1"></div>
                 <div class="col-lg-6 col-10">
                     <input type="text" class="form-control" size="5" id="cpf_marcacao" name="cpf_marcacao" aria-describedby="emailHelp" required="">
-                    <small id="cpfHelp" class="form-text text-muted">CPF do cliente (precisa estar cadastrado na plataforma).</small>
+                    <small id="cpfHelp" class="form-text">CPF do cliente (precisa estar cadastrado na plataforma).</small>
                 </div>
                 <div class="col-lg-3 col-1"></div>
             </div>    
         </div>
+                     
+        <!-- ---------------------------------------------------------------------------------- -->
+        <!-- Parte 2 - Informações do Cliente e registrando compra                              -->
+        <!-- ---------------------------------------------------------------------------------- -->
         
-        <div class="form-group" id="load_form_marcacao">
-            <div class="spinner-border text-secondary" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-       
-        <div class="form-group card p-2" id="confirma_marcacao">
-            
+        <div class="form-group card p-2" id="confirma_marcacao">     
             <div class="row text-center">
                 <div class="col-lg-12">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>                 
+                    <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->               
+                    <img id="selfie" src="<?= $caminhoImgDefault ?>" height="120px" class="rounded" alt="...">
                 </div>
             </div>
             <div class="row">
@@ -93,12 +101,16 @@
                     <div class="form-group text-center">
                         <label>Valor(R$)  </label>
                         <input type="text" class="form-control dinheiro" id="valorMarcacao" placeholder="R$"/>
-                        <input type="hidden" name="tipo_marcacao" id="tipoMarcacao" value="<?= $carregarConfiguracaoEmpresa[0]->tipo_marcacao?>"/>
+                        <input type="hidden" name="tipo_marcacao" id="tipoMarcacao" value="<?= $carregarConfiguracaoEmpresa[0]->tipo_marcacao  ?>"/>
                     </div>       
                 </div>
                 <div class="col-lg-3"></div>
             </div>        
         </div>
+        
+        <!-- ---------------------------------------------------------------------------------- -->
+        <!-- Parte 3 - Confirmação dos dados e Compra  ------------                             -->
+        <!-- ---------------------------------------------------------------------------------- -->
         
         <div class="form-group card p-2" id="confirma_marcacaoConfere">
             <div class="row">
@@ -137,16 +149,21 @@
         
         <br/><br/>
         
+        <!-- ---------------------------------------------------------------------------------- -->
+        <!-- Parte 4 - Botões da marcação  ------------------------                             -->
+        <!-- ---------------------------------------------------------------------------------- -->
+        
         <div class="row" id="btnsMarcarVoltar">
+            
             <div class="col-6">
                 <button type="button" id="btcVoltarMarcacao" class="btn btn-warning btn-lg btn-block">Voltar</button>
                 <button type="button" id="btcVoltarMarcacaoConfere" class="btn btn-warning btn-lg btn-block">Voltar e corrigir</button>
                 <button type="button" id="btcVoltarVazio" class="btn btn-warning btn-lg btn-block">Voltar</button>
             </div>
-            <div class="col-6">
-                
+            
+            <div class="col-6">    
                 <button type="button" id="btcContinuarMarcacao" class="btn btn-secondary btn-lg btn-block" <?= (!$tipoMarcacao) ? "disabled" : "" ?>>Continuar</button>
-                <button type="button" id="btnMarcar" class="btn btn-secondary btn-lg btn-block" <?= (!$tipoMarcacao) ? "disabled" : "" ?>>Marcar</button>
+                <button type="button" id="btnMarcar" class="btn btn-secondary btn-lg btn-block" style="margin-top: -1px"<?= (!$tipoMarcacao) ? "disabled" : "" ?>>Marcar</button>
                 <button type="button" id="btnMarcarConfere" class="btn btn-secondary btn-lg btn-block">Confirmar Marcação</button>
             </div>
         </div>

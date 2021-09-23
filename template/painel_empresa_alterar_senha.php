@@ -1,6 +1,18 @@
 <?php 
     /* Template Name: Painel Empresa - Alterar Senha */ 
-    get_header('painel');    
+    get_header('painel');
+    include( get_template_directory() . '/inc/functions_login.php' ); 
+    include( get_template_directory() . '/inc/model_empresa.php' );
+    include( get_template_directory() . '/inc/functions_empresa.php' );
+    
+    if(!isset($_SESSION['login_painel'])):
+        $url = get_bloginfo('url')."/login";
+        header("Location:$url");
+        exit("Sessão expirada ou invalida");
+    endif; 
+    
+    $resultAlterarSenha = alterarSenhaDashBoard();
+            
 ?>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -9,27 +21,47 @@
         <h2 class="h2">Minha Empresa <small> Alterar Senha</small></h2>
     </div>
     
-    <form class="needs-validation" novalidate action="#" method="post">
+    <form class="needs-validation" novalidate action="" method="post">
+        
+        <?php if ($resultAlterarSenha == "SenhaAlterada"): ?>      
+            <div class="alert alert-success" role="alert">
+                As senhas foram alteradas com sucesso!
+            </div>
+        <?php endif; ?>
+        
+        <?php if ($resultAlterarSenha == "SenhaAtualInvalida"): ?>      
+            <div class="alert alert-danger" role="alert">
+                A senha atual está incorreta, verifique e tente novamente.
+            </div>
+        <?php endif; ?>
+        
+        <?php if ($resultAlterarSenha == "NovasSenhasInvalidas"): ?>      
+            <div class="alert alert-danger" role="alert">
+                As novas senhas informadas não conferem, verifique e tente novamente.
+            </div>
+        <?php endif; ?>
         
         <br/>
         <div class="form-row">
             <div class="col-lg-6">
                 <label>Senha Atual</label>
-                <input type="password" class="form-control" value="<?= $_SESSION['dados_empresa'][0]->passwd ?>" required >
+                <input type="password" class="form-control" name="senhaatual" required >
             </div>
         </div>
         <br/>        
         <div class="form-row">    
             <div class="col-md-6 mb-3">
                 <label>Nova Senha </label>
-                <input type="password" class="form-control" name="password" id="password" required>
+                <input type="password" class="form-control" name="novasenha" id="novasenha" required>
+                 <small id="novasenhaHelp" class="form-text">Nova senha da empresa</small>
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <label>Confirmar nova Senha</label>
-                <input type="password" class="form-control" name="password_confirma"  id="password_confirma" required>
+                <input type="password" class="form-control" name="novasenha_confirma"  id="novasenha_confirma" required>
+                <small id="novasenhaHelp1" class="form-text">Confirmação da nova senha</small>
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
@@ -37,8 +69,8 @@
         </div>
             
         <div class="form-row mt-5">
-            <div class="col-lg-12">
-                <button class="btn btn-primary" type="submit" disabled="">Salvar</button>
+            <div class="col-lg-6">
+                <button class="btn btn-primary btn-block btnSalvarNovaSenha" type="submit">Salvar</button>
             </div>
         </div>
                 
@@ -48,6 +80,7 @@
 </main>
 
 <script>
+    
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
         'use strict';
@@ -66,6 +99,41 @@
             });
         }, false);
     })();
+    
+    var senha =  document.getElementById("novasenha");
+    var confirmar_senha = document.getElementById("novasenha_confirma");
+    document.getElementById("novasenhaHelp").style.color = "gray";
+    document.getElementById("novasenhaHelp1").style.color = "gray";
+
+    confirmar_senha.addEventListener("blur", function() {
+    
+    console.log(senha.value);
+    console.log(confirmar_senha.value);
+    
+    if (senha.value !== confirmar_senha.value) { 
+
+        senha.style.border = "solid 1px #FF0000"; 
+        confirmar_senha.style.border = "solid 1px #FF0000";
+        
+        var desativar = document.createAttribute("disabled");  
+        document.getElementById("btnSalvarNovaSenha").setAttributeNode(desativar);   
+
+        document.getElementById("novasenhaHelp").innerHTML = "As senhas não conferem";
+        document.getElementById("novasenha").style.color = "red";
+        document.getElementById("novasenhaHelp").style.color = "red"; 
+        document.getElementById("novasenhaHelp1").style.color = "red"; 
+
+    } else {
+        document.getElementById("novasenhaHelp").innerHTML = "Nova senha da empresa";
+        document.getElementById("novasenhaHelp1").innerHTML = "Confirmação da nova senha";
+        senha.style.border = ""; 
+        confirmar_senha.style.border = "";
+        document.getElementById("novasenhaHelp").style.color = "gray";
+        document.getElementById("novasenhaHelp1").style.color = "gray";
+        document.getElementById("btnSalvarNovaSenha").removeAttribute("disabled"); 
+    }   
+}, true);
+    
 </script>
     
 </main>

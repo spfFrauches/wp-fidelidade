@@ -22,20 +22,7 @@
         </div>
     </div>
 
-    <?php if (!$config): ?>
-        <div class="alert alert-danger" role="alert">
-           Nenhuma configuraçao aplicada. Por favor configure para continuar...
-           <br/>
-           Mas atenção, ao configurar não pode mais alterar (nesta versão)
-        </div>
-    <?php endif; ?>
     
-    <?php if ($config): ?>
-        <div class="alert alert-warning" role="alert">
-           Nesta versão, uma vez configurado não pode mais alterar. Caso precise alterar 
-           fale com o administrador do sistema.
-        </div>
-    <?php endif; ?>
     
     <br/>
     <div class="row">     
@@ -51,8 +38,24 @@
             }
         ?>    
     </div>
-    <div class="row">
-        <div class="col-lg-12 confMarcacao">            
+    <div class="row">    
+        <div class="col-lg-6">
+            <?php if (!$config): ?>
+                <div class="alert alert-danger" role="alert">
+                   Nenhuma configuraçao aplicada. Por favor configure para continuar...
+                   <br/>
+                   Mas atenção, ao configurar não pode mais alterar (nesta versão)
+                </div>
+            <?php endif; ?>
+
+            <?php if ($config): ?>
+                <div class="alert alert-warning" role="alert">
+                   Nesta versão, uma vez configurado não pode mais alterar. Caso precise de alteração 
+                   fale com o administrador do sistema.
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="col-lg-6 confMarcacao">            
             <div class="accordion mb-5" id="accordionExample">    
                 <div class="card">
                     <div class="card-header" id="headingOne">
@@ -76,10 +79,10 @@
                     </div>
                 </div>
             </div>
-        </div>       
+        </div>
     </div>
     <div class="row"> 
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="form-group">            
                 <label class="h5" >Tipo de Marcação</label>
                 <div class="form-group">
@@ -89,10 +92,7 @@
                     </select>
                 </div>
             </div>             
-        </div>      
-    </div> 
-    <br/>
-    <div class="row confMarcacao">
+        </div> 
         <div class="col-lg-6">          
             <label class="my-1 mr-2">Porcentagem (%) em cima do valor da compra.</label>
             <select class="custom-select my-1 mr-sm-2" name="percentual" id="percentual" <?= $config ? "disabled" : ""?>>
@@ -104,8 +104,9 @@
                 <option value="5" <?= ($percentual=='5') ?  "selected" : "" ?>>5%</option>
             </select>
             <small id="percentualHelp" class="form-text">Este campo é obrigatório</small>
-        </div>     
-    </div>
+        </div>  
+    </div> 
+    <br/>
     
     <div class="row confMarcacao mt-5">
         <div class="col-lg-6">  

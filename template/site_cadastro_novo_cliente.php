@@ -1,10 +1,13 @@
 <?php 
     /* Template Name: Site Cadastro Novo Cliente */ 
     get_header('site'); 
+    $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";  
 ?>
-<form method="post" action="<?= get_bloginfo('url') ?>/finalizar-cadastro-cliente" class="needs-validation" novalidate> 
+
+<form method="post" action="<?= get_bloginfo('url') ?>/finalizar-cadastro-cliente" class="needs-validation" novalidate enctype="multipart/form-data"> 
     
-    <div class="container ">       
+    <div class="container "> 
+        
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72">
             <h2>Cliente Fidelidade</h2>
@@ -16,8 +19,31 @@
    
         <div class="row card p-3" id="form_cadastroCliente">
             <div class="col-md-12 order-md-1"> 
-                <h4 class="mb-3">Formulário de cadastro</h4>        
-                <div class="row">
+                
+                <div class="row mt-3">
+                    <div class="col-lg-12 text-center">          
+                        <img id="previewImg" class="img-thumbnail" width="150" src="<?= $caminhoImgDefault  ?>" alt="Logomarca de sua empresa">
+                        <script>
+                            function previewFile(input){
+                                var file = $("input[type=file]").get(0).files[0];
+                                if(file){
+                                    var reader = new FileReader();
+                                    reader.onload = function(){
+                                        $("#previewImg").attr("src", reader.result);
+                                    }
+                                    reader.readAsDataURL(file);
+                                }
+                            }
+                        </script>             
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <label class="form-label" style="font-size: 17px">Seu selfie</label>
+                        <br/>
+                        <input type="file" name="selfcliente"  onchange="previewFile(this);"  accept="image/*" >
+                    </div>
+                </div> 
+                
+                <div class="row mt-5">
                     <div class="col-md-6 mb-6">
                         <label id="cpf_label">CPF</label>
                         <input type="text" class="form-control cpf" id="cpf" name="cpf_cliente" required >
@@ -33,6 +59,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <br/>   
                 <div class="form-row">
                     <div class="col-md-6 mb-6">
@@ -52,15 +79,16 @@
                 </div>
                 <br/>   
                 <div class="row"> 
+                    
                     <div class="col-md-6 mb-6">
-                        <label id="telefoneLabel">Telefone <span class="text-muted"></span></label>
+                        <label id="telefone_label">Telefone <span class="text-muted"></span></label>
                         <input type="text" class="form-control telefoneform" id="telefone" name="telefone" required>
                         <div class="invalid-feedback">
                             Este campo é obrigatório.
                         </div>
                     </div>
                     
-                     <div class="col-md-6 mb-6">
+                    <div class="col-md-6 mb-6">
                         <label>Sexo <span class="text-muted"></span></label>
                         <select class="form-control">
                             <option>Masculino</option>
@@ -71,6 +99,7 @@
                             Este campo é obrigatório.
                         </div>
                     </div>
+                    
                 </div>
                 <br/>   
                 <div class="row"> 
@@ -103,6 +132,7 @@
         </div>     
     </div>
 </form>
+
 <br/><br/><br/>
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields

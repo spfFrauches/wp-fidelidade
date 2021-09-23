@@ -15,6 +15,7 @@
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="sidebar-sticky pt-3">
+                
                 <?php
                     global $wp;
                     $url = home_url( $wp->request );                    
@@ -26,6 +27,7 @@
                         <span data-feather="plus-circle"></span>
                     </a>
                 </h6>
+                
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <?php $url_swp1 = get_bloginfo('url')."/painel-empresa" ?>                        
@@ -65,7 +67,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= get_bloginfo('url')  ?>/minha-empresa-alterar-senha/">
+                        <?php $url_swp5 = get_bloginfo('url')."/minha-empresa-alterar-senha" ?> 
+                        <a class="nav-link <?= ($url == $url_swp5 ) ? "active" : "" ?>" href="<?= $url_swp5 ?>">
                             <span data-feather="shopping-cart"></span>
                             Alterar Senha
                         </a>

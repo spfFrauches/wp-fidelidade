@@ -48,7 +48,7 @@ function marcarCliente($arrayLigacao, $arrayMarcacao ) {
     $dataLigacao = array('cnpjemp' => $arrayLigacao['cnpjEmpresa'], 'cpfcli' => $arrayLigacao['cpfCliente']);
       
     $inserirLigacao   = $wpdb->insert( "$tabela1", $dataLigacao,  array('%s','%s') ) ;    
-    $inserirMarcacao  = $wpdb->insert( "$tabela2", $arrayMarcacao, array('%s','%s','%s','%f','%s', '%s') );
+    $inserirMarcacao  = $wpdb->insert( "$tabela2", $arrayMarcacao, array('%s','%s','%s','%f','%s', '%s','%d','%f') );
     
     if ($inserirMarcacao) {
         return true;

@@ -30,4 +30,10 @@ function emailEmpresa($email){
     return $resultado;
 }
 
+function alterarSenhaEmpresa($novasenha, $cnpj){   
+    global $wpdb; 
+    $resultado = $wpdb->update('empresas', array('passwd'=>$novasenha), array('cnpj'=>$cnpj));
+    return $resultado;
+}
+
 ?>

@@ -2,6 +2,8 @@
     /* Template Name: Painel Empresa - Minha Empresa */
     get_header('painel'); 
     
+    include( get_template_directory() . '/inc/model_empresa.php' );
+    
     /* REFATORAR ISSO E COLOCAR DENTRO DE UM MODEL / FUNCAO */
     if(!empty($_FILES['logoempresa'])){      
         $id = $_POST['codempresa'];
@@ -11,15 +13,15 @@
         if(move_uploaded_file($_FILES['logoempresa']['tmp_name'], $target_file)){         
             global $wpdb; 
             $wpdb->update('empresas', array('logoempsrc'=>$dir ,'logopath'=>$target_file), array('id'=>$id));
-            $_SESSION['dados_empresa'][0]->logoempsrc = $target_file;
             $msgPosUpload = "Dados atualizados com sucesso!";  
         } else {
             $msgPosUpload = "Erro ao processar arquivo!";
         }
     }
-    $caminhoImgDefault = get_bloginfo('template_url')."/img/uploadYourLogo.png";
-    $caminhoLogoEmpresa = $_SESSION['dados_empresa'][0]->logoempsrc;
-    $caminhoLogoEmpresaPath =  $_SESSION['dados_empresa'][0]->logopath;
+    
+    $caminhoImgDefault = get_bloginfo('template_url')."/img/uploadYourLogo.png";  
+    $dadosEmpresa = buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+
        
 ?>
 
@@ -30,21 +32,19 @@
     </div>
     
     <?php 
+  
     /*
         echo "<pre>";
         var_dump($_SESSION['dados_empresa'][0]);
-        var_dump($msgPosUpload);
-        var_dump($caminhoLogoEmpresa);
-        var_dump( $caminhoLogoEmpresaPath );
         echo "</pre>";
     */
     ?>
     
     <form class="needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
         <br/>     
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-lg-3">          
-                <img id="previewImg" class="img-thumbnail" width="150" src="<?= ($caminhoLogoEmpresa != null ? $caminhoLogoEmpresa : $caminhoImgDefault )  ?>" alt="Logomarca de sua empresa">
+                <img id="previewImg" class="img-thumbnail" width="150" src="<?= ($dadosEmpresa[0]->logoempsrc != null ? $dadosEmpresa[0]->logoempsrc : $caminhoImgDefault )  ?>" alt="Logomarca de sua empresa">
                 <script>
                     function previewFile(input){
                         var file = $("input[type=file]").get(0).files[0];

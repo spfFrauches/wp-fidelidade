@@ -10,16 +10,22 @@ $('#confirma_marcacaoConfereSucesso').hide();
 $('#btnNovaMarcacao').hide();
 
 $('.dinheiro').mask('#.##0,00', {reverse: true});
+document.getElementById('cpfHelp').style.color = "gray"; 
 
-/* 1 Tela/load da marcação - Ao clicar em continuar  */
+/* ----------------------------------------------------  */
+/* 1 Tela/load da marcação - Ao clicar em continuar      */
+/* ----------------------------------------------------  */
 
 $( "#btcContinuarMarcacao" ).click(function() {
-    if ($('#cpf_marcacao').val() == '') {    
+    if ($('#cpf_marcacao').val() == '') { 
+        
         alert("O CPF deve ser preenhcido");
+        
         document.getElementById('cpf_marcacao').style.border = "solid 1px #FF0000"; 
         document.getElementById("cpfHelp").innerHTML = "O CPF deve ser preenchido";
         document.getElementById('cpfHelp').style.color = "red"; 
         return false; 
+        
     } else {
         $('.cpf_form_marcacao').hide();
         $('#load_form_marcacao').show(); 
@@ -33,7 +39,9 @@ $( "#btcContinuarMarcacao" ).click(function() {
     return false; 
 });
 
-/* 2 Tela/load da marcação - Ao clicar em continuar  */
+/* ----------------------------------------------------  */
+/* 2 Tela/load da marcação - Ao clicar em Marcar  */
+/* ----------------------------------------------------  */
 
 $( "#btnMarcar" ).click(function() {
     
@@ -82,6 +90,7 @@ $( "#btnMarcar" ).click(function() {
                 document.getElementById("confirma_marcacaoNomeConfere").innerHTML  = sessionStorage.getItem('nome_completo');
                 document.getElementById("confirma_marcacaoCPFConfere").innerHTML   =  sessionStorage.getItem('cpf');
                 document.getElementById("confirma_marcacaoValorConfere").innerHTML = sessionStorage.getItem('valorMarcacao');
+                document.getElementById("selfie").src = sessionStorage.getItem('src_selfie');
             },1000);          
         }; 
     }
@@ -131,6 +140,7 @@ $( "#btnNovaMarcacao" ).click(function() {
     sessionStorage.removeItem('cnpjMarcacao');
     sessionStorage.removeItem('datahoraMarcacao');
     sessionStorage.removeItem('valorMarcacao');
+    sessionStorage.removeItem('src_selfie');
     document.location.reload(true);
 
 });
@@ -142,6 +152,10 @@ $( "#btcVoltarMarcacao" ).click(function() {
     $('#btcContinuarMarcacao').show();
     $('#btnMarcar').hide();
     $('#confirma_marcacaoNaoExiste').hide();
+    
+    sessionStorage.removeItem('src_selfie');
+    
+    document.getElementById("selfie").src = 'http://restaurantemegachic.com/fidelidade/wp-content/themes/fidelidade/img/default-user-1.png';
     
     setTimeout(function(){         
         $('.cpf_form_marcacao').show();
@@ -168,9 +182,7 @@ $( "#btcVoltarMarcacaoConfere" ).click(function() {
         $('#load_form_marcacao').hide();
         return false;
     },1000); 
-    
-    
-    
+      
            
 });
 
@@ -203,11 +215,18 @@ function verificaSeExisteCPF() {
                 document.getElementById("confirma_marcacaoNome").innerHTML = objVerificarCliente[0]['nome_completo'];
                 document.getElementById("confirma_marcacaoCPF").innerHTML = objVerificarCliente[0]['cpf'];
                 
+                if (objVerificarCliente[0]['src_selfie'] != null){
+                    document.getElementById("selfie").src = objVerificarCliente[0]['src_selfie'];
+                    sessionStorage.setItem('src_selfie', objVerificarCliente[0]['src_selfie']);
+                } 
+                               
+                
                 sessionStorage.setItem('cpf', objVerificarCliente[0]['cpf']);
                 sessionStorage.setItem('data_nascimento', objVerificarCliente[0]['data_nascimento']);
                 sessionStorage.setItem('nome_completo', objVerificarCliente[0]['nome_completo']);
                 sessionStorage.setItem('email', objVerificarCliente[0]['email']);
                 sessionStorage.setItem('fone', objVerificarCliente[0]['fone']);
+                
                                 
             }
 

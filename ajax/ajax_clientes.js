@@ -64,6 +64,36 @@ email.addEventListener("blur", function() {
     
 }, true);
 
+var telefone = document.getElementById('telefone');
+var telefoneLabel = document.getElementById('telefone_label');
+
+telefone.addEventListener("blur", function() {
+  
+    var xmlhttp = new XMLHttpRequest();   
+    xmlhttp.open("POST", "../wp-content/themes/fidelidade/ajax/ajax_clientes.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+    xmlhttp.send("telefone="+telefone.value);
+    
+    xmlhttp.onreadystatechange = function() {
+            
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText == "ja_existe") {
+                telefone.style.border = "solid 1px #FF0000"; 
+                telefoneLabel.innerHTML = "Telefone - já existe";
+                telefoneLabel.style.color = "red";
+                var desativar = document.createAttribute("disabled");  
+                document.getElementById("btnContinuarCadastroCliente").setAttributeNode(desativar); 
+            } else {
+                telefone.style.border = ""; 
+                telefoneLabel.style.color = "black"; 
+                telefoneLabel.innerHTML = "Telefone";
+                document.getElementById("btnContinuarCadastroCliente").removeAttribute("disabled");  
+            }     
+        }       
+    };
+    
+}, true);
+
 
 $('#btnContinuarCadastroClienteOLD').click(function() {
     

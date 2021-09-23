@@ -1,24 +1,29 @@
 <?php
 
-    /* Template Name: Painel Empresa  */ 
-    if (isset($_SESSION['login_painel'])) :
+/* Template Name: Painel Empresa  */ 
+if (isset($_SESSION['login_painel'])) :
+        
     get_header('painel'); 
     require ( get_template_directory() . '/inc/model_empresa_config.php' );
     require ( get_template_directory() . '/inc/model_clientes.php' );
     require ( get_template_directory() . '/inc/model_marcacao.php' );
+    require ( get_template_directory() . '/inc/model_empresa.php' );
     
     $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
-    if ($config[0]->tipo_marcacao == 'qtd') {
-        $tipoMarcacao = "por Quantidade/Frequencia";
-    }
     
     if ($config[0]->tipo_marcacao == 'cash') {
         $tipoMarcacao = "por Cashback";
     }
     
     $totalClientes  = listarClientesPorEmpresa($_SESSION['dados_empresa'][0]->cnpj);
-    $totalMarcacoes  =listarTotalMarcacoes($_SESSION['dados_empresa'][0]->cnpj);
+    $totalMarcacoes = listarTotalMarcacoes($_SESSION['dados_empresa'][0]->cnpj);
+    
+    $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+    
+    if ($_SESSION['login_painel'] != 'empresa'):
+        exit("A sessão foi expirada ou é invalida");
+    endif; 
        
 ?>
 
@@ -34,25 +39,39 @@
             <h5 class="h5">Bem vindo ao Fidelidade Web</h5>              
         </div>            
     </div>
-    
-    <?php if (!$config) : ?>
-        
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Atenção!</h4>
-                    <p>
-                        É necessário configurar as forma de marcação.
-                        <br/>
-                        Após configuração sua empresa esta pronta para usar o fidelidade Web.
-                    
-                    </p>
-                    <hr>
-                    <p class="mb-0">Acesse o menu Configurar e escolha a forma de marcação</p>
-                </div>            
-            </div>
+       
+    <div class="row">
+        <?php if (!$config) : ?>
+        <div class="col-lg-6">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Atenção!</h4>
+                <p>
+                    É necessário configurar as forma de marcação.
+                    <br/>
+                    Após configuração sua empresa estará pronta para usar e disponibilizar o fidelidade Web
+                    para seus clientes. 
+                </p>
+                <hr>
+                <p class="mb-0">Acesse [Configurações] e defina a forma de marcação</p>
+            </div>            
         </div>
-    <?php endif; ?>
+        <?php endif; ?>
+        <?php if (!$dadosEmpresa[0]->logoempsrc) : ?>
+        <div class="col-lg-6">
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">Dica!</h4>
+                <p>
+                    Que tal inserir a logo de sua empresa?
+                    <br/>
+                    O cliente ao acessar o cartão precisa
+                    ver e identificar com facilidade sua empresa.                  
+                </p>
+                <hr>
+                <p class="mb-0">Acesse [Minha Empresa] e coloque sua logo</p>
+            </div>            
+        </div>
+        <?php endif; ?>
+    </div>
         
     <br/>
         
@@ -61,7 +80,7 @@
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
                     Tipo de marcação
-                    <span class="badge badge-primary badge-pill"><?= $tipoMarcacao ?></span>                       
+                    <span class="badge badge-primary badge-pill"><?= $tipoMarcacao == '' ? "Não definido" : $tipoMarcacao  ?></span>                       
                 </div>
             </div>
         </div>
@@ -103,12 +122,12 @@
 </main>
 
 <?php 
-    else : 
-        $url = get_bloginfo('url')."/login";
-        echo "<script>";
-        echo "window.location.href = '$url'";
-        echo "</script>"; 
-     endif;
+else : 
+    $url = get_bloginfo('url')."/login";
+    echo "<script>";
+    echo "window.location.href = '$url'";
+    echo "</script>"; 
+ endif;
 ?>
 
 <?php get_footer('painel') ?>

@@ -18,6 +18,13 @@ if (isset($_POST['email'])){
     }  
 }
 
+if (isset($_POST['telefone'])){   
+    $seExisteTelefone = seExisteTelefone($_POST['telefone']);
+    if ($seExisteTelefone){
+        echo "ja_existe";
+    }  
+}
+
 if (isset($_POST['finalizarCadastroCliente']) && $_POST['finalizarCadastroCliente'] ) {
     
     $arrayCliente = [

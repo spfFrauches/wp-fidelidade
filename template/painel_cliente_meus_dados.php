@@ -2,8 +2,27 @@
 
     /* Template Name: Painel Cliente Meus Dados */ 
     get_header('painel');
+    include( get_template_directory() . '/inc/model_clientes.php' );
+     
+    $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";   
     
+    if(!empty($_FILES['selfcliente'])){
+       
+        $cpf = $_SESSION['dados_cliente'][0]->cpf;
+        $targetDir = "./wp-content/themes/fidelidade/clientes_selfie/";
+        $dir = get_bloginfo('template_url')."/clientes_selfie/".basename($_FILES["selfcliente"]["name"]);
+        $target_file = $targetDir . basename($_FILES["selfcliente"]["name"]); 
+        
+        if(move_uploaded_file($_FILES['selfcliente']['tmp_name'], $target_file)){         
+            global $wpdb; 
+            $wpdb->update('clientes', array('src_selfie'=>$dir ,'path_selfie'=>$target_file), array('cpf'=>$cpf));
+            $msgPosUpload = "Dados atualizados com sucesso!";  
+        } else {
+            $msgPosUpload = "Erro ao processar!";
+        }
+    } 
     
+    $dadosCliente = buscarClientes($_SESSION['dados_cliente'][0]->cpf);
 ?>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -23,15 +42,30 @@
     
     <?php // var_dump($_SESSION['dados_cliente'][0]); ?>
     
-    <form method="post" id="formclientes">
-        
-        
-        <div class="form-row">
-            
-            <label>Foto</label>
-            <input type="file" class="form-control-file" name="foto" id="foto">
-            
-        </div>
+    <form method="post" id="formclientes" action=""  enctype="multipart/form-data">
+                
+       <div class="row mt-3">
+            <div class="col-lg-12 text-center">          
+                <img id="previewImg" class="img-thumbnail" width="200" src="<?= $dadosCliente[0]->src_selfie == '' ?  $caminhoImgDefault : $dadosCliente[0]->src_selfie ?>" alt="Logomarca de sua empresa">
+                <script>
+                    function previewFile(input){
+                        var file = $("input[type=file]").get(0).files[0];
+                        if(file){
+                            var reader = new FileReader();
+                            reader.onload = function(){
+                                $("#previewImg").attr("src", reader.result);
+                            }
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                </script>             
+            </div>
+            <div class="col-lg-12 text-center mt-5">
+                <label class="form-label" style="font-size: 17px">Alterar selfie</label>
+                <br/>
+                <input type="file" name="selfcliente"  onchange="previewFile(this);"  accept="image/*" required>
+            </div>
+        </div>   
         
         <br/><br/>
         
@@ -45,7 +79,7 @@
             </div>
             <div class="col-md-6 mb-6">
                 <label >Nome completo</label>
-                <input type="text" class="form-control" name="nome_completo"  value="<?= $_SESSION['dados_cliente'][0]->nome_completo ?>" required readonly="">
+                <input type="text" class="form-control" name="nome_completo"  value="<?= $dadosCliente[0]->nome_completo ?>" required readonly="">
                 <div class="invalid-feedback">
                    O nome completo é obrigatório. Preencha este campo.
                 </div>          
@@ -57,24 +91,25 @@
         <div class="form-row">    
             <div class="col-md-6 mb-6">
                 <label>E-mail <span class="text-muted"></span></label>
-                <input type="email" class="form-control" name="email"  value="<?= $_SESSION['dados_cliente'][0]->email ?>" readonly="">
+                <input type="email" class="form-control" name="email"  value="<?= $dadosCliente[0]->email ?>" readonly="">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div>
             <div class="col-md-6 mb-6">
                 <label>Nascimento</label>
-                <input type="date" class="form-control" name="data_nascimento"   value="<?= $_SESSION['dados_cliente'][0]->data_nascimento ?>" required readonly="">
+                <input type="date" class="form-control" name="data_nascimento"   value="<?= $dadosCliente[0]->data_nascimento ?>" required readonly="">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div>    
         </div>
         <br/>
-         <div class="row"> 
+        
+        <div class="row"> 
             <div class="col-md-6 mb-6">
                 <label>Telefone <span class="text-muted"></span></label>
-                <input type="text" class="form-control" name="telefone"  value="<?= $_SESSION['dados_cliente'][0]->fone ?>" required readonly="">
+                <input type="text" class="form-control" name="telefone"  value="<?= $dadosCliente[0]->fone ?>" required readonly="">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
@@ -83,7 +118,13 @@
         
         <br/>
         
-        <button class="btn btn-primary" id="btnSalvar">Salvar</button>
+        <div class="row mt-3"> 
+            <div class="col-lg-6">
+                <button class="btn btn-primary btn-block" id="btnSalvar">Salvar</button>
+            </div>
+        </div>
+        
+        <br/><br/>
         
     </form>
   

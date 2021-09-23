@@ -12,7 +12,7 @@ function insertDBCliente($array) {
     
     $tabela = "clientes";
     global $wpdb; 
-    $resultado = $wpdb->insert( "$tabela", $array, array('%s','%s', '%s', '%s','%s', '%s') ) ;  
+    $resultado = $wpdb->insert( "$tabela", $array, array('%s','%s', '%s','%s','%s', '%s', '%s', '%s', '%s') ) ;  
     
     if (!$resultado){
         return false;
@@ -129,14 +129,28 @@ function seExisteEmail($email) {
     else { return false; }
 }
 
-function listarClientesPorEmpresa($cnpj) {
+function seExisteTelefone($telefone) {
+    global $wpdb;      
+    $resultado =  $wpdb->get_results( "SELECT * FROM clientes where fone = '$telefone' " );
     
+    if ($resultado) { return true; } 
+    else { return false; }
+}
+
+function listarClientesPorEmpresa($cnpj) {
     /* Pesquisa a ser feita na tabela de ligação */
     global $wpdb;      
     $resultado =  $wpdb->get_results( "SELECT count(*) qtdTotalClientes "
                 . "FROM ligacaoclienteempresa WHERE cnpjemp = '$cnpj' " );
-    //return  $resultado->num_rows;
     return $resultado[0]->qtdTotalClientes;
+    
+}
+
+function alterarSenhaCliente($novasenha, $cpf){
+    
+    global $wpdb; 
+    $resultado = $wpdb->update('clientes', array('senha'=>$novasenha), array('cpf'=>$cpf));
+    return $resultado;
     
 }
 

@@ -59,7 +59,7 @@
         echo "<script>";
         echo "window.location.href = '$url'";
         echo "</script>"; 
-     endif;
+    endif;
 ?>
 
 <?php get_footer('painel') ?>

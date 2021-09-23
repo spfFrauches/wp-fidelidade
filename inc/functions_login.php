@@ -20,7 +20,7 @@ function autenticacaoCompleta() {
         }
         if ($analisarLogin == 'cliente') {
 
-            if (!autenticarLoginCliente($cpf, $senha)):
+            if (!autenticarLoginCliente($_POST['cnpj_cpf'], $_POST['passwd'])):
                 return $msg = "Dados de acesso invalidos!" ; 
                 else:
                    redirecionarPainelCliente($_POST['cnpj_cpf']);
@@ -64,8 +64,8 @@ function autenticarLoginEmpresa($cnpj, $senha) {
 
 function autenticarLoginCliente($cpf, $senha) {
     global $wpdb; 
-    $analisarSenha =  $wpdb->get_results( "SELECT passwd from clientes where cpf = '$cpf'" );
-    if ($analisarSenha[0]->passwd == $senha){
+    $analisarSenha =  $wpdb->get_results( "SELECT senha from clientes where cpf = '$cpf'" );
+    if ($analisarSenha[0]->senha == $senha){
         return true;
     } else {
         return false;

@@ -4,7 +4,8 @@
     require ( get_template_directory() . '/inc/model_marcacao.php' );
     require ( get_template_directory() . '/inc/model_clientes.php' );
     require ( get_template_directory() . '/inc/model_empresa_config.php' );
-
+    $configuracaoEmpresa = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+    
     /* 1 tela/load da marcação - ao clicar em Continuar na tela de Marcações */
     /* Verificando quem é o cliente e montando o JSON dos dados cadastrais. */
     
@@ -17,6 +18,7 @@
             echo "false";
         }        
     }
+    
        
     if (isset($_POST['marcar']) && $_POST['marcar']==1 ) {
         
@@ -26,7 +28,7 @@
         $cnpjMarcacao = $_SESSION['dados_empresa'][0]->cnpj;
         $valorMarcacao = $_POST['valor'];
         $tipoMarcacao = $_POST['tipoMarcacao'];
-        
+               
                
         $dadosMarcacao = [
             "cpf"  => $cpfMarcacao,
@@ -49,6 +51,12 @@
         $protocolo = 'teste';
         $tipo_marcacao = $_POST['tipoMarcacao'];
         
+        $percentual = $configuracaoEmpresa[0]->percentual_vlrcompra;
+        
+        $pontos = ($valorMarcacao *  ($percentual /100));
+        $pontos = number_format($pontos, 2);
+        
+        
         $valorMarcacaoSemPonto  = str_replace('.', '', $valorMarcacao);
         $valorMarcacaoFormatado  = str_replace(',', '.', $valorMarcacaoSemPonto);
 
@@ -63,7 +71,9 @@
             'datamarcacao' => $datahora,
             'valormarcacao' => $valorMarcacaoFormatado,
             'protocolomarcacao' => $protocolo,
-            'tipomarcacao' => $tipo_marcacao
+            'tipomarcacao' => $tipo_marcacao,
+            'porcentagemPontos' => $percentual,
+            'pontos' => $pontos
         ];
        
         $marcarCartao = marcarCliente($arrayLigacao, $arrayMarcacao);

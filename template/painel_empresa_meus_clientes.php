@@ -3,7 +3,7 @@
     get_header('painel');
     include( get_template_directory() . '/inc/model_clientes.php' );
     include( get_template_directory() . '/inc/model_marcacao.php' );
-    //$listarCliente = listarClientesLigados($_SESSION['dados_empresa'][0]->cnpj); 
+    
     $listarCliente = listarDadosCompletosClientesLigados($_SESSION['dados_empresa'][0]->cnpj);
     $configEmpresa = listarConfiguracaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
@@ -87,8 +87,7 @@
                                 
                                 <?php  
                                     $marcacoes = listarMarcacaoCliente($value->CPF, $_SESSION['dados_empresa'][0]->cnpj);                                   
-                                    $totalValor = 0;
-                                                                                                                                                                                                                   
+                                    $totalValor = 0;                                                                                                                                                                                                                   
                                 ?>
                                 
                                 <div class="col-lg-12 order-lg-12 mb-4">
