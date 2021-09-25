@@ -22,6 +22,13 @@ function listarMarcacaoClienteIndividual($cliente) {
     
 }
 
+function listarMarcacaoEmpresaCliente($cliente, $empresa) {
+    global $wpdb;
+    $result  = $wpdb->get_results("SELECT * FROM marcacao WHERE cpfcli = '$cliente' AND cnpjemp = '$empresa' ORDER BY datamarcacao desc ");
+    return $result;
+    
+}
+
 
 function listarConfiguracaoEmpresa($cnpj) {
     global $wpdb;

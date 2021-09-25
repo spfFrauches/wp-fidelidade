@@ -77,7 +77,6 @@
         ];
        
         $marcarCartao = marcarCliente($arrayLigacao, $arrayMarcacao);
-        echo "<br/>";
 
         if ($marcarCartao):
             
@@ -85,11 +84,7 @@
             $qtdMarcacoes = count($marcacoes);
             
             $configEmpresa = listarConfiguracaoEmpresa($cnpjMarcacao);
-            echo "<pre>";
-            var_dump($qtdMarcacoes);
-            echo "</pre>";
                                       
-            
         endif;
         
         

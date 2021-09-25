@@ -15,7 +15,7 @@
             
 ?>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2 class="h2">Minha Empresa <small> Alterar Senha</small></h2>
@@ -42,15 +42,18 @@
         <?php endif; ?>
         
         <br/>
-        <div class="form-row">
+        
+        <div class="row">
             <div class="col-lg-6">
                 <label>Senha Atual</label>
                 <input type="password" class="form-control" name="senhaatual" required >
             </div>
         </div>
-        <br/>        
-        <div class="form-row">    
-            <div class="col-md-6 mb-3">
+        
+        <br/>  
+        
+        <div class="row">    
+            <div class="col-lg-6 mb-3">
                 <label>Nova Senha </label>
                 <input type="password" class="form-control" name="novasenha" id="novasenha" required>
                  <small id="novasenhaHelp" class="form-text">Nova senha da empresa</small>
@@ -58,7 +61,10 @@
                     Este campo é obrigatório.
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
+        </div>
+        
+        <div class="row">  
+            <div class="col-lg-6 mb-3">
                 <label>Confirmar nova Senha</label>
                 <input type="password" class="form-control" name="novasenha_confirma"  id="novasenha_confirma" required>
                 <small id="novasenhaHelp1" class="form-text">Confirmação da nova senha</small>
@@ -68,9 +74,11 @@
             </div>           
         </div>
             
-        <div class="form-row mt-5">
-            <div class="col-lg-6">
-                <button class="btn btn-primary btn-block btnSalvarNovaSenha" type="submit">Salvar</button>
+        <div class="row mt-5">
+            <div class="col-lg-4">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary btn-block btnSalvarNovaSenha" type="submit">Salvar</button>
+                </div>
             </div>
         </div>
                 

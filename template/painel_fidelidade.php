@@ -1,7 +1,7 @@
 <?php 
 
     /* Template Name: Painel Fidelidade */ 
-    if (isset($_SESSION['login_painel'])) :
+    if (isset($_SESSION['login_painel']) && $_SESSION['login_painel'] == 'admin') :
     get_header('painel');
     
 ?>

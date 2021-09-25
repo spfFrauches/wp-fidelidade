@@ -1,15 +1,15 @@
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Gestão Fidelidade</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Webi Fidelidade</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
-        </li>
-    </ul>
-</nav>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Pesquisar" aria-label="Search">
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+            <a class="nav-link px-3" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
+        </div>
+    </div>
+</header>
 
 <div class="container-fluid">
     <div class="row">
@@ -37,20 +37,18 @@
                             Home <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <!--
-                    <li class="nav-item">
-                        <?php $url_swp1 = get_bloginfo('url')."/painel-cliente/minhas-compras-e-marcacoes/" ?>     
-                        <a class="nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
-                            <span data-feather="home"></span>
-                            Minhas compras e marcações
-                        </a>
-                    </li>
-                    -->
                     <li class="nav-item">
                         <?php $url_swp2 = get_bloginfo('url')."/cliente-meus-dados" ?>  
                         <a class="nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
                             <span data-feather="shopping-cart"></span>
                             Meus dados
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <?php $url_swp3 = get_bloginfo('url')."/cliente-alterar-senha" ?>  
+                        <a class="nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>" href="<?= $url_swp3 ?>">
+                            <span data-feather="shopping-cart"></span>
+                            Alterar Senha
                         </a>
                     </li>
                 </ul>

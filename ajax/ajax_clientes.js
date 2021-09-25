@@ -6,6 +6,7 @@ $('#error-icon').hide();
 
 var cpf = document.getElementById('cpf');
 var cpfLabel = document.getElementById('cpf_label');
+var cpfHelp = document.getElementById('cpfHelp');
 
 cpf.addEventListener("blur", function() {
   
@@ -19,14 +20,18 @@ cpf.addEventListener("blur", function() {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText == "ja_existe") {
                 cpf.style.border = "solid 1px #FF0000"; 
-                cpfLabel.innerHTML = "CPF - já existe";
+                cpfLabel.innerHTML = "CPF";
+                cpfHelp.innerHTML = "Já existe um cadastro com esse CPF";
                 cpfLabel.style.color = "red";
+                cpfHelp.style.color = "red";
                 var desativar = document.createAttribute("disabled");  
                 document.getElementById("btnContinuarCadastroCliente").setAttributeNode(desativar); 
             } else {
                 cpf.style.border = ""; 
                 cpfLabel.style.color = "black"; 
                 cpfLabel.innerHTML = "CPF";
+                cpfHelp.style.color = "black"; 
+                cpfHelp.innerHTML = "";
                 document.getElementById("btnContinuarCadastroCliente").removeAttribute("disabled");  
             }     
         }       

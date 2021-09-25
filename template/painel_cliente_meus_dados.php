@@ -23,13 +23,20 @@
     } 
     
     $dadosCliente = buscarClientes($_SESSION['dados_cliente'][0]->cpf);
+    
+    if ($_SESSION['login_painel'] != 'cliente'):
+        $url = get_bloginfo('url')."/login";
+        header("Location:$url");
+        exit("A sessão foi expirada ou é invalida");
+    endif; 
+    
+    
 ?>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<main class="col-lg-9 ms-sm-auto col-lg-10 px-lg-4">
     
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Meus Dados</h1>
-        
     </div>
      
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-secondary rounded shadow-sm">
@@ -46,7 +53,7 @@
                 
        <div class="row mt-3">
             <div class="col-lg-12 text-center">          
-                <img id="previewImg" class="img-thumbnail" width="200" src="<?= $dadosCliente[0]->src_selfie == '' ?  $caminhoImgDefault : $dadosCliente[0]->src_selfie ?>" alt="Logomarca de sua empresa">
+                <img id="previewImg" class="img-thumbnail" width="200" src="<?= $dadosCliente[0]->src_selfie == null ?  $caminhoImgDefault : $dadosCliente[0]->src_selfie ?>" alt="Selfie">
                 <script>
                     function previewFile(input){
                         var file = $("input[type=file]").get(0).files[0];
@@ -69,15 +76,15 @@
         
         <br/><br/>
         
-        <div class="form-row">
-            <div class="col-md-6 mb-6">
+        <div class="row">
+            <div class="col-lg-6 mb-6">
                 <label>CPF</label>
                 <input type="text" class="form-control cpf" id="cpf" name="cpf_cliente"  value="<?= $_SESSION['dados_cliente'][0]->cpf ?>" required readonly="" >
                 <div class="invalid-feedback">
                     O CPF é obrigatório. Preencha este campo.
                 </div>
             </div>
-            <div class="col-md-6 mb-6">
+            <div class="col-lg-6 mb-6">
                 <label >Nome completo</label>
                 <input type="text" class="form-control" name="nome_completo"  value="<?= $dadosCliente[0]->nome_completo ?>" required readonly="">
                 <div class="invalid-feedback">
@@ -88,15 +95,15 @@
         
         <br/>
         
-        <div class="form-row">    
-            <div class="col-md-6 mb-6">
+        <div class="row">    
+            <div class="col-lg-6 mb-6">
                 <label>E-mail <span class="text-muted"></span></label>
                 <input type="email" class="form-control" name="email"  value="<?= $dadosCliente[0]->email ?>" readonly="">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div>
-            <div class="col-md-6 mb-6">
+            <div class="col-lg-6 mb-6">
                 <label>Nascimento</label>
                 <input type="date" class="form-control" name="data_nascimento"   value="<?= $dadosCliente[0]->data_nascimento ?>" required readonly="">
                 <div class="invalid-feedback">
@@ -107,7 +114,7 @@
         <br/>
         
         <div class="row"> 
-            <div class="col-md-6 mb-6">
+            <div class="col-lg-6 mb-6">
                 <label>Telefone <span class="text-muted"></span></label>
                 <input type="text" class="form-control" name="telefone"  value="<?= $dadosCliente[0]->fone ?>" required readonly="">
                 <div class="invalid-feedback">

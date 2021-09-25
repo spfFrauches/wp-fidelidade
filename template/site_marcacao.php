@@ -1,6 +1,13 @@
 <?php 
     /* Template Name: Site Marcação cartão */ 
     get_header('marcacao'); 
+    
+    if(!isset($_SESSION['login_painel'])):
+        $url = get_bloginfo('url')."/login";
+        header("Location:$url");
+        exit("Sessão expirada ou invalida");
+    endif; 
+    
     include( get_template_directory() . '/inc/model_empresa_config.php' );
     include( get_template_directory() . '/inc/model_empresa.php' );
     
@@ -12,9 +19,6 @@
     $tipoMarcacao = $carregarConfiguracaoEmpresa[0]->tipo_marcacao ;
     $logoEmpresa = $dadosEmpresa[0]->logoempsrc;
     
-    if ($tipoMarcacao == 'cash') {
-        $tipoMarcacao = "Cashback";
-    }
      
 ?>
 <style>
@@ -46,7 +50,7 @@
         <?php endif; ?>
         
         <h2>
-            Web <small> Marcações <span class="badge badge-secondary"> <?= $tipoMarcacao; ?></span></small>
+            Webi <small> Club Fidelidade</small>
         </h2>
         <br/>
        
@@ -84,8 +88,7 @@
         
         <div class="form-group card p-2" id="confirma_marcacao">     
             <div class="row text-center">
-                <div class="col-lg-12">
-                    <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->               
+                <div class="col-lg-12">                   
                     <img id="selfie" src="<?= $caminhoImgDefault ?>" height="120px" class="rounded" alt="...">
                 </div>
             </div>
@@ -113,12 +116,21 @@
         <!-- ---------------------------------------------------------------------------------- -->
         
         <div class="form-group card p-2" id="confirma_marcacaoConfere">
-            <div class="row">
+            
+             <div class="row text-center">
                 <div class="col-lg-12">
-                    <h4>Confirmação de Marcação</h4>
-                    <br/>
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                    <br/>
+                   <h4>Confirmação de Marcação</h4>
+                </div>
+            </div>
+            
+            <div class="row text-center mt-2">
+                <div class="col-lg-12">
+                    <img id="selfie2" src="<?= $caminhoImgDefault ?>" height="120px" class="rounded" >
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-lg-12">
                     <h4 id="confirma_marcacaoNomeConfere"><small>Cliente.:</small> Nome do Cliente</h4>
                     <h4 id="confirma_marcacaoCPFConfere" ><small>CPF.:</small> 000.000.000-00</h4>
                     <h4><small>Valor R$ .: </small><b id="confirma_marcacaoValorConfere">R$ 000,00</b></h4>

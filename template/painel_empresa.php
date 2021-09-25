@@ -1,33 +1,34 @@
 <?php
 
 /* Template Name: Painel Empresa  */ 
-if (isset($_SESSION['login_painel'])) :
+    
+if ($_SESSION['login_painel'] != 'empresa'):
+    $url = get_bloginfo('url')."/login";
+    header("Location:$url");
+    exit("A sessão foi expirada ou é invalida");
+endif; 
         
-    get_header('painel'); 
-    require ( get_template_directory() . '/inc/model_empresa_config.php' );
-    require ( get_template_directory() . '/inc/model_clientes.php' );
-    require ( get_template_directory() . '/inc/model_marcacao.php' );
-    require ( get_template_directory() . '/inc/model_empresa.php' );
+get_header('painel'); 
     
-    $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+require ( get_template_directory() . '/inc/model_empresa_config.php' );
+require ( get_template_directory() . '/inc/model_clientes.php' );
+require ( get_template_directory() . '/inc/model_marcacao.php' );
+require ( get_template_directory() . '/inc/model_empresa.php' );
     
-    
-    if ($config[0]->tipo_marcacao == 'cash') {
-        $tipoMarcacao = "por Cashback";
-    }
-    
-    $totalClientes  = listarClientesPorEmpresa($_SESSION['dados_empresa'][0]->cnpj);
-    $totalMarcacoes = listarTotalMarcacoes($_SESSION['dados_empresa'][0]->cnpj);
-    
-    $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
-    
-    if ($_SESSION['login_painel'] != 'empresa'):
-        exit("A sessão foi expirada ou é invalida");
-    endif; 
-       
+$config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+
+if ($config[0]->tipo_marcacao == 'cash') {
+    $tipoMarcacao = "por Cashback";
+}
+
+$totalClientes  = listarClientesPorEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+$totalMarcacoes = listarTotalMarcacoes($_SESSION['dados_empresa'][0]->cnpj);
+
+$dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+         
 ?>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
     
     <div class="row">            
         <div class="col-lg-12">
@@ -36,7 +37,7 @@ if (isset($_SESSION['login_painel'])) :
                 <br/>            
             </div>    
             <br/>
-            <h5 class="h5">Bem vindo ao Fidelidade Web</h5>              
+            <h5 class="h5">Bem vindo ao <?= NOME_APLICACAO ?></h5>              
         </div>            
     </div>
        
@@ -46,9 +47,9 @@ if (isset($_SESSION['login_painel'])) :
             <div class="alert alert-danger" role="alert">
                 <h4 class="alert-heading">Atenção!</h4>
                 <p>
-                    É necessário configurar as forma de marcação.
+                    É necessário configurar a forma de pontuação de seus clientes.
                     <br/>
-                    Após configuração sua empresa estará pronta para usar e disponibilizar o fidelidade Web
+                    Após configuração sua empresa estará pronta para usar e disponibilizar o Wibi Club Fidelide
                     para seus clientes. 
                 </p>
                 <hr>
@@ -76,27 +77,20 @@ if (isset($_SESSION['login_painel'])) :
     <br/>
         
     <div class="row">
-        <div class="col-lg-4 col-12">
-            <div class="card">
-                <div class="card-body d-flex justify-content-between align-items-center">                        
-                    Tipo de marcação
-                    <span class="badge badge-primary badge-pill"><?= $tipoMarcacao == '' ? "Não definido" : $tipoMarcacao  ?></span>                       
-                </div>
-            </div>
-        </div>
+        
         <div class="col-lg-4 col-12">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
                     <a href="<?= get_bloginfo('url')."/empresa-meus-clientes/" ?>">Meus clientes </a>
-                    <span class="badge badge-primary badge-pill"><?= $totalClientes ?></span>                       
+                    <span class="badge rounded-pill bg-primary"><?= $totalClientes ?></span>                  
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-12">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
-                    Marcações 
-                    <span class="badge badge-primary badge-pill"><?= $totalMarcacoes ?></span>                       
+                    Total Marcações 
+                    <span class="badge rounded-pill bg-success"><?= $totalMarcacoes ?></span>                     
                 </div>
             </div>
         </div>
@@ -120,15 +114,6 @@ if (isset($_SESSION['login_painel'])) :
     </div>
    <br/>                
 </main>
-
-<?php 
-else : 
-    $url = get_bloginfo('url')."/login";
-    echo "<script>";
-    echo "window.location.href = '$url'";
-    echo "</script>"; 
- endif;
-?>
 
 <?php get_footer('painel') ?>
 

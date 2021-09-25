@@ -12,11 +12,13 @@ $('#btnNovaMarcacao').hide();
 $('.dinheiro').mask('#.##0,00', {reverse: true});
 document.getElementById('cpfHelp').style.color = "gray"; 
 
+
 /* ----------------------------------------------------  */
 /* 1 Tela/load da marcação - Ao clicar em continuar      */
 /* ----------------------------------------------------  */
 
 $( "#btcContinuarMarcacao" ).click(function() {
+    
     if ($('#cpf_marcacao').val() == '') { 
         
         alert("O CPF deve ser preenhcido");
@@ -60,6 +62,8 @@ $( "#btnMarcar" ).click(function() {
         document.getElementById('valorMarcacao').style.border = "";
     }
     
+    document.getElementById("selfie2").src = sessionStorage.getItem('src_selfie');
+    
     var xmlhttp = new XMLHttpRequest(); 
     
     xmlhttp.open("POST", "../wp-content/themes/fidelidade/ajax/ajax_marcacao.php", true);
@@ -90,7 +94,7 @@ $( "#btnMarcar" ).click(function() {
                 document.getElementById("confirma_marcacaoNomeConfere").innerHTML  = sessionStorage.getItem('nome_completo');
                 document.getElementById("confirma_marcacaoCPFConfere").innerHTML   =  sessionStorage.getItem('cpf');
                 document.getElementById("confirma_marcacaoValorConfere").innerHTML = sessionStorage.getItem('valorMarcacao');
-                document.getElementById("selfie").src = sessionStorage.getItem('src_selfie');
+                
             },1000);          
         }; 
     }
@@ -119,6 +123,9 @@ $( "#btnMarcarConfere" ).click(function() {
             
             console.log(this.responseText);
             $('#load_form_marcacao').show();
+            
+            document.getElementById("selfie2").src = sessionStorage.getItem('src_selfie');
+            
             setTimeout(function(){   
                 $('#confirma_marcacaoConfere').hide();
                 $('#confirma_marcacaoConfereSucesso').show();
@@ -153,8 +160,7 @@ $( "#btcVoltarMarcacao" ).click(function() {
     $('#btnMarcar').hide();
     $('#confirma_marcacaoNaoExiste').hide();
     
-    sessionStorage.removeItem('src_selfie');
-    
+    sessionStorage.removeItem('src_selfie'); 
     document.getElementById("selfie").src = 'http://restaurantemegachic.com/fidelidade/wp-content/themes/fidelidade/img/default-user-1.png';
     
     setTimeout(function(){         
@@ -211,14 +217,18 @@ function verificaSeExisteCPF() {
                 
                 /* Armazenando os dados cadastrai do cliente */
                 
-                console.log(objVerificarCliente);            
+                console.log(objVerificarCliente);  
+                
                 document.getElementById("confirma_marcacaoNome").innerHTML = objVerificarCliente[0]['nome_completo'];
                 document.getElementById("confirma_marcacaoCPF").innerHTML = objVerificarCliente[0]['cpf'];
                 
-                if (objVerificarCliente[0]['src_selfie'] != null){
+                if (objVerificarCliente[0]['src_selfie'] == null || objVerificarCliente[0]['src_selfie'] == ''){
+                    document.getElementById("selfie").src = 'http://restaurantemegachic.com/fidelidade/wp-content/themes/fidelidade/img/default-user-1.png';
+                    sessionStorage.setItem('src_selfie', 'http://restaurantemegachic.com/fidelidade/wp-content/themes/fidelidade/img/default-user-1.png');
+                } else {
                     document.getElementById("selfie").src = objVerificarCliente[0]['src_selfie'];
                     sessionStorage.setItem('src_selfie', objVerificarCliente[0]['src_selfie']);
-                } 
+                }
                                
                 
                 sessionStorage.setItem('cpf', objVerificarCliente[0]['cpf']);
@@ -226,8 +236,7 @@ function verificaSeExisteCPF() {
                 sessionStorage.setItem('nome_completo', objVerificarCliente[0]['nome_completo']);
                 sessionStorage.setItem('email', objVerificarCliente[0]['email']);
                 sessionStorage.setItem('fone', objVerificarCliente[0]['fone']);
-                
-                                
+                                                
             }
 
         };     

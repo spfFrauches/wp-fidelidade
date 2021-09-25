@@ -1,88 +1,89 @@
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Gestão Fidelidade</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Webi Fidelidade</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-   
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
-        </li>
-    </ul>
-</nav>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Pesquisar" aria-label="Search">
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+            <a class="nav-link px-3" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
+        </div>
+    </div>
+</header>
+
 
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="sidebar-sticky pt-3">
+            <div class="position-sticky pt-3">
                 
                 <?php
                     global $wp;
                     $url = home_url( $wp->request );                    
                 ?>
-                
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Painel Fidelidade</span>
-                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-                        <span data-feather="plus-circle"></span>
+                    <span>PAINEL</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
                     </a>
                 </h6>
-                
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <?php $url_swp1 = get_bloginfo('url')."/painel-empresa" ?>                        
-                        <a class="nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>"
-                            <span data-feather="home"></span>
-                            Home 
+                        <a class="nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            &nbsp; Home 
                         </a>
                     </li>
                     <li class="nav-item">
                         <?php $url_swp4 = get_bloginfo('url')."/empresas-configuracao" ?> 
                         <a class="nav-link <?php if ($url == $url_swp4 ) { echo "active";}?>"href="<?= $url_swp4 ?>">
-                            <span data-feather="shopping-cart"></span>
-                            Configurações
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            &nbsp; Configurações
                         </a>
                     </li>
                     <li class="nav-item">
                         <?php $url_swp2 = get_bloginfo('url')."/minha-empresa" ?> 
                         <a class="nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
-                            <span data-feather="file"></span>
-                            Minha empresa
+                            <i class="fa fa-industry" aria-hidden="true"></i>
+                            &nbsp; Minha empresa
                          </a>
                     </li>
 
                     <li class="nav-item">
                         <?php $url_swp3 = get_bloginfo('url')."/empresa-meus-clientes" ?> 
                         <a class="nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>"href="<?= $url_swp3 ?>">
-                            <span data-feather="shopping-cart"></span>
-                            Meus Cliente
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            &nbsp; Meus Cliente
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <?php $url_swp5 = get_bloginfo('url')."/minha-empresa-alterar-senha" ?> 
+                        <a class="nav-link <?= ($url == $url_swp5 ) ? "active" : "" ?>" href="<?= $url_swp5 ?>">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                            &nbsp; Alterar Senha
                         </a>
                     </li>
                                        
                     <li class="nav-item">
                         <a  target="_blank" class="nav-link" href="<?= get_bloginfo('url')  ?>/site-marcacao/">
-                            <span data-feather="shopping-cart"></span>
-                            Site marcação 
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Site marcação 
                         </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <?php $url_swp5 = get_bloginfo('url')."/minha-empresa-alterar-senha" ?> 
-                        <a class="nav-link <?= ($url == $url_swp5 ) ? "active" : "" ?>" href="<?= $url_swp5 ?>">
-                            <span data-feather="shopping-cart"></span>
-                            Alterar Senha
-                        </a>
-                    </li>
+                    </li>                   
                     
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart"></span>
-                            Tutoriais
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            &nbsp; Tutoriais / Ajuda
                         </a>
                     </li>
-
-                </ul>            
-
+                </ul>
             </div>
         </nav>
+    </div>
+</div>
+
+
 

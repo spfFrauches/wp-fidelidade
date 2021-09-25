@@ -15,7 +15,7 @@
         <div class="text-center mb-4">   
             <!--<img class="mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72"> -->
             <i class="fa fa-fire fa-4x" aria-hidden="true"></i>
-            <h1 class="h3 mb-3 mt-2 font-weight-normal">Fidelidade Web</h1>
+            <h1 class="h3 mb-3 mt-2 font-weight-normal"><?= NOME_APLICACAO ?></h1>
             <?php if (isset($msg)) : echo  msgLoginInvalido($msg) ; endif;?>
             <p>
                 <a href="<?= get_bloginfo('url') ?>"> Voltar ao site </a>
@@ -39,36 +39,22 @@
         </div>
 
         <button class="btn btn-lg btn-primary btn-block"  id="btnLoginEntrar" type="submit"  data-toggle="modal" data-target="#exampleModal">Entrar</button>
-        <p class="mt-5 mb-3 text-muted text-center">&copy; MegaChic Fidelidade 2021</p>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; <?= NOME_APLICACAO ?> <?=  date("Y"); ?></p>
 
     </form>
-<!--
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">       
-        <div class="d-flex justify-content-center" style="margin-top: 50%">
-              <div class="spinner-border text-light" role="status">
-                    <span class="sr-only">Loading...</span>
-              </div>
-        </div>
-    </div>
-</div>
--->
 
 <?php get_footer('login');  ?>
 
 <script>
     /* Função para mascaras CNPJ e CPF automatico */
-    
     function mascara(o,f){
         v_obj=o;
         v_fun=f;
         setTimeout("execmascara()",1);
     }
-
     function execmascara(){
         v_obj.value=v_fun(v_obj.value);
     }
-
     function remove(str, sub) {
         i = str.indexOf(sub);
         r = "";
@@ -77,13 +63,10 @@
         }
         return r;
     }
-
     function nocnpjcpf_mask(v){
-
         v = remove(v, "-");
         v = remove(v, ".");
         v = remove(v, "/");
-
         if(v.length < 12){
             v = v.replace(/\D/g,"")
             v = v.replace(/(\d{3})(\d)/,"$1.$2");

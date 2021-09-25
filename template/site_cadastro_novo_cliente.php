@@ -4,25 +4,27 @@
     $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";  
 ?>
 
+<div  class="mb-5" >
+
 <form method="post" action="<?= get_bloginfo('url') ?>/finalizar-cadastro-cliente" class="needs-validation" novalidate enctype="multipart/form-data"> 
     
-    <div class="container "> 
+    <div class="container"> 
         
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72">
-            <h2>Cliente Fidelidade</h2>
+            <h2>Webi Club Fidelidade</h2>
             <p class="lead">
-                Seja bem vindo, faça seu cadastro e tenha seu cartão fidelidade web para que
-                que compras sejam marcadas. Ganhe premios com o fidelidade web.
+                Seja bem vindo, faça seu cadastro e tenha seu webi fidelidade.
+                Suas compras valem pontos pontos para trocar por beneficios !
             </p>
         </div>
    
         <div class="row card p-3" id="form_cadastroCliente">
-            <div class="col-md-12 order-md-1"> 
+            <div class="col-lg-12 order-lg-1"> 
                 
                 <div class="row mt-3">
                     <div class="col-lg-12 text-center">          
-                        <img id="previewImg" class="img-thumbnail" width="150" src="<?= $caminhoImgDefault  ?>" alt="Logomarca de sua empresa">
+                        <img id="previewImg" class="img-thumbnail" width="150" src="<?= $caminhoImgDefault  ?>" alt="Selfie">
                         <script>
                             function previewFile(input){
                                 var file = $("input[type=file]").get(0).files[0];
@@ -44,14 +46,15 @@
                 </div> 
                 
                 <div class="row mt-5">
-                    <div class="col-md-6 mb-6">
+                    <div class="col-lg-6 mb-2">
                         <label id="cpf_label">CPF</label>
                         <input type="text" class="form-control cpf" id="cpf" name="cpf_cliente" required >
+                        <div id="cpfHelp" class="form-text"></div>
                         <div class="invalid-feedback">
                             Este campo é obrigatório.
                         </div>
                     </div>
-                    <div class="col-md-6 mb-6">
+                    <div class="col-lg-6 mb-2">
                        <label >Nome completo</label>
                         <input type="text" class="form-control" id="nome_completo" name="nome_completo" required>
                         <div class="invalid-feedback">
@@ -61,15 +64,15 @@
                 </div>
                 
                 <br/>   
-                <div class="form-row">
-                    <div class="col-md-6 mb-6">
+                <div class="row">
+                    <div class="col-lg-6 mb-2">
                         <label id="email_label">E-mail </label>
                         <input type="email" class="form-control" id="email" name="email" required>
                         <div class="invalid-feedback">
                             Este campo é obrigatório.
                         </div>
                     </div>
-                    <div class="col-md-6 mb-6">
+                    <div class="col-lg-6 mb-6">
                         <label>Nascimento</label>
                         <input type="date" class="form-control" name="data_nascimento" required>
                         <div class="invalid-feedback">
@@ -80,7 +83,7 @@
                 <br/>   
                 <div class="row"> 
                     
-                    <div class="col-md-6 mb-6">
+                    <div class="col-lg-6 mb-2">
                         <label id="telefone_label">Telefone <span class="text-muted"></span></label>
                         <input type="text" class="form-control telefoneform" id="telefone" name="telefone" required>
                         <div class="invalid-feedback">
@@ -88,7 +91,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-6 mb-6">
+                    <div class="col-lg-6 mb-2">
                         <label>Sexo <span class="text-muted"></span></label>
                         <select class="form-control">
                             <option>Masculino</option>
@@ -103,14 +106,14 @@
                 </div>
                 <br/>   
                 <div class="row"> 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-lg-6 mb-2">
                         <label id="senhaCliente">Senha</label>
                         <input type="password" class="form-control" name="senha" id="senha_cliente" required >
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-lg-6 mb-2">
                         <label id="senhaClienteConfirmar">Confirmar Senha </label>
                         <input type="password" class="form-control" name="password_confirma" id="senha_cliente_confirma" required >
                         <div class="invalid-feedback">
@@ -120,20 +123,20 @@
                 </div>
                 <br/>
                 <div class="form-group form-check">
-                    <p>
-                        <a href="#">Clique aqui</a> e Leia os termos de uso 
-                    </p>
                     <input type="checkbox" class="form-check-input" id="termos_contrato" required="" name="termos_contrato" value="SIM">
-                    <label class="form-check-label">Eu aceito e concordo com o termos e condições do uso.</label>
+                    <label class="form-check-label">Eu aceito e concordo com o termos e condições do uso. <a href="#">Clique aqui</a> para ler</label>
                 
                 </div>
-                <button class="btn btn-primary btn-lg btn-block" id="btnContinuarCadastroCliente">Continuar <i class="fa fa-chevron-right" aria-hidden="true"></i></button>   
+                <br/><br/>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary btn-lg btn-block" id="btnContinuarCadastroCliente">Continuar <i class="fa fa-chevron-right" aria-hidden="true"></i></button>   
+                </div>
             </div> 
         </div>     
     </div>
 </form>
+</div>
 
-<br/><br/><br/>
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
@@ -156,7 +159,7 @@
 </script>
 
 <?php get_footer('site'); ?>
-<script src="<?php bloginfo('template_url') ?>/ajax/ajax_clientes.js"></script>
+<script src="<?php bloginfo('template_url') ?>/ajax/ajax_clientes.js?v=1.0"></script>
 
 
 

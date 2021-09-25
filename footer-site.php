@@ -1,6 +1,3 @@
-        <div class="container-fluid">
-            <hr/>
-        </div>  
 
         <footer class="container-fluid" style="padding-left: 50px">
 
@@ -23,7 +20,7 @@
                 <div class="col-lg-4 col-12">
                     <h5>Programa Fidelidade</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Como funciona o fidelidade web?</a></li>
+                        <li><a class="text-muted" href="#">Como funciona o <?= NOME_APLICACAO ?>?</a></li>
                         <li><a class="text-muted" href="#">Como criar meu cartão web?</a></li>
                         <li><a class="text-muted" href="#">Planos </a></li>
                         <li><a class="text-muted" href="#">FAQ</a></li>
@@ -36,7 +33,7 @@
 
         <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
         
-        <script src="<?php bloginfo('template_url') ?>/dist/js/bootstrap.min.js"></script>
+        <script src="<?php bloginfo('template_url') ?>/dist/js/bootstrap5-1.min.js"></script>
         <script src="<?php bloginfo('template_url') ?>/dist/Mask/dist/jquery.mask.js"></script>
         <script src="<?php bloginfo('template_url') ?>/dist/js/form-validation.js"></script>        
         <script src="<?php bloginfo('template_url') ?>/ajax/ajax_login.js"></script>

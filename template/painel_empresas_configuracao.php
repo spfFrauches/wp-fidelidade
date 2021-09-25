@@ -11,7 +11,7 @@
         
 ?>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"> 
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> 
     
     <div class="row">            
         <div class="col-lg-12">
@@ -21,8 +21,6 @@
             </div>
         </div>
     </div>
-
-    
     
     <br/>
     <div class="row">     
@@ -41,11 +39,21 @@
     <div class="row">    
         <div class="col-lg-6">
             <?php if (!$config): ?>
+            
                 <div class="alert alert-danger" role="alert">
-                   Nenhuma configuraçao aplicada. Por favor configure para continuar...
-                   <br/>
-                   Mas atenção, ao configurar não pode mais alterar (nesta versão)
+                    <h4 class="alert-heading">Nenhuma configuraçao aplicada</h4>
+                    <p>
+                        Configure a forma de pontuação para seus clientes. Sem isso não será possivel
+                        continuar.
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        Defina a quantidade de obtenção de pontos com base na compra dos produtos
+                        ou serviços por parte do seu cliente.
+                    </p>
                 </div>
+            
+            
             <?php endif; ?>
 
             <?php if ($config): ?>
@@ -55,47 +63,21 @@
                 </div>
             <?php endif; ?>
         </div>
-        <div class="col-lg-6 confMarcacao">            
-            <div class="accordion mb-5" id="accordionExample">    
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Configure seu cashback
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <p>
-                                Com base no valor da compra de seu cliente, estabeleça
-                                um percentual desse valor que será convertido em pontos.
-                                <br/>
-                                Esses pontos podem ser trocador por produtos ou brindes
-                                para fidelizar seu cliente. Veja com nossa consultoria
-                                como isso pode ser vantajoso.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="row"> 
+    <div class="row mt-4"> 
         <div class="col-lg-6">
             <div class="form-group">            
-                <label class="h5" >Tipo de Marcação</label>
+                <label class="h5" >Forma de adquirir pontos</label>
                 <div class="form-group">
-                    <select class="form-control" id="tipoMarcacao" name="tipoMarcacao" <?= $config ? "disabled" : ""?>>
-                        <option value="none">Selecione</option>
-                        <option value="cash" <?= ($tipoMarcacao=='cash') ?  "selected" : "" ?> >Por cashback</option>
+                    <select class="form-select" id="tipoMarcacao" name="tipoMarcacao" <?= $config ? "disabled" : ""?>>
+                        <option value="cash" <?= ($tipoMarcacao=='cash') ?  "selected" : "" ?> >Base no valor da compra/pgto</option>
                     </select>
                 </div>
             </div>             
         </div> 
         <div class="col-lg-6">          
-            <label class="my-1 mr-2">Porcentagem (%) em cima do valor da compra.</label>
-            <select class="custom-select my-1 mr-sm-2" name="percentual" id="percentual" <?= $config ? "disabled" : ""?>>
+            <label class="my-1 mr-2">Porcentagem (%) de conversão para pontos</label>
+            <select class="form-select my-1 mr-sm-2" name="percentual" id="percentual" <?= $config ? "disabled" : ""?>>
                 <option value="0" selected>Selecione o % (percentual)</option>
                 <option value="1" <?= ($percentual=='1') ?  "selected" : "" ?>>1%</option>
                 <option value="2" <?= ($percentual=='2') ?  "selected" : "" ?>>2%</option>
@@ -108,9 +90,11 @@
     </div> 
     <br/>
     
-    <div class="row confMarcacao mt-5">
+    <div class="row  mt-5">
         <div class="col-lg-6">  
-            <button  class="btn btn-primary my-1  btn-block btnSalvarAction"  <?= $config ? "disabled" : "" ?>  >Salvar</button>  
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <button  class="btn btn-primary my-1  btn-block btnSalvarAction"  <?= $config ? "disabled" : "" ?>  >Salvar</button> 
+            </div>
         </div>
     </div>
              

@@ -25,21 +25,12 @@
        
 ?>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<main class="col-lg-9 ms-sm-auto col-lg-10 px-lg-4">
       
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2 class="h2">Minha Empresa <small> dados cadastrais</small></h2>
     </div>
-    
-    <?php 
-  
-    /*
-        echo "<pre>";
-        var_dump($_SESSION['dados_empresa'][0]);
-        echo "</pre>";
-    */
-    ?>
-    
+
     <form class="needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
         <br/>     
         <div class="row mt-3">
@@ -65,12 +56,12 @@
             </div>
         </div>   
             
-        <div class="form-row mt-5">
-            <div class="col-lg-6">
+        <div class="row mt-5">
+            <div class="col-lg-4">
                 <label>Cód. Emp</label>
                 <input type="text" class="form-control" name="codempresa" value="<?= $_SESSION['dados_empresa'][0]->id ?>" readonly>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <label >Razão Social</label>
                 <input type="text" class="form-control" value="<?= $_SESSION['dados_empresa'][0]->razao_social ?>" readonly>
                 <div class="invalid-feedback">
@@ -79,52 +70,47 @@
             </div>
         </div>
         <br/>
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
+        <div class="row">
+            <div class="col-lg-4 mb-3">
                 <label>Nome Fantasia</label>
                 <input type="text" class="form-control"  value="<?= $_SESSION['dados_empresa'][0]->nome_fantasia ?>"  readonly>
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
-            </div> 
-            
-            <div class="col-md-6 mb-3">
+            </div>            
+            <div class="col-lg-4 mb-3">
                 <label>CNPJ</label>
                 <input type="text" class="form-control" value="<?= $_SESSION['dados_empresa'][0]->cnpj ?>" readonly>
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div>
-            
-        </div>
-        <br/>
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-lg-4 mb-3">
                 <label>Telefone</label>
                 <input type="text" class="form-control" readonly value="<?= $_SESSION['dados_empresa'][0]->telefone ?>">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
-            </div>
-            <div class="col-md-6 mb-3">
+            </div>            
+        </div>
+
+        <br/>
+        <div class="row"> 
+            <div class="col-lg-4 mb-3">
                 <label>Whatsapp / Telegram</label>
                 <input type="text" class="form-control"  readonly value="<?= $_SESSION['dados_empresa'][0]->whatsapptelegram ?>">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div>
-        </div>
-        <br/>
-        <div class="form-row">           
-            <div class="col-md-6 mb-3">
+            <div class="col-lg-4 mb-3">
                 <label>Facebook</label>
                 <input type="text" class="form-control" readonly value="<?= $_SESSION['dados_empresa'][0]->facebook ?>">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
-            </div>
-           
-            <div class="col-md-6 mb-3">
+            </div>          
+            <div class="col-lg-4 mb-3">
                 <label>Instagram</label>
                 <input type="text" class="form-control"  readonly value="<?= $_SESSION['dados_empresa'][0]->instagram ?>">
                 <div class="invalid-feedback">
@@ -137,25 +123,15 @@
         <h3><small>Endereço</small></h3>
         <hr/>
         
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
+        <div class="row">
+            <div class="col-lg-4 mb-3">
                 <label>CEP</label>
                 <input type="text" class="form-control" name="cep" value="<?= $_SESSION['dados_empresa'][0]->cep ?>" required readonly="">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
-            </div>   
-            <div class="col-md-6 mb-3">
-                <label>Cidade</label>
-                <input type="text" class="form-control" name="cidade" value="<?= $_SESSION['dados_empresa'][0]->cidade ?>"  required readonly="">
-                <div class="invalid-feedback">
-                    Este campo é obrigatório.
-                </div>
-            </div>      
-        </div>
-        
-        <div class="form-row">
-            <div class="col-md-6 mb-3">                       
+            </div> 
+            <div class="col-lg-4 mb-3">                       
                 <div class="form-group">
                     <label>UF</label>
                     <select class="form-control" id="uf" name="uf" required readonly>
@@ -189,36 +165,42 @@
                         <option value="TO" <?= $_SESSION['dados_empresa'][0]->uf == "TO" ? "selected" : "" ?>>Tocantins</option>
                     </select>
                 </div>                        
-            </div>       
-            <div class="col-md-6 mb-3">
+            </div> 
+            <div class="col-lg-4 mb-3">
+                <label>Cidade</label>
+                <input type="text" class="form-control" name="cidade" value="<?= $_SESSION['dados_empresa'][0]->cidade ?>"  required readonly="">
+                <div class="invalid-feedback">
+                    Este campo é obrigatório.
+                </div>
+            </div>      
+        </div>
+        
+        <div class="row">
+                  
+            <div class="col-lg-4 mb-3">
                 <label>Endereço</label>
                 <input type="text" class="form-control" name="endereco" value="<?= $_SESSION['dados_empresa'][0]->endereco ?>"  required readonly="">
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
-            </div>          
-        </div>
-        
-        <div class="form-row">
-            
-            <div class="col-md-6 mb-3">
+            </div> 
+            <div class="col-lg-4 mb-3">
                 <label>Bairro</label>
                 <input type="text" class="form-control" value="<?= $_SESSION['dados_empresa'][0]->bairro ?>"  readonly>
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div> 
-            <div class="col-md-6 mb-3">
+            <div class="col-lg-4 mb-3">
                 <label>Número</label>
                 <input type="text" class="form-control" value="<?= $_SESSION['dados_empresa'][0]->numero ?>"  readonly>
                 <div class="invalid-feedback">
                     Este campo é obrigatório.
                 </div>
             </div> 
-            
         </div>
         
-        <div class="form-row">
+        <div class="row">
             
             <div class="col-lg-12">
                 <label>Complemento</label>
@@ -230,9 +212,11 @@
            
         </div>
               
-        <div class="form-row mt-5">
-            <div class="col-lg-12">
-                <button class="btn btn-primary" type="submit" >Salvar</button>
+        <div class="row mt-5">
+            <div class="col-lg-4">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit" >Salvar</button>
+                </div>
             </div>
         </div>     
         

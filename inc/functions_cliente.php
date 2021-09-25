@@ -15,7 +15,11 @@ function cadastroClienteViaSite() {
         $targetDir = "./wp-content/themes/fidelidade/clientes_selfie/";    
         $dir = get_bloginfo('template_url')."/clientes_selfie/".basename($_FILES["selfcliente"]["name"]);
         $target_file = $targetDir . basename($_FILES["selfcliente"]["name"]);             
-        move_uploaded_file ($_FILES['selfcliente']['tmp_name'], $target_file);
+        if (move_uploaded_file ($_FILES['selfcliente']['tmp_name'], $target_file)):
+            else:
+            $dir = '';
+            $target_file = '';
+        endif;
     endif;
 
     $arrayCliente = [
@@ -35,7 +39,27 @@ function cadastroClienteViaSite() {
     else:
         return false;
     endif;
+   
+}
 
+
+function alterarSenhaDashBoard() {
+    
+    if (isset($_POST['novasenha']) && isset($_POST['novasenha_confirma']) ):        
+        if ($_POST['novasenha'] == $_POST['novasenha_confirma']):  
+            if (isset($_POST['senhaatual'])): 
+                if (autenticarLoginCliente($_SESSION['dados_cliente'][0]->cpf, $_POST['senhaatual'])):
+                    if (alterarSenhaCliente($_POST['novasenha'], $_SESSION['dados_cliente'][0]->cpf)):
+                        return "SenhaAlterada";
+                    endif;
+                else :
+                    return "SenhaAtualInvalida";
+                endif;
+            endif;
+        else:
+            return "NovasSenhasInvalidas";
+        endif;      
+    endif;
     
 }
 
