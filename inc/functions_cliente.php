@@ -14,7 +14,9 @@ function cadastroClienteViaSite() {
     if(!empty($_FILES['selfcliente'])):      
         $targetDir = "./wp-content/themes/fidelidade/clientes_selfie/";    
         $dir = get_bloginfo('template_url')."/clientes_selfie/".basename($_FILES["selfcliente"]["name"]);
-        $target_file = $targetDir . basename($_FILES["selfcliente"]["name"]);             
+        
+        $target_file = $targetDir . basename($_FILES["selfcliente"]["name"]); 
+        
         if (move_uploaded_file ($_FILES['selfcliente']['tmp_name'], $target_file)):
             else:
             $dir = '';
@@ -29,6 +31,7 @@ function cadastroClienteViaSite() {
         'email' => $_POST['email'],
         'fone' => $_POST['telefone'],
         'senha' =>  $_POST['senha'],
+        'sexo' =>  $_POST['sexo'],
         'termos_uso' => 'SIM',
         'src_selfie' => $dir,
         'path_selfie' => $target_file

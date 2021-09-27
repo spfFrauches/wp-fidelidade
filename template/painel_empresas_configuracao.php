@@ -1,22 +1,29 @@
 <?php 
 
-    /* Template Name: Painel Empresas Configuração */ 
-    get_header('painel');
-    require './wp-content/themes/fidelidade/inc/model_marcacao.php';    
-    setlocale( LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil');
-    date_default_timezone_set('America/Bahia');  
-    
-    require ( get_template_directory() . '/inc/model_empresa_config.php' );    
-    $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+/* Template Name: Painel Empresas Configuração */ 
+get_header('painel');
+
+if ($_SESSION['login_painel'] != 'empresa'):
+    $url = get_bloginfo('url')."/login";
+    header("Location:$url");
+    exit("A sessão foi expirada ou é invalida");
+endif; 
+
+include( get_template_directory() . '/inc/model_marcacao.php' );
+setlocale( LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil');
+date_default_timezone_set('America/Bahia');  
+
+require ( get_template_directory() . '/inc/model_empresa_config.php' );    
+$config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
         
 ?>
 
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> 
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3"> 
     
     <div class="row">            
         <div class="col-lg-12">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Configurações do Fidelidade </h1> 
+                <h1 class="h2">Configurações <?= NOME_APLICACAO ?></h1> 
                 <br/>
             </div>
         </div>

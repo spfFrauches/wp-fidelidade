@@ -1,34 +1,38 @@
 <?php 
-    /* Template Name: Painel Empresa - Minha Empresa */
-    get_header('painel'); 
-    
-    include( get_template_directory() . '/inc/model_empresa.php' );
-    
-    /* REFATORAR ISSO E COLOCAR DENTRO DE UM MODEL / FUNCAO */
-    if(!empty($_FILES['logoempresa'])){      
-        $id = $_POST['codempresa'];
-        $targetDir = "./wp-content/themes/fidelidade/empresas_logos/";
-        $dir = get_bloginfo('template_url')."/empresas_logos/".basename($_FILES["logoempresa"]["name"]);
-        $target_file = $targetDir . basename($_FILES["logoempresa"]["name"]);              
-        if(move_uploaded_file($_FILES['logoempresa']['tmp_name'], $target_file)){         
-            global $wpdb; 
-            $wpdb->update('empresas', array('logoempsrc'=>$dir ,'logopath'=>$target_file), array('id'=>$id));
-            $msgPosUpload = "Dados atualizados com sucesso!";  
-        } else {
-            $msgPosUpload = "Erro ao processar arquivo!";
-        }
-    }
-    
-    $caminhoImgDefault = get_bloginfo('template_url')."/img/uploadYourLogo.png";  
-    $dadosEmpresa = buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
 
-       
+/* Template Name: Painel Empresa - Minha Empresa */
+get_header('painel'); 
+    
+include( get_template_directory() . '/inc/model_empresa.php' );
+
+/* REFATORAR ISSO E COLOCAR DENTRO DE UM MODEL / FUNCAO */
+if(!empty($_FILES['logoempresa'])){      
+    $id = $_POST['codempresa'];
+    $targetDir = "./wp-content/themes/fidelidade/empresas_logos/";
+    $dir = get_bloginfo('template_url')."/empresas_logos/".basename($_FILES["logoempresa"]["name"]);
+    $target_file = $targetDir . basename($_FILES["logoempresa"]["name"]);              
+    if(move_uploaded_file($_FILES['logoempresa']['tmp_name'], $target_file)){         
+        global $wpdb; 
+        $wpdb->update('empresas', array('logoempsrc'=>$dir ,'logopath'=>$target_file), array('id'=>$id));
+        $msgPosUpload = "Dados atualizados com sucesso!";  
+    } else {
+        $msgPosUpload = "Erro ao processar arquivo!";
+    }
+}
+
+$caminhoImgDefault = get_bloginfo('template_url')."/img/uploadYourLogo.png";  
+$dadosEmpresa = buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+
 ?>
 
-<main class="col-lg-9 ms-sm-auto col-lg-10 px-lg-4">
-      
-    <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h2 class="h2">Minha Empresa <small> dados cadastrais</small></h2>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
+    
+    <div class="row">            
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h2 class="h2">Minha Empresa <small> dados cadastrais</small></h2>
+            </div>      
+        </div>
     </div>
 
     <form class="needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
@@ -57,11 +61,11 @@
         </div>   
             
         <div class="row mt-5">
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-3">
                 <label>Cód. Emp</label>
                 <input type="text" class="form-control" name="codempresa" value="<?= $_SESSION['dados_empresa'][0]->id ?>" readonly>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 mb-3">
                 <label >Razão Social</label>
                 <input type="text" class="form-control" value="<?= $_SESSION['dados_empresa'][0]->razao_social ?>" readonly>
                 <div class="invalid-feedback">
@@ -225,26 +229,9 @@
     
 </main>
 
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                form.classList.add('was-validated');
-            }, false);
-            });
-        }, false);
-    })();
-</script>
     
-</main>
+<?php get_footer('painel'); ?>
+
+
+    
 <?php get_footer('painel'); ?>

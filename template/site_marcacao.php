@@ -28,11 +28,9 @@
         }
     }  
 </style>
-
-<br/><br/>  
-
+ 
 <div class="container">    
-    <div class="py-5 text-center topo"> 
+    <div class="py-3 text-center topo"> 
         
         <?php if (!$tipoMarcacao): ?>
             <div class="alert alert-danger" role="alert">

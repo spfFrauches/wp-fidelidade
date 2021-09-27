@@ -18,6 +18,16 @@ function listar() {
     return $resultado;
 }
 
+function alterarSenhaEmpresa($novasenha, $cnpj){   
+    global $wpdb; 
+    $resultado = $wpdb->update('empresas', array('passwd'=>$novasenha), array('cnpj'=>$cnpj));
+    return $resultado;
+}
+
+/* -------------------------------------------------- */
+/* Analisa Se Existe                                   */
+/* -------------------------------------------------- */
+
 function buscarEmpresa($cnpj){
    global $wpdb;      
    $resultado =  $wpdb->get_results( "SELECT * FROM empresas where cnpj = '$cnpj' " ); 
@@ -27,12 +37,6 @@ function buscarEmpresa($cnpj){
 function emailEmpresa($email){
     global $wpdb;     
     $resultado =  $wpdb->get_results( "SELECT * FROM empresas where email = '$email' " ); 
-    return $resultado;
-}
-
-function alterarSenhaEmpresa($novasenha, $cnpj){   
-    global $wpdb; 
-    $resultado = $wpdb->update('empresas', array('passwd'=>$novasenha), array('cnpj'=>$cnpj));
     return $resultado;
 }
 

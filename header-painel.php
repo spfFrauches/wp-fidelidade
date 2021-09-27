@@ -9,6 +9,7 @@
 
         <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/dist/css/bootstrap5-1.min.css" >
         <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/dist/css/dashboard5-1.css" >
+        <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/dist/css/style.css" >
         
         <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/dist/font-awesome-4.7.0/css/font-awesome.css" >   
         <script src="<?php bloginfo('template_url') ?>/dist/js/jquery-3.5.1.min.js" ></script>

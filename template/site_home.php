@@ -67,9 +67,9 @@
     </button>
 </div>
 
-<div class="container-fluid">         
-    <div class="row featurette">
-        <div class="col-lg-7" style="padding-top: 100px; padding-left: 50px">
+<div class="container">         
+    <div class="row featurette mt-5">
+        <div class="col-lg-7" style="padding-top: 100px;">
             <h2 class="featurette-heading">
                 Modernize seu cartão fidelidade
             </h2>
@@ -78,7 +78,7 @@
             </h2>
             <p class="lead">Para criar seu cartão fidelidade web é muito simples, faça seu cadastro, configure como será seu cartão e pronto! Em apenas 2 minutos você tem tudo pronto!</p>
         </div>
-        <div class="col-md-5 text-right p-5">
+        <div class="col-md-5 text-right mt-5">
             <img class="img-fluid" src="<?= get_bloginfo('template_url')  ?>/img/img_exemple.png">
         </div>
     </div>    
@@ -88,9 +88,9 @@
     <hr/>
 </div>
 
-<div class="container-fluid">  
+<div class="container">  
     <div class="row featurette">
-        <div class="col-lg-5 text-left p-5">
+        <div class="col-lg-5 text-left">
             <img class="img-fluid" src="<?= get_bloginfo('template_url')  ?>/img/img_exemple.png">
         </div>     
         <div class="col-lg-7" style="padding-top: 100px; padding-left: 50px">
@@ -108,5 +108,8 @@
     </div>
 </div>
 
+<div class="container mb-5 mt-5">  
+    <hr/>
+</div>
 <?php get_footer('site') ?>
 

@@ -48,115 +48,78 @@
                 <div class="row mt-5">
                     <div class="col-lg-6 mb-2">
                         <label id="cpf_label">CPF</label>
-                        <input type="text" class="form-control cpf" id="cpf" name="cpf_cliente" required >
+                        <input type="text" class="form-control cpf" id="cpf" name="cpf_cliente" onblur="analisarCpf()" >
                         <div id="cpfHelp" class="form-text"></div>
-                        <div class="invalid-feedback">
-                            Este campo é obrigatório.
-                        </div>
                     </div>
                     <div class="col-lg-6 mb-2">
-                       <label >Nome completo</label>
-                        <input type="text" class="form-control" id="nome_completo" name="nome_completo" required>
-                        <div class="invalid-feedback">
-                            Este campo é obrigatório.
-                        </div>
+                       <label id="nome_label">Nome completo</label>
+                        <input type="text" class="form-control" id="nomeCompleto" name="nome_completo" onblur="analisarNomeCompleto()"  >
+                        <div id="nomeCompletoHelp" class="form-text"></div>
                     </div>
                 </div>
                 
-                <br/>   
                 <div class="row">
                     <div class="col-lg-6 mb-2">
-                        <label id="email_label">E-mail </label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                        <div class="invalid-feedback">
-                            Este campo é obrigatório.
-                        </div>
+                        <label id="email_label">E-mail *</label>
+                        <input type="email" class="form-control" id="email" name="email" >
+                        <div id="emailHelp" class="form-text"></div>
                     </div>
-                    <div class="col-lg-6 mb-6">
-                        <label>Nascimento</label>
-                        <input type="date" class="form-control" name="data_nascimento" required>
-                        <div class="invalid-feedback">
-                            Este campo é obrigatório.
-                        </div>
+                    <div class="col-lg-6 mb-2">
+                        <label id="nascimento_label">Nascimento *</label>
+                        <input type="date" class="form-control" id="data_nascimento" name="data_nascimento"  onblur="analisarDataNascimento()" >
+                        <div id="nascimentoHelp" class="form-text"></div>
                     </div>
                 </div>
-                <br/>   
-                <div class="row"> 
-                    
+                
+                <div class="row">               
                     <div class="col-lg-6 mb-2">
-                        <label id="telefone_label">Telefone <span class="text-muted"></span></label>
-                        <input type="text" class="form-control telefoneform" id="telefone" name="telefone" required>
-                        <div class="invalid-feedback">
-                            Este campo é obrigatório.
-                        </div>
+                        <label id="telefone_label">Telefone *<span class="text-muted"></span></label>
+                        <input type="text" class="form-control telefoneform" id="telefone" name="telefone" onblur="analisarTelefone()" >
+                        <div id="telefoneHelp" class="form-text"></div>
                     </div>
                     
                     <div class="col-lg-6 mb-2">
-                        <label>Sexo <span class="text-muted"></span></label>
-                        <select class="form-control">
-                            <option>Masculino</option>
-                            <option>Femenino</option>
-                            <option>Nenhum dos dois</option>
+                        <label id="sexo_label">Sexo <span class="text-muted"></span></label>
+                        <select class="form-control" id="sexo" name="sexo" onblur="analisarSexo()">
+                            <option value=''></option>
+                            <option value='M'>Masculino</option>
+                            <option value="F">Femenino</option>                           
                         </select>
-                        <div class="invalid-feedback">
-                            Este campo é obrigatório.
-                        </div>
-                    </div>
-                    
+                        <div id="sexoHelp" class="form-text"></div>
+                    </div>                    
                 </div>
-                <br/>   
+               
                 <div class="row"> 
                     <div class="col-lg-6 mb-2">
                         <label id="senhaCliente">Senha</label>
-                        <input type="password" class="form-control" name="senha" id="senha_cliente" required >
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
+                        <input type="password" class="form-control" name="senha" id="senha_cliente">
+                        <div id="senhaHelp" class="form-text"></div>
                     </div>
                     <div class="col-lg-6 mb-2">
                         <label id="senhaClienteConfirmar">Confirmar Senha </label>
-                        <input type="password" class="form-control" name="password_confirma" id="senha_cliente_confirma" required >
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
+                        <input type="password" class="form-control" name="password_confirma" id="senha_cliente_confirma" >
+                        <div id="senhaConfirmaHelp" class="form-text"></div>
                     </div>
                 </div>
+                
                 <br/>
+                
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="termos_contrato" required="" name="termos_contrato" value="SIM">
-                    <label class="form-check-label">Eu aceito e concordo com o termos e condições do uso. <a href="#">Clique aqui</a> para ler</label>
-                
+                    <label class="form-check-label">Eu aceito e concordo com o termos e condições do uso. <a href="#">Clique aqui</a> para ler</label>               
                 </div>
+                
                 <br/><br/>
+                
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button class="btn btn-primary btn-lg btn-block" id="btnContinuarCadastroCliente">Continuar <i class="fa fa-chevron-right" aria-hidden="true"></i></button>   
                 </div>
+                
             </div> 
         </div>     
     </div>
 </form>
 </div>
-
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-    'use strict';
-    window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
-    });
-  }, false);
-})();
-</script>
 
 <?php get_footer('site'); ?>
 <script src="<?php bloginfo('template_url') ?>/ajax/ajax_clientes.js?v=1.0"></script>

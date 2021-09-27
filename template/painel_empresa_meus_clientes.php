@@ -1,25 +1,24 @@
 <?php 
-    /* Template Name: Painel Empresa - Meus Clientes */ 
-    get_header('painelcliente');
-    include( get_template_directory() . '/inc/model_clientes.php' );
-    include( get_template_directory() . '/inc/model_marcacao.php' );
-    
-    $listarCliente = listarDadosCompletosClientesLigados($_SESSION['dados_empresa'][0]->cnpj);
-    $configEmpresa = listarConfiguracaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);   
-    $percentualDaEmpresa = $configEmpresa[0]->percentual_vlrcompra;
-    $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
+/* Template Name: Painel Empresa - Meus Clientes */ 
+get_header('painelcliente');
+include( get_template_directory() . '/inc/model_clientes.php' );
+include( get_template_directory() . '/inc/model_marcacao.php' );
+
+$listarCliente = listarDadosCompletosClientesLigados($_SESSION['dados_empresa'][0]->cnpj);
+$configEmpresa = listarConfiguracaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);   
+$percentualDaEmpresa = $configEmpresa[0]->percentual_vlrcompra;
+$cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
     
 ?>
-<!-- -->
 
-
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
+    
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Meus clientes <small></small></h1>
     </div>
-    
-    
+       
     <?php // var_dump($listarCliente) ?>
+    
     <div class="row mt-5">   
         <div class="col-lg-12">
             <table id="example" class="table table-hover" >

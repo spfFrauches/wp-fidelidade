@@ -3,51 +3,17 @@
     /* Template Name: Site Finalizar Cadastro Empresa */ 
     get_header('site');
     
-    require './wp-content/themes/fidelidade/inc/functions_empresa.php';
-    require './wp-content/themes/fidelidade/inc/model_empresa.php';
+    include( get_template_directory() . '/inc/functions_empresa.php' ); 
+    include( get_template_directory() . '/inc/model_empresa.php' ); 
+    
+    include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroEmpresaSite.php' ); 
               
-    if (isset($_POST)) {
-        
-        function sanitizeString($string) {
-            // matriz de entrada
-            $what = array( 'ä','ã','à','á','â','ê','ë','è','é','ï','ì','í','ö','õ','ò','ó','ô','ü','ù','ú','û','À','Á','É','Í','Ó','Ú','ñ','Ñ','ç','Ç',' ','-','(',')',',',';',':','|','!','"','#','$','%','&','/','=','?','~','^','>','<','ª','º' );
-            // matriz de saída
-            $by   = array( 'a','a','a','a','a','e','e','e','e','i','i','i','o','o','o','o','o','u','u','u','u','A','A','E','I','O','U','n','n','c','C','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-' );
-            // devolver a string
-            return str_replace($what, $by, $string);
-        }
-        
-        $array_insert = [
-            'razao_social' => $_POST['razao_social'],
-            'nome_fantasia' => $_POST['nome_fantasia'],
-            'cnpj' =>  $_POST['cnpj'],
-            'email' =>  $_POST['email'],
-            'slug_empresa' =>   $urlFantasia = strtolower (sanitizeString($_POST['nome_fantasia'])),
-            'passwd' => $_POST['passwd'],
-            'telefone' => $_POST['telefone'],
-            'whatsapptelegram' => $_POST['whatsapp'],
-            'facebook' => $_POST['facebook'],
-            'instagram' => $_POST['instagram'],            
-            'data_cadastro' => $_POST['data_cadastro'],
-            'fl_situacao' => 0,
-            'cep' => $_POST['cep'],
-            'cidade' => $_POST['cidade'],
-            'uf' => $_POST['uf'],
-            'endereco' => $_POST['endereco'],
-            'bairro' => $_POST['bairro'],
-            'numero' => $_POST['numero'],
-            'complemento' => $_POST['complemento']
-        ];
-
-        $result = insertDB($array_insert);
-       
-    }
-
 ?>
 
 <?php if ($result): ?>
 
 <div class="container"> 
+       
     <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72">
         <h2>Parabéns, seu cadastro foi realizado.</h2>
@@ -66,9 +32,75 @@
     <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72">
         <h2 style="color:red">Ops, desculpe</h2>
+        
+        <?php if ($MgsAlertaCnpj): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaCnpj ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaRazaoSocial): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaRazaoSocial ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaFantasia): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaFantasia ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaEmail): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaEmail ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaTelefone): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaTelefone ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaSenha): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaSenha ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaConfirmarSenha): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaConfirmarSenha ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaCep): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaCep ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaCidade): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaCidade ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaBairro): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaBairro ?>
+        </div>
+        <?php endif; ?>
+        <?php if ($MgsAlertaEndereco): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaEndereco ?>
+        </div>
+        <?php endif; ?>
+            
         <p class="lead" style="color:red">
-            Algo com esses dados. Não foi possível inserir
-            no banco de dados. Verifique e tente novamente mais tarde.
+            Não foi possivel prosseguir com o cadastro. Tente novamente
+            observando com cuidado todos os campos do formulário.
         </p>
         <br/>
         <a href="<?= get_bloginfo('url') ?>/nova-empresa" class="btn btn-outline-secondary" >Voltar ao cadastro</a>
@@ -80,6 +112,7 @@
 <br/><br/><br/>
 <br/><br/><br/>
 <br/><br/><br/>
+
 <?php get_footer('site'); ?>
 
 

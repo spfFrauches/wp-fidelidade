@@ -33,7 +33,7 @@
     
 ?>
 
-<main class="col-lg-9 ms-sm-auto col-lg-10 px-lg-4">
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     
     <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Meus Dados</h1>
@@ -42,8 +42,8 @@
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-secondary rounded shadow-sm">
             <!-- <img class="mr-3" src="" alt="" width="48" height="48"> -->
             <div class="lh-100"> 
-              <h6 class="mb-0 text-white lh-100">Se necessário altere seus dados.</h6>
-              <small>Após alterar clique em Salvar</small>
+              <h6 class="mb-0 text-white lh-100">Ola, <?=  explode(' ',trim($dadosCliente[0]->nome_completo))[0] ?></h6>
+              <small>Se quiser alterar o selfie, insira no novo e clique em salvar</small>
             </div>
         </div>
     
@@ -52,7 +52,7 @@
     <form method="post" id="formclientes" action=""  enctype="multipart/form-data">
                 
        <div class="row mt-3">
-            <div class="col-lg-12 text-center">          
+            <div class="col-lg-12 ">          
                 <img id="previewImg" class="img-thumbnail" width="200" src="<?= $dadosCliente[0]->src_selfie == null ?  $caminhoImgDefault : $dadosCliente[0]->src_selfie ?>" alt="Selfie">
                 <script>
                     function previewFile(input){
@@ -67,7 +67,7 @@
                     }
                 </script>             
             </div>
-            <div class="col-lg-12 text-center mt-5">
+            <div class="col-lg-12 mt-2">
                 <label class="form-label" style="font-size: 17px">Alterar selfie</label>
                 <br/>
                 <input type="file" name="selfcliente"  onchange="previewFile(this);"  accept="image/*" required>
@@ -126,36 +126,17 @@
         <br/>
         
         <div class="row mt-3"> 
-            <div class="col-lg-6">
-                <button class="btn btn-primary btn-block" id="btnSalvar">Salvar</button>
+            <div class="col-lg-12">
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary btn-block" id="btnSalvar">Salvar</button>
+                </div>
             </div>
         </div>
         
         <br/><br/>
         
-    </form>
-  
+    </form> 
 </main>
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
 
 <?php get_footer('painel'); ?>
 

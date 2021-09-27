@@ -4,7 +4,8 @@
     include( get_template_directory() . '/inc/model_clientes.php' );
     include( get_template_directory() . '/inc/functions_cliente.php' );
     
-    $insertCliente = cadastroClienteViaSite()
+    include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroCliente.php' ); 
+    
 ?>
 
 <?php if ($insertCliente): ?>
@@ -27,11 +28,46 @@
 <div class="container"> 
     <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72">
-        <h2>Ops, desculpe</h2>
-        <p class="lead">
-            Houve um erro e não foi possivel realizar o cadastro.
-            Verifique se já não existe um cadastro com esses dados informado (ou algum dos dados CPF, Telefone)
-            e tente novamente.
+        <h2 style="color:red">Ops, desculpe</h2>
+        
+        <?php if ($MgsAlertaCpf): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaCpf ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaNomeCompleto): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaNomeCompleto ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaEmail): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaEmail ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaTelefone): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaTelefone ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaSenha): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaSenha ?>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($MgsAlertaConfirmarSenha): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $MgsAlertaConfirmarSenha ?>
+        </div>
+        <?php endif; ?>
+        
+        <p class="lead" style="color:red">
+            Não foi possivel concluir o cadastro.
         </p>
         <br/>
         <a href="<?= get_bloginfo('url') ?>/novo-cliente" class="btn btn-outline-secondary" >Voltar ao cadastro</a>
@@ -43,6 +79,7 @@
 <br/><br/><br/>
 <br/><br/><br/>
 <br/><br/><br/>
+
 <?php get_footer('site'); ?>
 
 

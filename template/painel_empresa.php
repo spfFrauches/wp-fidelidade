@@ -17,10 +17,6 @@ require ( get_template_directory() . '/inc/model_empresa.php' );
     
 $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
 
-if ($config[0]->tipo_marcacao == 'cash') {
-    $tipoMarcacao = "por Cashback";
-}
-
 $totalClientes  = listarClientesPorEmpresa($_SESSION['dados_empresa'][0]->cnpj);
 $totalMarcacoes = listarTotalMarcacoes($_SESSION['dados_empresa'][0]->cnpj);
 

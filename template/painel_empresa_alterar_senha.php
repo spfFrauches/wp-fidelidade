@@ -1,21 +1,21 @@
 <?php 
-    /* Template Name: Painel Empresa - Alterar Senha */ 
-    get_header('painel');
-    include( get_template_directory() . '/inc/functions_login.php' ); 
-    include( get_template_directory() . '/inc/model_empresa.php' );
-    include( get_template_directory() . '/inc/functions_empresa.php' );
-    
-    if(!isset($_SESSION['login_painel'])):
-        $url = get_bloginfo('url')."/login";
-        header("Location:$url");
-        exit("Sessão expirada ou invalida");
-    endif; 
-    
-    $resultAlterarSenha = alterarSenhaDashBoard();
+/* Template Name: Painel Empresa - Alterar Senha */ 
+get_header('painel');
+include( get_template_directory() . '/inc/functions_login.php' ); 
+include( get_template_directory() . '/inc/model_empresa.php' );
+include( get_template_directory() . '/inc/functions_empresa.php' );
+
+if(!isset($_SESSION['login_painel'])):
+    $url = get_bloginfo('url')."/login";
+    header("Location:$url");
+    exit("Sessão expirada ou invalida");
+endif; 
+
+$resultAlterarSenha = alterarSenhaDashBoard();
             
 ?>
 
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
       
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2 class="h2">Minha Empresa <small> Alterar Senha</small></h2>
@@ -144,5 +144,4 @@
     
 </script>
     
-</main>
 <?php get_footer('painel'); ?>

@@ -22,15 +22,6 @@ function insertDBCliente($array) {
 
 }
 
-function verificarSeExiste($cpf) {
-    $tabela = "clientes"; 
-    global $wpdb; 
-    $resultado =  $wpdb->get_results( "SELECT * FROM $tabela WHERE cpf = '$cpf' " );
-    
-    if ($resultado) { return $resultado; } 
-    else { return false; }
-}
-
 function insertLigacaoClienteEmpresa($cpf, $cnpj) {
     
    $tabela = "ligacaoclienteempresa";
@@ -112,6 +103,15 @@ function listarDadosCompletosClientesLigados($cnpj) {
     $resultado =  $wpdb->get_results($sql);    
     return $resultado;
     
+}
+
+function verificarSeExiste($cpf) {
+    $tabela = "clientes"; 
+    global $wpdb; 
+    $resultado =  $wpdb->get_results( "SELECT * FROM $tabela WHERE cpf = '$cpf' " );
+    
+    if ($resultado) { return $resultado; } 
+    else { return false; }
 }
 
 function buscarClientes($cpf){ 

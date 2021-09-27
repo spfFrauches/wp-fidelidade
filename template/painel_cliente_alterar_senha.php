@@ -1,24 +1,24 @@
 <?php 
 
-    /* Template Name: Painel Cliente AlterarSenha */ 
-    get_header('painel');
-    include( get_template_directory() . '/inc/model_clientes.php' );
-    include( get_template_directory() . '/inc/functions_login.php' );
-    include( get_template_directory() . '/inc/functions_cliente.php' );
-     
-    $dadosCliente = buscarClientes($_SESSION['dados_cliente'][0]->cpf);
-    
-    if ($_SESSION['login_painel'] != 'cliente'):
-        $url = get_bloginfo('url')."/login";
-        header("Location:$url");
-        exit("A sessão foi expirada ou é invalida");
-    endif; 
-    
-    $resultAlterarSenha = alterarSenhaDashBoard();
+/* Template Name: Painel Cliente AlterarSenha */ 
+get_header('painel');
+include( get_template_directory() . '/inc/model_clientes.php' );
+include( get_template_directory() . '/inc/functions_login.php' );
+include( get_template_directory() . '/inc/functions_cliente.php' );
+
+$dadosCliente = buscarClientes($_SESSION['dados_cliente'][0]->cpf);
+
+if ($_SESSION['login_painel'] != 'cliente'):
+    $url = get_bloginfo('url')."/login";
+    header("Location:$url");
+    exit("A sessão foi expirada ou é invalida");
+endif; 
+
+$resultAlterarSenha = alterarSenhaDashBoard();
        
 ?>
 
-<main class="col-lg-9 ms-sm-auto col-lg-10 px-lg-4">
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     
     <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Alterar Senha</h1>

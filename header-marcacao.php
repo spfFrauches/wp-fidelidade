@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en">
     
-    <head>
-        
+    <head>  
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -20,13 +19,13 @@
     <body>
         
         <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">                
+            <div class="bg-dark p-2">                
                 <div class="row"> 
                     <div class="col-lg-6">
                         <h5 class="text-white h4"> <?= $_SESSION['dados_empresa'][0]->nome_fantasia ?></h5>
                         <span class="text-muted"><?= $_SESSION['dados_empresa'][0]->cnpj ?></span>
                     </div>
-                    <div class="col-lg-6 position-absolute start-100 translate-middle mt-5">
+                    <div class="col-lg-6 d-flex justify-content-end">
                         <a href="<?php bloginfo('home') ?>/painel-empresa" type="button" class="btn btn-outline-light">Voltar ao Painel</a>  
                     </div>
                     

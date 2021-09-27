@@ -1,7 +1,6 @@
 <?php
 
-function configurarTipoMarcacao() {
-    
+function configurarTipoMarcacao() {    
     $dadosInsert = array();
     $dadosInsert['tipo_marcacao'] = $_POST['tipo_marcacao'];
     $dadosInsert['cnpjemp'] = $_SESSION['dados_empresa'][0]->cnpj ;
@@ -11,16 +10,13 @@ function configurarTipoMarcacao() {
         $dadosInsert['percentual'] = $_POST['percentual'];
         $retorno =  inserirConfiguracao($dadosInsert);
         return $retorno;
-    }
-       
+    }    
 }
-
-
 
 function alterarSenhaDashBoard() {
     
     if (isset($_POST['novasenha']) && isset($_POST['novasenha_confirma']) ): 
-        
+   
         if ($_POST['novasenha'] == $_POST['novasenha_confirma']):  
             
             if (isset($_POST['senhaatual'])):   
