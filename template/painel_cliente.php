@@ -1,19 +1,19 @@
 <?php 
-    /* Template Name: Painel Cliente */ 
-    get_header('painel');
-    
-    if (!isset($_SESSION['login_painel']) && $_SESSION['login_painel'] != 'cliente') :
-        
-        $url = get_bloginfo('url')."/login";
-        header("Location:$url");
-        exit("A sessão foi expirada ou é invalida");
-        
-    endif;
-        
-    include( get_template_directory() . '/inc/model_marcacao.php' ); 
-    include( get_template_directory() . '/inc/model_empresa.php' ); 
-    include( get_template_directory() . '/inc/model_ligacaoEmpresa.php' ); 
-    $minhasEmpresas = buscarEmpresaLigadaAoCliente($_SESSION['dados_cliente'][0]->cpf);
+/* Template Name: Painel Cliente */ 
+get_header('painel');
+
+if (!isset($_SESSION['login_painel']) && $_SESSION['login_painel'] != 'cliente') :
+
+    $url = get_bloginfo('url')."/login";
+    header("Location:$url");
+    exit("A sessão foi expirada ou é invalida");
+
+endif;
+
+include( get_template_directory() . '/inc/model_marcacao.php' ); 
+include( get_template_directory() . '/inc/model_empresa.php' ); 
+include( get_template_directory() . '/inc/model_ligacaoEmpresa.php' ); 
+$minhasEmpresas = buscarEmpresaLigadaAoCliente($_SESSION['dados_cliente'][0]->cpf);
         
 ?>
 
@@ -37,7 +37,7 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Meu Webi CLub</h1>    
+        <h1 class="h2">Meu <?= NOME_APLICACAO ?></h1>    
     </div> 
     
     <?php
@@ -72,6 +72,7 @@
           
             <div class="col-4 p-1 div-resolut mt-2"> 
                 <img class="img-resolut img-thumbnail rounded-circle p-2" src="<?= $valueEmp->logoempsrc ?>" width="90px"  >
+                    <button type="button" class="btn btn-primary btn-sm">Meu extrato</button>
             </div>
         
             
