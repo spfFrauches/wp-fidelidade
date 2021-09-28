@@ -42,7 +42,7 @@ var senhaConfirmaHelp = document.getElementById("senhaConfirmaHelp");
 $( "#btnContinuarCadastroCliente" ).click(function() {
     
     var cpfCliente = $("#cpf").val();  
-    if (cpfCliente.trim() == '') {
+    if (cpfCliente.trim() == '') {      
         cpfHelp.innerHTML = "Este campo deve ser preenchido";
         pintarCampoCPFErro();
         $("#cpf").focus();
@@ -93,7 +93,7 @@ $( "#btnContinuarCadastroCliente" ).click(function() {
     if (senhaCliente.trim() == '') {
         senhaHelp.innerHTML = "Este campo deve ser preenchido";
         pintarCampoSenhaErro();
-        $("#telefone").focus();
+        $("#senha_cliente").focus();
         return false;
     }
     
@@ -101,11 +101,24 @@ $( "#btnContinuarCadastroCliente" ).click(function() {
     if (senhaConfirmaCliente.trim() == '') {
         senhaConfirmaHelp.innerHTML = "Este campo deve ser preenchido";
         pintarCampoSexoErro();
-        $("#telefone").focus();
+        $("#senha_cliente_confirma").focus();
         return false;
     }
-          
+    
+    $('#modalLoad').modal('show');
+
+            
 });
+
+
+/* ----------------------------------------------------  */
+/* Validando campos em branco              */
+/* ----------------------------------------------------  */
+
+function validarCamposEmBranco() {
+    
+       
+}
 
 /* ----------------------------------------------------  */
 /* Buscando no banco campos duplicados ...               */
@@ -184,10 +197,10 @@ confirmar_senha.addEventListener("blur", function() {
     
 }, true);
 
-/* ---------------------------------------------  */
-/* Funções auxiliares do arquivo  */
-/* ---------------------------------------------  */
 
+/* ---------------------------------------------  */
+/* Voltar os campos ao normal caso preenchido     */
+/* ---------------------------------------------  */
 function analisarCpf() {
     var cpfCliente =  $("#cpf").val();
     if (cpfCliente.trim() != '') {
@@ -229,6 +242,10 @@ function analisarSenha() {
         pintarCampoSenhaNormal();
     }  
 }
+
+/* ---------------------------------------------  */
+/* Funções auxiliares do arquivo  */
+/* ---------------------------------------------  */
 
 function pintarCampoCPFErro() {
     cpf.style.border = "solid 1px #FF0000"; 

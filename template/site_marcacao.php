@@ -48,7 +48,7 @@
         <?php endif; ?>
         
         <h2>
-            Webi <small> Club Fidelidade</small>
+            <?= NOME_APLICACAO ?>
         </h2>
         <br/>
        
@@ -166,15 +166,27 @@
         <div class="row" id="btnsMarcarVoltar">
             
             <div class="col-6">
-                <button type="button" id="btcVoltarMarcacao" class="btn btn-warning btn-lg btn-block">Voltar</button>
-                <button type="button" id="btcVoltarMarcacaoConfere" class="btn btn-warning btn-lg btn-block">Voltar e corrigir</button>
-                <button type="button" id="btcVoltarVazio" class="btn btn-warning btn-lg btn-block">Voltar</button>
+                <div class="d-grid gap-2">
+                    <button type="button" id="btcVoltarMarcacao" class="btn btn-warning btn-lg btn-block">Voltar</button>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" id="btcVoltarMarcacaoConfere" class="btn btn-warning btn-lg btn-block">Voltar e corrigir</button>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" id="btcVoltarVazio" class="btn btn-warning btn-lg btn-block">Voltar</button>
+                </div>
             </div>
             
-            <div class="col-6">    
-                <button type="button" id="btcContinuarMarcacao" class="btn btn-secondary btn-lg btn-block" <?= (!$tipoMarcacao) ? "disabled" : "" ?>>Continuar</button>
-                <button type="button" id="btnMarcar" class="btn btn-secondary btn-lg btn-block" style="margin-top: -1px"<?= (!$tipoMarcacao) ? "disabled" : "" ?>>Marcar</button>
-                <button type="button" id="btnMarcarConfere" class="btn btn-secondary btn-lg btn-block">Confirmar Marcação</button>
+            <div class="col-6"> 
+                <div class="d-grid gap-2">
+                    <button type="button" id="btcContinuarMarcacao" class="btn btn-secondary btn-lg btn-block" <?= (!$tipoMarcacao) ? "disabled" : "" ?>>Continuar</button>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" id="btnMarcar" class="btn btn-secondary btn-lg btn-block" style="margin-top: -1px"<?= (!$tipoMarcacao) ? "disabled" : "" ?>>Marcar</button>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" id="btnMarcarConfere" class="btn btn-secondary btn-lg btn-block">Confirmar Marcação</button>
+                </div>
             </div>
         </div>
 

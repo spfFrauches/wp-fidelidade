@@ -16,8 +16,8 @@
                     </p>
                     <br/>
                     <p>
-                        <a href="<?= get_bloginfo('url') ?>/novo-cliente" class="btn btn-primary my-2">Para Clientes</a>
-                        <a href="<?= get_bloginfo('url') ?>/nova-empresa/" class="btn btn-secondary my-2">Para empresas</a>
+                        <a href="<?= get_bloginfo('url') ?>/novo-cliente/" class="btn btn-primary my-2 btn-CadastroCliente">Para Clientes</a>
+                        <a href="<?= get_bloginfo('url') ?>/nova-empresa/" class="btn btn-secondary my-2 btn-CadastroEmpresa" >Para empresas</a>
                     </p>
                 </div>
             </section>
@@ -33,8 +33,8 @@
                     </p>
                     <br/>
                     <p>
-                        <a href="<?= get_bloginfo('url') ?>/novo-cliente" class="btn btn-primary my-2">Para Clientes</a>
-                        <a href="<?= get_bloginfo('url') ?>/nova-empresa/" class="btn btn-secondary my-2">Para empresas</a>
+                        <a href="<?= get_bloginfo('url') ?>/novo-cliente" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#modalLoad">Para Clientes</a>
+                        <a href="<?= get_bloginfo('url') ?>/nova-empresa/" class="btn btn-secondary my-2" data-bs-toggle="modal" data-bs-target="#modalLoad">Para empresas</a>
                     </p>
                 </div>
             </section>
@@ -50,8 +50,8 @@
                     </p>
                     <br/>
                     <p>
-                        <a href="<?= get_bloginfo('url') ?>/novo-cliente" class="btn btn-primary my-2">Para Clientes</a>
-                        <a href="<?= get_bloginfo('url') ?>/nova-empresa/" class="btn btn-secondary my-2">Para empresas</a>
+                        <a href="<?= get_bloginfo('url') ?>/novo-cliente" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#modalLoad">Para Clientes</a>
+                        <a href="<?= get_bloginfo('url') ?>/nova-empresa/" class="btn btn-secondary my-2" data-bs-toggle="modal" data-bs-target="#modalLoad">Para empresas</a>
                     </p>
                 </div>
             </section>
@@ -111,5 +111,50 @@
 <div class="container mb-5 mt-5">  
     <hr/>
 </div>
+
+<!-- Modal Para Efeito de Load Apenas -->
+<div class="modal fade" id="modalLoad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered d-flex justify-content-center">
+        <div class="modal-content" style="background: rgba(0, 0, 0, 0.0); border: none" >
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="spinner-border text-light" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                </div> 
+                <div class="col-lg-12 text-center">
+                    <p class="text-light" style="font-size: 18px">Carregando, por favor aguarde</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php 
+    $urlCadastroCliente = get_bloginfo('url')."/novo-cliente";
+    $urlCadastroEmpresa = get_bloginfo('url')."/nova-empresa"
+?>
+
+<script>
+
+    $(".btn-CadastroCliente").click(function(){    
+        $('#modalLoad').modal('show');
+        setTimeout(function() {
+            $('#modalLoad').modal('hide');
+        }, 2000);
+        window.location.replace("<?= $urlCadastroCliente ?>");
+    });
+    
+    $(".btn-CadastroEmpresa").click(function(){    
+        $('#modalLoad').modal('show');
+        setTimeout(function() {
+            $('#modalLoad').modal('hide');
+        }, 2000);
+        window.location.replace("<?= $urlCadastroEmpresa ?>");
+    });
+    
+
+</script>
+
 <?php get_footer('site') ?>
 

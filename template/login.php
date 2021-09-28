@@ -17,9 +17,11 @@
             <i class="fa fa-fire fa-4x" aria-hidden="true"></i>
             <h1 class="h3 mb-3 mt-2 font-weight-normal"><?= NOME_APLICACAO ?></h1>
             <?php if (isset($msg)) : echo  msgLoginInvalido($msg) ; endif;?>
+            <!--
             <p>
                 <a href="<?= get_bloginfo('url') ?>"> Voltar ao site </a>
             </p>
+            -->
         </div>
 
         <div class="form-label-group">

@@ -6,11 +6,23 @@ get_header('painel');
 include( get_template_directory() . '/inc/model_empresa.php' );
 
 /* REFATORAR ISSO E COLOCAR DENTRO DE UM MODEL / FUNCAO */
-if(!empty($_FILES['logoempresa'])){      
+if(!empty($_FILES['logoempresa'])){  
+    
     $id = $_POST['codempresa'];
-    $targetDir = "./wp-content/themes/fidelidade/empresas_logos/";
-    $dir = get_bloginfo('template_url')."/empresas_logos/".basename($_FILES["logoempresa"]["name"]);
-    $target_file = $targetDir . basename($_FILES["logoempresa"]["name"]);              
+    $targetDir = "./wp-content/themes/fidelidade/uploadfidelidade/empresas_logos/";
+    
+    /* Renomeando o arquivo com base na data e hora */
+    $datahr = date("Y-m-d h:i:s");
+    $datahr  = str_replace(" ", "", $datahr);
+    $datahr  = str_replace("-", "", $datahr);
+    $datahr  = str_replace(":", "", $datahr); 
+    $extension = explode(".", $_FILES["logoempresa"]["name"]);
+    $renomearArquivo = $datahr.".".$extension[1];
+    
+    
+    $dir = get_bloginfo('template_url')."/uploadfidelidade/empresas_logos/".basename($_FILES["logoempresa"].$renomearArquivo);
+    $target_file = $targetDir . basename($_FILES["logoempresa"].$renomearArquivo);  
+    
     if(move_uploaded_file($_FILES['logoempresa']['tmp_name'], $target_file)){         
         global $wpdb; 
         $wpdb->update('empresas', array('logoempsrc'=>$dir ,'logopath'=>$target_file), array('id'=>$id));
