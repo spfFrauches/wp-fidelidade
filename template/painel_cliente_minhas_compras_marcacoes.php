@@ -1,9 +1,10 @@
 <?php 
-    /* Template Name: Painel Cliente - Minhas compras e marcações */ 
-    if (isset($_SESSION['login_painel']) && $_SESSION['login_painel'] == 'cliente') :
-        get_header('painel');
-        include( get_template_directory() . '/inc/model_marcacao.php' ); 
-        include( get_template_directory() . '/inc/model_empresa.php' ); 
+/* Template Name: Painel Cliente - Minhas compras e marcações */ 
+$_SESSION['url_referencia'] = '';
+if (isset($_SESSION['login_painel']) && $_SESSION['login_painel'] == 'cliente') :
+    get_header('painel');
+    include( get_template_directory() . '/models/model_marcacao.php' ); 
+    include( get_template_directory() . '/models/model_empresa.php' ); 
         
 ?>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">

@@ -16,6 +16,7 @@
             .navbar-text a:hover, .navbar-light .navbar-text a:focus {
                 color: #fff !important; 
             }
+           
         </style>
     </head>
     <?php  include( get_template_directory() . '/inc/functions_global.php' ); ?>
@@ -32,23 +33,25 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="<?php bloginfo('home') ?>">Home</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="#">Planos e Assinaturas</a>
+                        </li>
                     </ul>
                     <span class="navbar-text">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Planos e Assinaturas</a>
-                            </li>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">                             
+                            
                             <li class="nav-item active">
                                 <a class="nav-link" href="#">&nbsp;</a>
                             </li>
                            
                             <li class="nav-item">
-                                <a  href="<?php bloginfo('home') ?>/painel" class="btn btn-outline-dark">Entrar</a>
+                                <a  href="<?php bloginfo('home') ?>/login" class="btn btn-outline-dark btn-Entrar-noLogin">Entrar</a>
                             </li>
                         </ul>
                     </span>
                 </div>
             </div>
         </nav>
+        
         
 

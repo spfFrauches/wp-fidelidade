@@ -1,10 +1,11 @@
 <?php 
     /* Template Name: Site Finalizar Cadastro Cliente */ 
-    get_header('site');
-    include( get_template_directory() . '/inc/model_clientes.php' );
-    include( get_template_directory() . '/inc/functions_cliente.php' );
-    
-    include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroCliente.php' ); 
+$_SESSION['url_referencia'] = '';
+get_header('site');
+include( get_template_directory() . '/models/model_clientes.php' );
+include( get_template_directory() . '/inc/functions_cliente.php' );
+
+include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroCliente.php' ); 
     
 ?>
 

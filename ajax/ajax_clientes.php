@@ -2,7 +2,7 @@
 
 include '../../../../wp-load.php';
 require '../inc/functions_cliente.php';
-require '../inc/model_clientes.php';
+require '../models/model_clientes.php';
 
 if (isset($_POST['cpf'])){
     $seExisteCpf = verificarSeExiste($_POST['cpf']);

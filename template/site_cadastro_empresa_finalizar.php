@@ -1,12 +1,13 @@
 <?php 
 
-    /* Template Name: Site Finalizar Cadastro Empresa */ 
-    get_header('site');
-    
-    include( get_template_directory() . '/inc/functions_empresa.php' ); 
-    include( get_template_directory() . '/inc/model_empresa.php' ); 
-    
-    include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroEmpresaSite.php' ); 
+/* Template Name: Site Finalizar Cadastro Empresa */ 
+$_SESSION['url_referencia'] = '';
+get_header('site');
+
+include( get_template_directory() . '/models/functions_empresa.php' ); 
+include( get_template_directory() . '/models/model_empresa.php' ); 
+
+include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroEmpresaSite.php' ); 
               
 ?>
 
@@ -111,7 +112,15 @@
 
 <br/><br/><br/>
 <br/><br/><br/>
-<br/><br/><br/>
+<br/><br/>
+
+<div class="container">
+    <div class="row mt-3 mb-3">
+        <div class="col-lg-12">
+            <hr/>
+        </div>
+    </div>
+</div>
 
 <?php get_footer('site'); ?>
 

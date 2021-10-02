@@ -1,9 +1,9 @@
 <?php 
 
     require '../../../../wp-load.php';
-    require ( get_template_directory() . '/inc/model_marcacao.php' );
-    require ( get_template_directory() . '/inc/model_clientes.php' );
-    require ( get_template_directory() . '/inc/model_empresa_config.php' );
+    require ( get_template_directory() . '/models/model_marcacao.php' );
+    require ( get_template_directory() . '/models/model_clientes.php' );
+    require ( get_template_directory() . '/models/model_empresa_config.php' );
     $configuracaoEmpresa = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
     /* 1 tela/load da marcação - ao clicar em Continuar na tela de Marcações */

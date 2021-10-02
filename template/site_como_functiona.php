@@ -1,7 +1,8 @@
 <?php 
 
-    /* Template Name: Site Como Funciona */
-    get_header('site');
+/* Template Name: Site Como Funciona */
+$_SESSION['url_referencia'] = '';
+get_header('site');
     
 ?>
 <br/>

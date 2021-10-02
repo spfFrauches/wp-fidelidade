@@ -6,7 +6,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Pesquisar" aria-label="Search">
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
+            <a class="nav-link px-3 btnSairPainel" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
         </div>
     </div>
 </header>
@@ -32,29 +32,27 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <?php $url_swp1 = get_bloginfo('url')."/painel-cliente" ?>     
-                        <a class="nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
                             <span data-feather="home"></span>
                             Home <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <?php $url_swp2 = get_bloginfo('url')."/cliente-meus-dados" ?>  
-                        <a class="nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
                             <span data-feather="shopping-cart"></span>
                             Meus dados
                         </a>
                     </li>
                     <li class="nav-item">
                         <?php $url_swp3 = get_bloginfo('url')."/cliente-alterar-senha" ?>  
-                        <a class="nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>" href="<?= $url_swp3 ?>">
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>" href="<?= $url_swp3 ?>">
                             <span data-feather="shopping-cart"></span>
                             Alterar Senha
                         </a>
                     </li>
                 </ul>
-
-                
-                
+                                
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="#">

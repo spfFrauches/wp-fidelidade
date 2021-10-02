@@ -1,7 +1,8 @@
 <?php 
-    /* Template Name: Site Cadastro Novo Cliente */ 
-    get_header('site'); 
-    $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";  
+/* Template Name: Site Cadastro Novo Cliente */ 
+$_SESSION['url_referencia'] = '';
+get_header('site'); 
+$caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";  
 ?>
 
 <div  class="mb-5" >
@@ -23,11 +24,15 @@
                     <div class="col-lg-12 text-center">          
                         <img id="previewImg" class="img-thumbnail" width="150" src="<?= $caminhoImgDefault  ?>" alt="Selfie">                                   
                     </div>
-                    <div class="col-lg-12 text-center">
-                        <label class="form-label" style="font-size: 17px">Seu selfie</label>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4 text-center">
+                        <label for="formFileSm" class="form-label" style="font-size: 17px">Seu selfie</label>
                         <br/>
-                        <input type="file" name="selfcliente"  onchange="previewFile(this);"  accept="image/*" >
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="selfcliente"  onchange="previewFile(this);"  accept="image/*" >
                     </div>
+                    <div class="col-lg-4"></div>
                 </div>                
                 <div class="row mt-5">
                     <div class="col-lg-6 mb-2">

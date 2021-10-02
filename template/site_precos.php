@@ -1,7 +1,8 @@
 <?php 
 
-    /* Template Name: Site Preços */
-    get_header('site');
+/* Template Name: Site Preços */
+$_SESSION['url_referencia'] = '';
+get_header('site');
 
 ?>
 <br/>

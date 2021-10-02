@@ -1,6 +1,7 @@
 <?php 
-    /* Template Name: Site Marcação cartão */ 
-    get_header('marcacao'); 
+/* Template Name: Site Marcação cartão */ 
+$_SESSION['url_referencia'] = '';
+get_header('marcacao'); 
     
     if(!isset($_SESSION['login_painel'])):
         $url = get_bloginfo('url')."/login";
@@ -8,8 +9,8 @@
         exit("Sessão expirada ou invalida");
     endif; 
     
-    include( get_template_directory() . '/inc/model_empresa_config.php' );
-    include( get_template_directory() . '/inc/model_empresa.php' );
+    include( get_template_directory() . '/models/model_empresa_config.php' );
+    include( get_template_directory() . '/models/model_empresa.php' );
     
     $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";  
     
@@ -30,7 +31,7 @@
 </style>
  
 <div class="container">    
-    <div class="py-3 text-center topo"> 
+    <div class="py-3 text-center topo mt-1"> 
         
         <?php if (!$tipoMarcacao): ?>
             <div class="alert alert-danger" role="alert">

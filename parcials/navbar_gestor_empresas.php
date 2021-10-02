@@ -6,7 +6,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Pesquisar" aria-label="Search">
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
+            <a class="nav-link px-3 btnSairPainel" href="<?= get_bloginfo('url') ?>/sair">Sair</a>
         </div>
     </div>
 </header>
@@ -24,27 +24,27 @@
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>PAINEL</span>
                     <a class="link-secondary" href="#" aria-label="Add a new report">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                      
                     </a>
                 </h6>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <?php $url_swp1 = get_bloginfo('url')."/painel-empresa" ?>                        
-                        <a class="nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             &nbsp; Home 
                         </a>
                     </li>
                     <li class="nav-item">
                         <?php $url_swp4 = get_bloginfo('url')."/empresas-configuracao" ?> 
-                        <a class="nav-link <?php if ($url == $url_swp4 ) { echo "active";}?>"href="<?= $url_swp4 ?>">
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp4 ) { echo "active";}?>"href="<?= $url_swp4 ?>">
                             <i class="fa fa-cogs" aria-hidden="true"></i>
                             &nbsp; Configurações
                         </a>
                     </li>
                     <li class="nav-item">
                         <?php $url_swp2 = get_bloginfo('url')."/minha-empresa" ?> 
-                        <a class="nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
                             <i class="fa fa-industry" aria-hidden="true"></i>
                             &nbsp; Minha empresa
                          </a>
@@ -52,7 +52,7 @@
 
                     <li class="nav-item">
                         <?php $url_swp3 = get_bloginfo('url')."/empresa-meus-clientes" ?> 
-                        <a class="nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>"href="<?= $url_swp3 ?>">
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>"href="<?= $url_swp3 ?>">
                             <i class="fa fa-users" aria-hidden="true"></i>
                             &nbsp; Meus Cliente
                         </a>
@@ -60,7 +60,7 @@
                     
                     <li class="nav-item">
                         <?php $url_swp5 = get_bloginfo('url')."/minha-empresa-alterar-senha" ?> 
-                        <a class="nav-link <?= ($url == $url_swp5 ) ? "active" : "" ?>" href="<?= $url_swp5 ?>">
+                        <a class="btn-nav-forload nav-link <?= ($url == $url_swp5 ) ? "active" : "" ?>" href="<?= $url_swp5 ?>">
                             <i class="fa fa-key" aria-hidden="true"></i>
                             &nbsp; Alterar Senha
                         </a>
@@ -71,7 +71,27 @@
                             <i class="fa fa-gift" aria-hidden="true"></i>
                             &nbsp; Site marcação 
                         </a>
-                    </li>                   
+                    </li>  
+                    
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Pontos e Benefícios</span>
+                        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    
+                    <li class="nav-item">
+                        <?php $url_swp6 = get_bloginfo('url')."/painel-empresa/beneficios-por-pontos/" ?> 
+                        <?php 
+                            if (isset ($_SESSION['url_referencia']) && $_SESSION['url_referencia'] == 'empresa-beneficios-por-pontos') {
+                                $active = "active";
+                            }
+                         ?>
+                        <a class="btn-nav-forload nav-link <?= $active ?>" href="<?= $url_swp6 ?>">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Benefícios
+                        </a>
+                    </li>
                     
                     <li class="nav-item">
                         <a class="nav-link" href="#">

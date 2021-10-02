@@ -48,7 +48,8 @@ function cadastroClienteViaSite() {
 }
 
 
-function alterarSenhaDashBoard() {   
+function alterarSenhaDashBoard() { 
+     
     if (isset($_POST['novasenha']) && isset($_POST['novasenha_confirma']) ):        
         if ($_POST['novasenha'] == $_POST['novasenha_confirma']):  
             if (isset($_POST['senhaatual'])): 
@@ -64,6 +65,7 @@ function alterarSenhaDashBoard() {
             return "NovasSenhasInvalidas";
         endif;      
     endif;
+    return "NadaInformado";
 }
 
 

@@ -104,6 +104,13 @@ $( "#btnContinuar" ).click(function() {
         return false;
     }
     
+    $(".btnContinuarCadastroEmpresa").click(function(){    
+        $('#modalLoad').modal('show');
+        setTimeout(function() {
+            $('#modalLoad').modal('hide');
+        }, 2000);
+    });
+    
     
 });
 

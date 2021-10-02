@@ -1,8 +1,8 @@
 <?php 
-
+$_SESSION['url_referencia'] = '';
 /* Template Name: Painel Cliente AlterarSenha */ 
 get_header('painel');
-include( get_template_directory() . '/inc/model_clientes.php' );
+include( get_template_directory() . '/models/model_clientes.php' );
 include( get_template_directory() . '/inc/functions_login.php' );
 include( get_template_directory() . '/inc/functions_cliente.php' );
 
@@ -14,8 +14,10 @@ if ($_SESSION['login_painel'] != 'cliente'):
     exit("A sessão foi expirada ou é invalida");
 endif; 
 
-$resultAlterarSenha = alterarSenhaDashBoard();
-       
+if (isset($_POST)):
+   $resultAlterarSenha = alterarSenhaDashBoard();  
+endif;
+     
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -23,12 +25,14 @@ $resultAlterarSenha = alterarSenhaDashBoard();
     <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Alterar Senha</h1>
     </div>
-        
-    <form method="post" id="formclientes" action=""  >  
+    
+    
+    
+    <form method="post" id="formclientes" action="">  
         
          <?php if ($resultAlterarSenha == "SenhaAlterada"): ?>      
             <div class="alert alert-success" role="alert">
-                As senhas foram alteradas com sucesso!
+                Sua senha foi alterada com sucesso!
             </div>
         <?php endif; ?>
         
@@ -40,19 +44,20 @@ $resultAlterarSenha = alterarSenhaDashBoard();
         
         <?php if ($resultAlterarSenha == "NovasSenhasInvalidas"): ?>      
             <div class="alert alert-danger" role="alert">
-                As novas senhas informadas não conferem, verifique e tente novamente.
+                A confirmação de senha não confere, verifique e tente novamente.
             </div>
         <?php endif; ?>
         
+      
+        
+               
         <div class="row">
             <div class="col-lg-6">
                 <label>Senha Atual</label>
                 <input type="password" class="form-control" name="senhaatual" required >
             </div>
-        </div>
-        <br/>    
-              
-        <div class="row">    
+        </div>             
+        <div class="row mt-5">    
             <div class="col-lg-6 mb-3">
                 <label>Nova Senha </label>
                 <input type="password" class="form-control" name="novasenha" id="novasenha" required>
@@ -71,16 +76,14 @@ $resultAlterarSenha = alterarSenhaDashBoard();
                     Este campo é obrigatório.
                 </div>
             </div>           
-        </div>
-            
-        <div class="row mt-5">
+        </div>           
+        <div class="row">
             <div class="col-lg-4">
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary btn-block" type="submit">Salvar</button>
+                    <button class="btn btn-primary btn-block btnSalvarAlteracaoSenha" type="submit">Salvar</button>
                 </div>
             </div>
-        </div>
-       
+        </div>    
     </form>
   
 </main>

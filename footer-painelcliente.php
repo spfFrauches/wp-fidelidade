@@ -9,6 +9,7 @@
         <script src="<?php bloginfo('template_url') ?>/dist/js/form-validation.js"></script>
         <script src="<?php bloginfo('template_url') ?>/ajax/painelempresa-meusclientes.js"></script>
         
+        <?php include( get_template_directory() . '/inc/functions_loads.php' ); ?>
         
     </body>
 </html>

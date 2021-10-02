@@ -1,6 +1,7 @@
 <?php 
-    /* Template Name: Site Cadastro Nova Empresa */ 
-    get_header('site');
+/* Template Name: Site Cadastro Nova Empresa */ 
+$_SESSION['url_referencia'] = '';
+get_header('site');
 ?>
 
 <div class="container">
@@ -162,7 +163,7 @@
                 </div>                                
                 <br/>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-primary btn-lg btn-block" id="btnContinuar" type="submit">Continue <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary btn-lg btn-block btnContinuarCadastroEmpresa" data-bs-target="#exampleModal" id="btnContinuar" type="submit">Continue <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
                 </div>
             </form>
         </div> 
@@ -171,10 +172,13 @@
 
 <br/><br/>
 
+
 <?php get_footer('site'); ?>
 
 <script src="<?php bloginfo('template_url') ?>/ajax/buscacep.js"></script>
 <script src="<?php bloginfo('template_url') ?>/ajax/ajax_empresas.js"></script>
+
+
 
 
 
