@@ -19,7 +19,7 @@
            
         </style>
     </head>
-    <?php  include( get_template_directory() . '/inc/functions_global.php' ); ?>
+    <?php  include( get_template_directory() . '/functions/functions_global.php' ); ?>
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">

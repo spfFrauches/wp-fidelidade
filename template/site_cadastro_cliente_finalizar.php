@@ -3,7 +3,7 @@
 $_SESSION['url_referencia'] = '';
 get_header('site');
 include( get_template_directory() . '/models/model_clientes.php' );
-include( get_template_directory() . '/inc/functions_cliente.php' );
+include( get_template_directory() . '/functions/functions_cliente.php' );
 
 include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroCliente.php' ); 
     
@@ -20,7 +20,7 @@ include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroClie
             para usar a ferramenta .
         </p>
         <br/>
-        <a href="<?= get_bloginfo('url') ?>/painel" class="btn btn-outline-secondary" >Ir ao Painel</a>        
+        <a href="<?= get_bloginfo('url') ?>/login" class="btn btn-outline-secondary" >Ir ao Painel</a>        
     </div>   
 </div>
 

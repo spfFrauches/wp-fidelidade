@@ -1,22 +1,22 @@
 <?php
     /* Template Name: Login App */ 
     get_header('login');
-    include( get_template_directory() . '/inc/functions_empresa.php' );
+    include( get_template_directory() . '/functions/functions_empresa.php' );
     include( get_template_directory() . '/models/model_empresa.php' );
-    include( get_template_directory() . '/inc/functions_login.php' );
+    include( get_template_directory() . '/functions/functions_login.php' );
     
     if ($_POST) :    
-        $msg = autenticacaoCompleta();
+        $msg = autenticacaoApp();
     endif;    
 ?>
-    <form class="form-signin" id="form_login" method="post">
-    
+    <form class="form-signin" id="form_login" method="post"> 
+        
         <div class="text-center mb-4">   
             <!--<img class="mb-4" src="<?= get_bloginfo('template_url') ?>/img/img_exemple.png" alt="" width="72" height="72"> -->
-            <i class="fa fa-fire fa-4x" aria-hidden="true"></i>
+            <i class="fa fa-grav fa-4x" aria-hidden="true"></i>
             <h1 class="h3 mb-3 mt-2 font-weight-normal"><?= NOME_APLICACAO ?></h1>
-            <?php if (isset($msg)) : echo  msgLoginInvalido($msg) ; endif;?>            
-           
+            <h1 class="h5 mb-3 mt-2 font-weight-normal">App</h1>
+            <?php if (isset($msg)) : echo  msgLoginInvalido($msg) ; endif;?>                      
         </div>
 
         <div class="form-label-group">
@@ -29,32 +29,18 @@
             <label>Senha</label>
         </div>
 
-
-        <button class="btn btn-lg btn-primary btn-block btn-nav-forload"  id="btnLoginEntrar" type="submit" >Entrar</button>
-        
-        <div class="row mt-3">  
-            <div class="col-lg-12 text-center">
-                <a href="#" style="text-decoration: none; font-size: 13px">Ainda não tem cadatro? Clique em um dos links abaixo</a>
-            </div>        
-        </div>
-        
-        <div class="row mt-5">  
-            <div class="col-6 d-flex flex-row">
-                <a href="#" style="text-decoration: none; font-size: 12px">Cadastrar Empresa</a>
-            </div>
-            <div class="col-6 d-flex flex-row-reverse">
-                <a href="#" style="text-decoration: none; font-size: 12px">Cadastrar Cliente</a>
-            </div>
-        </div>
-        
-        <p class="mt-5 mb-3 text-muted text-center">&copy; <?= NOME_APLICACAO ?> <?=  date("Y"); ?></p>
+        <button class="btn btn-lg btn-primary btn-block btn-nav-forload"  type="submit" >
+            Entrar
+        </button>
+  
+        <p class="mt-5 mb-3 text-muted text-center">
+            &copy; <?= NOME_APLICACAO ?> <?=  date("Y"); ?>
+        </p>
                
     </form>
-
-    
-
+   
 <?php
-    include( get_template_directory() . '/inc/functions_loads.php' );
+    include( get_template_directory() . '/functions/functions_loadsApp.php' );
     get_footer('login');  
 ?>
 

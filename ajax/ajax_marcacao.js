@@ -130,7 +130,6 @@ $( "#btnMarcarConfere" ).click(function() {
                 $('#confirma_marcacaoConfere').hide();
                 $('#confirma_marcacaoConfereSucesso').show();
                 $('#load_form_marcacao').hide();
-
                 $('#btnsMarcarVoltar').hide();
                 $('#btnNovaMarcacao').show();
 

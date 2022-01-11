@@ -1,9 +1,9 @@
 <?php
     /* Template Name: Login */ 
     get_header('login');
-    include( get_template_directory() . '/inc/functions_empresa.php' );
+    include( get_template_directory() . '/functions/functions_empresa.php' );
     include( get_template_directory() . '/models/model_empresa.php' );
-    include( get_template_directory() . '/inc/functions_login.php' );
+    include( get_template_directory() . '/functions/functions_login.php' );
     
     if ($_POST) :    
         $msg = autenticacaoCompleta();
@@ -57,13 +57,11 @@
         
         <p class="mt-5 mb-3 text-muted text-center">&copy; <?= NOME_APLICACAO ?> <?=  date("Y"); ?></p>
                
-
     </form>
-
-    
+  
 
 <?php
-    include( get_template_directory() . '/inc/functions_loads.php' );
+    include( get_template_directory() . '/functions/functions_loads.php' );
     get_footer('login');  
 ?>
 

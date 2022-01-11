@@ -4,9 +4,8 @@
 $_SESSION['url_referencia'] = '';
 get_header('site');
 
-include( get_template_directory() . '/models/functions_empresa.php' ); 
+include( get_template_directory() . '/functions/functions_empresa.php' ); 
 include( get_template_directory() . '/models/model_empresa.php' ); 
-
 include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroEmpresaSite.php' ); 
               
 ?>
@@ -23,7 +22,7 @@ include( get_template_directory() . '/inc/include_helper_validaPOST_CadastroEmpr
             para usar a ferramenta .
         </p>
         <br/>
-        <a href="<?= get_bloginfo('url') ?>/painel" class="btn btn-outline-secondary" >Ir ao Painel</a>  
+        <a href="<?= get_bloginfo('url') ?>/login" class="btn btn-outline-secondary" >Ir ao Painel</a>  
     </div>   
 </div>
 

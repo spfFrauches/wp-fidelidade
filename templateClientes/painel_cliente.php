@@ -60,8 +60,8 @@ $minhasEmpresas = buscarEmpresaLigadaAoCliente($_SESSION['dados_cliente'][0]->cp
         <h6 class="border-bottom border-gray pb-2 mb-0">Meus locais de compra</h6>
         <?php if (!$minhasEmpresas): ?>
             <div class="col-lg-12 mt-5 mb-1">
-                Você ainda não tem locais de compra registrados
-                no Webi Club Fidadelidade.
+                Ainda não existem registros de compras 
+                no <?= NOME_APLICACAO ?>
             </div>
         <?php endif; ?>
     </div>
@@ -74,7 +74,12 @@ $minhasEmpresas = buscarEmpresaLigadaAoCliente($_SESSION['dados_cliente'][0]->cp
                 <!--<p class="p-2 text-center" style="font-size: 9px; margin-bottom: -5px"><?= $valueEmp->cnpjemp ?></p> -->
                 <img class="img-resolut img-thumbnail rounded-circle p-2" src="<?= $valueEmp->logoempsrc ?>" width="90px">
                 <div class="p-2 text-center ">
-                    <a href="<?= get_bloginfo('url') ?>/painel-cliente/extrato-pontos/?cnpj=<?= $valueEmp->cnpjemp ?>" class="btn btn-outline-secondary btn-sm btn-nav-forload" style="font-size:10px">Meu extrato</a>
+                    <a 
+                        href="<?= get_bloginfo('url') ?>/painel-cliente/extrato-pontos/?cnpj=<?= $valueEmp->cnpjemp ?>" 
+                        class="btn btn-outline-secondary btn-sm btn-nav-forload" 
+                        style="font-size:10px">
+                        Meu extrato
+                    </a>
                 </div>
             </div>
         

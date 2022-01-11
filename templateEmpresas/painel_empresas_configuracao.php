@@ -101,7 +101,7 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     <div class="row  mt-5">
         <div class="col-lg-6">  
             <div class="d-grid gap-2 col-12 mx-auto">
-                <button  class="btn btn-primary my-1  btn-block btnSalvarAction"  <?= $config ? "disabled" : "" ?>  >Salvar</button> 
+                <button  class="btn btn-primary my-1  btn-block btnSalvarAction" <?= $config ? "disabled" : "" ?>  >Salvar</button> 
             </div>
         </div>
     </div>

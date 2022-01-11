@@ -54,7 +54,7 @@
                         <?php $url_swp3 = get_bloginfo('url')."/empresa-meus-clientes" ?> 
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>"href="<?= $url_swp3 ?>">
                             <i class="fa fa-users" aria-hidden="true"></i>
-                            &nbsp; Meus Cliente
+                            &nbsp; Meus Clientes
                         </a>
                     </li>
                     
@@ -90,6 +90,14 @@
                         <a class="btn-nav-forload nav-link <?= $active ?>" href="<?= $url_swp6 ?>">
                             <i class="fa fa-gift" aria-hidden="true"></i>
                             &nbsp; Benefícios
+                        </a>
+                        
+                        <?php $url_swp7 = get_bloginfo('url')."/painel-empresa/painel-empresa-resgate-pontos" ?> 
+                        
+                       
+                        <a class="btn-nav-forload nav-link <?= ($url == $url_swp7 ) ? "active" : "" ?>" href="<?= $url_swp7 ?>">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Resgate Pontos
                         </a>
                     </li>
                     

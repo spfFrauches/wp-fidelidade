@@ -1,7 +1,7 @@
 <?php 
 
     require '../../../../wp-load.php';
-    require ( get_template_directory() . '/inc/model_empresa.php' );
+    require ( get_template_directory() . '/models/model_empresa.php' );
 
     if (isset($_POST['cnpj'])) {
         $buscarEmpresa = buscarEmpresa($_POST['cnpj']);   

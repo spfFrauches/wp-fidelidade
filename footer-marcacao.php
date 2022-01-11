@@ -13,7 +13,7 @@
                 <div class="col-4">
                     <h5>Ajuda</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="<?= get_bloginfo('url') ?>/novo-cliente">Cadastrar Cliente</a></li>
+                        <li><a class="text-muted" target="_blank" href="<?= get_bloginfo('url') ?>/novo-cliente">Cadastro de Clientes</a></li>
                         <li><a class="text-muted" href="#">Consultar cliente</a></li>
                     </ul>
                 </div>

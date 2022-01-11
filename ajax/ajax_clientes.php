@@ -1,7 +1,7 @@
 <?php
 
 include '../../../../wp-load.php';
-require '../inc/functions_cliente.php';
+require '../functions/functions_cliente.php';
 require '../models/model_clientes.php';
 
 if (isset($_POST['cpf'])){

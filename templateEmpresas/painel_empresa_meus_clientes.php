@@ -12,6 +12,8 @@ $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
     
 ?>
 
+
+
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
     
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -37,7 +39,8 @@ $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
                         <td><?= $value->NOME ?></td>
                         <td><?= $value->CPF ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($value->ULTMARC)) ?></td>
-                        <td>                           
+                        <td>  
+                            
                             <a href="#" class="modaldetalhes"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-modal="<?= $value->CPF ?>" data-cnpj="<?= $cnpjempresa ?>" >
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>                            
