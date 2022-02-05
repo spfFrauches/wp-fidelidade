@@ -27,10 +27,14 @@ function cadastroNovoBeneficio() {
                 $target_file = '';
             endif;          
         endif;             
-    endif;      
+    endif; 
+    
+    $qtdPontos  = str_replace('.', '', $_POST['valorpontos']);
+    $qtdPontos  = str_replace(',', '.', $qtdPontos);
+    
     $dadosInput = [
         'descricao' => $_POST['descricaobeneficio'],
-        'qtdpontos' =>  $_POST['valorpontos'],
+        'qtdpontos' =>  $qtdPontos,
         'dtvalidade' => '0000-00-00 00:00',
         'dtcadastro' => date("Y-m-d H:i"),
         'dtvalidade' => $_POST['dtvalidade'],
@@ -69,6 +73,17 @@ function updateBeneficio($id) {
         "qtdpontos"  => $_POST['valorpontos'],
         "dtvalidade" => $_POST['dtvalidade'],
         "status" => $_POST['status']
+    ];
+    $resultado = $wpdb->update("$tabela", $camposUpdade, array('id'=>$id));   
+    return $resultado;
+       
+}
+
+function updateBeneficio2($id, $vlrPontos) {
+    $tabela = "beneficios";
+    global $wpdb;
+    $camposUpdade = [
+        "qtdpontos"  => $vlrPontos,
     ];
     $resultado = $wpdb->update("$tabela", $camposUpdade, array('id'=>$id));   
     return $resultado;

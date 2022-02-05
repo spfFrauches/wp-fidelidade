@@ -30,11 +30,19 @@
                 ?>
                 
                 <ul class="nav flex-column">
+                    
                     <li class="nav-item">
                         <?php $url_swp1 = get_bloginfo('url')."/painel-cliente" ?>     
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             &nbsp; Home <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <?php $url_swp1 = get_bloginfo('url')."/resgates-cliente" ?>     
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Meus Resgates <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -44,13 +52,19 @@
                             &nbsp; Meus dados
                         </a>
                     </li>
-                        <?php $url_swp3 = get_bloginfo('url')."/painel-cliente-resgate-beneficios" ?> 
+                    
+                    <?php $url_swp3 = get_bloginfo('url')."/painel-cliente-resgate-beneficios" ?> 
+                    <!--
                     <a class="btn-nav-forload nav-link <?= $active ?>" href="<?= $url_swp3 ?>">
                             <i class="fa fa-gift" aria-hidden="true"></i>
                             &nbsp; Resgatar Pontos
-                        </a>
-                    
-                    <li class="nav-item">
+                    </a>
+                    -->
+                   
+                </ul>
+                                
+                <ul class="nav flex-column">
+                     <li class="nav-item">
                         <?php $url_swp3 = get_bloginfo('url')."/cliente-alterar-senha" ?>  
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>" href="<?= $url_swp3 ?>">
                             <i class="fa fa-key" aria-hidden="true"></i>
@@ -58,9 +72,6 @@
                             Alterar Senha
                         </a>
                     </li>
-                </ul>
-                                
-                <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fa fa-handshake-o" aria-hidden="true"></i>

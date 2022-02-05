@@ -93,6 +93,8 @@ function descontarSaldo_ResgateBeneficio($qtdPontos, $cpf, $cnpj){
      
     $inserirMarcacao  = $wpdb->insert( "$tabela2", $dadosMarcacao, array('%s','%s','%s','%f','%s', '%s','%d','%f') );
     $_SESSION['jaInseridoRegistro'] = false;
+    return $inserirMarcacao;
+    
     
 }
     

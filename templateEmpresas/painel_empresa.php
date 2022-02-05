@@ -43,10 +43,7 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             <div class="alert alert-danger" role="alert">
                 <h4 class="alert-heading">Atenção!</h4>
                 <p>
-                    É necessário configurar a forma de pontuação de seus clientes.
-                    <br/>
-                    Após configuração sua empresa estará pronta para usar e disponibilizar o Wibi Club Fidelide
-                    para seus clientes. 
+                    Em Configurações defina a porcentagens de pontos de seus Clientes.
                 </p>
                 <hr>
                 <p class="mb-0">Acesse [Configurações] e defina a forma de marcação</p>
@@ -72,8 +69,7 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
         
     <br/>
         
-    <div class="row">
-        
+    <div class="row">  
         <div class="col-lg-4 col-12">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
@@ -92,37 +88,7 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
         </div>
     </div>
     <br/>
-    <div class="row"> 
-        <div class="col-lg-12">
-            <div class="my-3 p-3 bg-white rounded shadow-sm">
-                <h6 class="border-bottom border-gray pb-2 mb-0">Pendências Técnica de desenvolvimento</h6>
-                
-                <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <strong class="d-block text-gray-dark">wp-admin</strong>
-                        saulopf | 102030 (Retirar isso depois de pronto)
-                    </p>
-                </div>
-                
-                <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <strong class="d-block text-gray-dark">Painel Cliente</strong>
-                        Criar Solicitação de restate de pontos. 
-                    </p>
-                </div>
-                
-                <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <strong class="d-block text-gray-dark">Painel Empresa</strong>
-                        Travar resgate de pontos. Resgatar apenas o que 
-                        foi solicitado pelo cliente.
-                    </p>
-                </div>
-
-            </div>  
-        </div>
-    </div>
-   <br/>                
+              
 </main>
 
 <?php get_footer('painel') ?>

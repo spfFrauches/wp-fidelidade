@@ -67,6 +67,12 @@ $listagemBeneficios = listarBeneficiosPorEmpresa($_SESSION['dados_empresa'][0]->
             <?php endif; ?>           
         </div>
     </div>
+    <!--
+    <div class="alert alert-success alert-dismissible fade show updateBeneficioSuccess" role="alert">
+        <strong>Salvo com sucesso!</strong> Dados atualizados.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    -->
     
     <div class="row mt-5">
         <?php foreach ($listagemBeneficios as $key => $value): ?>
@@ -122,4 +128,5 @@ $listagemBeneficios = listarBeneficiosPorEmpresa($_SESSION['dados_empresa'][0]->
 </div>
 
 <script src="<?php bloginfo('template_url') ?>/ajax/painelempresa-pontosEbeneficios.js"></script>  
+
 <?php get_footer('painel'); ?>

@@ -45,7 +45,7 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
         ?>    
     </div>
     <div class="row">    
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <?php if (!$config): ?>
             
                 <div class="alert alert-danger" role="alert">
@@ -66,8 +66,11 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
 
             <?php if ($config): ?>
                 <div class="alert alert-warning" role="alert">
-                   Nesta versão, uma vez configurado não pode mais alterar. Caso precise de alteração 
-                   fale com o administrador do sistema.
+                    <h3>Atenção</h3>
+                    <hr>
+                    <p>
+                        Cuidado ao alterar o percentual, os anterios já marcados não sofrem alteração
+                    </p>
                 </div>
             <?php endif; ?>
         </div>
@@ -77,14 +80,16 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             <div class="form-group">            
                 <label class="h5" >Forma de adquirir pontos</label>
                 <div class="form-group">
-                    <select class="form-select" id="tipoMarcacao" name="tipoMarcacao" <?= $config ? "disabled" : ""?>>
+                    <select class="form-select" id="tipoMarcacao" name="tipoMarcacao">
                         <option value="cash" <?= ($tipoMarcacao=='cash') ?  "selected" : "" ?> >Base no valor da compra/pgto</option>
                     </select>
                 </div>
             </div>             
         </div> 
         <div class="col-lg-6">          
-            <label class="my-1 mr-2">Porcentagem (%) de conversão para pontos</label>
+            <label class="my-1 mr-2">Porcentual (%) de conversão</label>
+            <input type="text" class='form-control dinheiro' name="percentual" id='percentual' value="<?= ($percentual) ?>">
+            <!--
             <select class="form-select my-1 mr-sm-2" name="percentual" id="percentual" <?= $config ? "disabled" : ""?>>
                 <option value="0" selected>Selecione o % (percentual)</option>
                 <option value="1" <?= ($percentual=='1') ?  "selected" : "" ?>>1%</option>
@@ -92,7 +97,11 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
                 <option value="3" <?= ($percentual=='3') ?  "selected" : "" ?>>3%</option>
                 <option value="4" <?= ($percentual=='4') ?  "selected" : "" ?>>4%</option>
                 <option value="5" <?= ($percentual=='5') ?  "selected" : "" ?>>5%</option>
+                <option value="8" <?= ($percentual=='8') ?  "selected" : "" ?>>8%</option>
+                <option value="9" <?= ($percentual=='8') ?  "selected" : "" ?>>9%</option>
+                <option value="10" <?= ($percentual=='10') ? "selected" : "" ?>>10%</option>
             </select>
+            -->
             <small id="percentualHelp" class="form-text">Este campo é obrigatório</small>
         </div>  
     </div> 
@@ -101,7 +110,10 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     <div class="row  mt-5">
         <div class="col-lg-6">  
             <div class="d-grid gap-2 col-12 mx-auto">
-                <button  class="btn btn-primary my-1  btn-block btnSalvarAction" <?= $config ? "disabled" : "" ?>  >Salvar</button> 
+                <?php if (isset($config)): ?>
+                <input type="hidden" name="update" id='update' value="sim">
+                <?php endif; ?>
+                <button  class="btn btn-primary my-1  btn-block btnSalvarAction"  >Salvar</button> 
             </div>
         </div>
     </div>
@@ -113,5 +125,8 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     get_footer('painel');   
 ?>
 <script src="<?php bloginfo('template_url') ?>/ajax/ajax_empresa_config.js"></script>
+<script>
+$('.dinheiro').mask('#.##0,00', {reverse: true});
+</script>
 
 

@@ -42,10 +42,10 @@ $minhasEmpresas = buscarEmpresaLigadaAoCliente($_SESSION['dados_cliente'][0]->cp
     
     <?php
         /*
-        echo "<pre>";
-        var_dump($minhasEmpresas);
-        echo "</pre>";  
-        */
+            echo "<pre>";
+            var_dump($minhasEmpresas);
+            echo "</pre>"; 
+        */ 
     ?>
     
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-secondary rounded shadow-sm">
@@ -67,23 +67,29 @@ $minhasEmpresas = buscarEmpresaLigadaAoCliente($_SESSION['dados_cliente'][0]->cp
     </div>
        
     <div class="row p-2 d-flex">    
-        <?php foreach ($minhasEmpresas as $keyEmp => $valueEmp) : ?>
-        
-        
-            <div class="col-4 p-1 div-resolut mt-1"> 
-                <!--<p class="p-2 text-center" style="font-size: 9px; margin-bottom: -5px"><?= $valueEmp->cnpjemp ?></p> -->
-                <img class="img-resolut img-thumbnail rounded-circle p-2" src="<?= $valueEmp->logoempsrc ?>" width="90px">
-                <div class="p-2 text-center ">
+        <?php foreach ($minhasEmpresas as $keyEmp => $valueEmp) : ?>                
+            <div class="col p-1 div-resolut mt-1"> 
+                <p class="p-2 text-center" style="font-size: 9px; margin-top: -5px;">
+                    Estabelecimento.: 
+                </p>
+               
+                <div class="text-center">
+                    <img class="img-resolut img-thumbnail rounded-circle p-2" src="<?= $valueEmp->logoempsrc ?>" width="90px">
+                </div> 
+                
+                <div class="p-2 text-center ">                  
                     <a 
                         href="<?= get_bloginfo('url') ?>/painel-cliente/extrato-pontos/?cnpj=<?= $valueEmp->cnpjemp ?>" 
                         class="btn btn-outline-secondary btn-sm btn-nav-forload" 
                         style="font-size:10px">
                         Meu extrato
                     </a>
+                    
+                     <p class="p-2 text-center" style="font-size: 11px; margin-top: -5px;">
+                        <?= $valueEmp->nome_fantasia ?>
+                    </p>
                 </div>
-            </div>
-        
-                 
+            </div>                        
         <?php endforeach; ?>
     </div>
     

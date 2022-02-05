@@ -18,9 +18,11 @@
             <h1 class="h3 mb-3 mt-2 font-weight-normal"><?= NOME_APLICACAO ?></h1>
             <h1 class="h5 mb-5 font-weight-normal">Painel da Empresa</h1>
             <?php if (isset($msg)) : echo  msgLoginInvalido($msg) ; endif;?>            
+            <!--
             <p>
                 <a  class="badge rounded-pill bg-success p-2" style="color: #fff" href="<?= get_bloginfo('url') ?>"> Voltar ao site </a>
             </p>
+            -->
         </div>
 
         <div class="form-label-group">
@@ -41,18 +43,20 @@
 
         <button class="btn btn-lg btn-primary btn-block btn-nav-forload"  id="btnLoginEntrar" type="submit" >Entrar</button>
         
+        <!--
         <div class="row mt-3">  
             <div class="col-lg-12 text-center">
                 <a href="#" style="text-decoration: none; font-size: 13px">Ainda não tem cadatro? Clique em um dos links abaixo</a>
             </div>        
         </div>
+        -->
         
         <div class="row mt-5">  
             <div class="col-6 d-flex flex-row">
-                <a href="#" style="text-decoration: none; font-size: 12px">Cadastrar Empresa</a>
+                <a href="<?= get_bloginfo('url') ?>/nova-empresa/" style="text-decoration: none; font-size: 12px">Cadastrar Empresa</a>
             </div>
             <div class="col-6 d-flex flex-row-reverse">
-                <a href="#" style="text-decoration: none; font-size: 12px">Cadastrar Cliente</a>
+                <a href="<?= get_bloginfo('url') ?>" style="text-decoration: none; font-size: 12px">Voltar ao site</a>
             </div>
         </div>
         

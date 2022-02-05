@@ -62,7 +62,7 @@ $brindePontosMinimos = brindeMenorPonto($_SESSION['dados_empresa'][0]->cnpj);
                         <th>CPF</th>
                         <th>Últ. Marcação</th>
                         <th>Pontos</th>
-                        <th>Brinde</th>
+                        <!--<th>Brinde</th> -->
                     </tr>
                 </thead>               
                 <tbody>
@@ -72,11 +72,13 @@ $brindePontosMinimos = brindeMenorPonto($_SESSION['dados_empresa'][0]->cnpj);
                         <td><?= $value->CPF ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($value->ULTMARC)) ?></td>
                         <td><?= $value->SOMAPONTOS ?></td>
+                        <!--
                         <td>                           
                             <a href="#" class="modalResgateBeneficio"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-cpf="<?= $value->CPF ?>" data-modal="<?= $cnpjempresa ?>" data-cnpj="<?= $cnpjempresa ?>" >
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>                            
                         </td>
+                        -->
                     </tr>
                      <?php endforeach;  ?> 
                 </tbody>              
@@ -104,3 +106,11 @@ $brindePontosMinimos = brindeMenorPonto($_SESSION['dados_empresa'][0]->cnpj);
 <?php get_footer('painel'); ?>
 
 <script src="<?php bloginfo('template_url') ?>/ajax/painelempresa-resgateBeneficios.js"> </script>
+
+<script>
+    
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    
+</script>

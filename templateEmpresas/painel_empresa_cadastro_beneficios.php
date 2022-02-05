@@ -50,7 +50,7 @@ endif;
             <div class="col-lg-4 mt-5">
                 <label for="formFileSm" class="form-label" style="font-size: 17px">Imagem ilustrativa do brinde / beneficio</label>
                 <br/>
-                <input class="form-control form-control-sm" id="formFileSm"  type="file" name="imgbeneficio"  onchange="previewFile(this);"  accept="image/*" required>
+                <input class="form-control form-control-sm imgBrinde" id="formFileSm"  type="file" name="imgbeneficio"  onchange="previewFile(this);"  accept="image/*" required>
             </div>
         </div>
 
@@ -103,6 +103,7 @@ endif;
 <?php get_footer('painel'); ?>
 
 <script>
+    
     function previewFile(input){
         var file = $("input[type=file]").get(0).files[0];
         if(file){
@@ -113,5 +114,16 @@ endif;
             reader.readAsDataURL(file);
         }
     }
+    
     $('.dinheiro').mask('#.##0,00', {reverse: true});
+    
+    var formFileSm = $('.imgBrinde');
+    
+    $('.btn-nav-forload').click(function() {
+        console.log(formFileSm.length);
+    });
+    
+    
+    
+    
 </script>  

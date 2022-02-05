@@ -14,15 +14,11 @@ get_header('sitetmpl4');
                 </div>
                 <div class="h3 text-white">
                     Cadastro de Empresas
-                </div>
-                
+                </div>               
                 <p class="lead text-white" style="margin-top: -15px">
                     Implante o Sistema Webi Fidelidade e disponibilize o
                     cashback para seus clientes.
                 </p>
-                <!--
-                <img src="<?php bloginfo('template_url') ?>/dist/4/assets/img/tnw-logo.svg" alt="..." style="height: 3rem" />
-                -->
                 <br/>
             </div>
             <div class="col-xl-4 text-end">            
@@ -31,10 +27,6 @@ get_header('sitetmpl4');
         </div>
     </div>
 </aside>
-
-<div class="py-5 text-center">       
-    
-</div>
 
 <div class="container px-5 mt-5">  
     <div class="row gx-5">
@@ -181,73 +173,73 @@ get_header('sitetmpl4');
                                     <input type="text" class="form-control"  name="cidade" id="cidade" onblur="analisaCidade()" >
                                     <div id="cidadeHelp" class="form-text"></div>
                                 </div>                     
-                    <div class="col-lg-6 mb-3">                       
-                        <div class="form-group">
-                            <label id="label_uf">UF</label>
-                            <select class="form-control" id="uf" name="uf" onblur="analisaUF()" >
-                                <option value=""></option>
-                                <option value="AC">Acre</option>
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="TO">Tocantins</option>
-                            </select>
-                            <div id="ufHelp" class="form-text"></div>
-                        </div>                        
-                    </div>                    
-                    <div class="col-lg-6 mb-3">
-                        <label id="label_endereco">Endereço</label>
-                        <input type="text" class="form-control"  name="endereco" id="endereco" onblur="analisaEndereco()"  >
-                        <div id="enderecoHelp" class="form-text"></div>
+                                <div class="col-lg-6 mb-3">                       
+                                    <div class="form-group">
+                                        <label id="label_uf">UF</label>
+                                        <select class="form-control" id="uf" name="uf" onblur="analisaUF()" >
+                                            <option value=""></option>
+                                            <option value="AC">Acre</option>
+                                            <option value="AC">Acre</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapá</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceará</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espírito Santo</option>
+                                            <option value="GO">Goiás</option>
+                                            <option value="MA">Maranhão</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Pará</option>
+                                            <option value="PB">Paraíba</option>
+                                            <option value="PR">Paraná</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piauí</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondônia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">São Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
+                                        </select>
+                                        <div id="ufHelp" class="form-text"></div>
+                                    </div>                        
+                                </div>                    
+                                <div class="col-lg-6 mb-3">
+                                    <label id="label_endereco">Endereço</label>
+                                    <input type="text" class="form-control"  name="endereco" id="endereco" onblur="analisaEndereco()"  >
+                                    <div id="enderecoHelp" class="form-text"></div>
+                                </div> 
+                                <div class="col-lg-6 mb-3">
+                                    <label id="label_bairro">Bairro</label>
+                                    <input type="text" class="form-control"  name="bairro" id="bairro" onblur="analisaBairro()" >
+                                    <div id="bairroHelp" class="form-text"></div>
+                                </div>                     
+                                <div class="col-lg-6 mb-3">
+                                    <label>Número</label>
+                                    <input type="text" class="form-control"  name="numero" id="numero">
+                                    <div id="numeroHelp" class="form-text"></div>
+                                </div>                     
+                                <div class="col-lg-6 mb-3">
+                                    <label >Complemento</label>
+                                    <input type="text" class="form-control"  name="complemento" id="complemento">
+                                    <div id="complementoHelp" class="form-text"></div>
+                                </div> 
+                                <input type="hidden" name="data_cadastro" value="<?= date("Y-m-d") ?>" />
+                                <input type="hidden" name="flsituacao" value="0" />
+                            </div>                                
+                            <br/>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn btn-primary btn-lg btn-block btnContinuarCadastroEmpresa" data-bs-target="#exampleModal" id="btnContinuar" type="submit">Continue <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                            </div>
+                        </form>
                     </div> 
-                    <div class="col-lg-6 mb-3">
-                        <label id="label_bairro">Bairro</label>
-                        <input type="text" class="form-control"  name="bairro" id="bairro" onblur="analisaBairro()" >
-                        <div id="bairroHelp" class="form-text"></div>
-                    </div>                     
-                    <div class="col-lg-6 mb-3">
-                        <label>Número</label>
-                        <input type="text" class="form-control"  name="numero" id="numero">
-                        <div id="numeroHelp" class="form-text"></div>
-                    </div>                     
-                    <div class="col-lg-6 mb-3">
-                        <label >Complemento</label>
-                        <input type="text" class="form-control"  name="complemento" id="complemento">
-                        <div id="complementoHelp" class="form-text"></div>
-                    </div> 
-                    <input type="hidden" name="data_cadastro" value="<?= date("Y-m-d") ?>" />
-                    <input type="hidden" name="flsituacao" value="0" />
-                </div>                                
-                <br/>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-primary btn-lg btn-block btnContinuarCadastroEmpresa" data-bs-target="#exampleModal" id="btnContinuar" type="submit">Continue <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
                 </div>
-            </form>
-        </div> 
-    </div>
 
                 <!-- Modal Para Efeito de Load Apenas -->
                 <div class="modal fade" id="modalLoad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -273,9 +265,7 @@ get_header('sitetmpl4');
 </div>
 
 
-
 <br/><br/>
-
 
 <?php get_footer('sitetmpl4'); ?>
 

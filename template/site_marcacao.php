@@ -18,9 +18,7 @@ get_header('marcacao');
     $dadosEmpresa = buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
     $tipoMarcacao = $carregarConfiguracaoEmpresa[0]->tipo_marcacao ;
-    $logoEmpresa = $dadosEmpresa[0]->logoempsrc;
-    
-     
+    $logoEmpresa = $dadosEmpresa[0]->logoempsrc;    
 ?>
 <style>
     @media (max-width:550px){      
@@ -114,20 +112,17 @@ get_header('marcacao');
         <!-- Parte 3 - Confirmação dos dados e Compra  ------------                             -->
         <!-- ---------------------------------------------------------------------------------- -->
         
-        <div class="form-group card p-2" id="confirma_marcacaoConfere">
-            
+        <div class="form-group card p-2" id="confirma_marcacaoConfere">            
              <div class="row text-center">
                 <div class="col-lg-12">
                    <h4>Confirmação de Marcação</h4>
                 </div>
-            </div>
-            
+            </div>           
             <div class="row text-center mt-2">
                 <div class="col-lg-12">
                     <img id="selfie2" src="<?= $caminhoImgDefault ?>" height="120px" class="rounded" >
                 </div>
-            </div>
-            
+            </div>            
             <div class="row mt-4">
                 <div class="col-lg-12">
                     <h4 id="confirma_marcacaoNomeConfere"><small>Cliente.:</small> Nome do Cliente</h4>
@@ -153,7 +148,7 @@ get_header('marcacao');
                 <div class="col-12">
                     <i class="fa fa-exclamation-triangle fa-5x" aria-hidden="true"></i>
                     <br/>
-                   Desculpe, mas não encotramos registro desse CPF. 
+                    Desculpe, mas não encotramos registro desse CPF. 
                 </div>             
             </div>        
         </div>
@@ -164,8 +159,7 @@ get_header('marcacao');
         <!-- Parte 4 - Botões da marcação  ------------------------                             -->
         <!-- ---------------------------------------------------------------------------------- -->
         
-        <div class="row" id="btnsMarcarVoltar">
-            
+        <div class="row" id="btnsMarcarVoltar">           
             <div class="col-6">
                 <div class="d-grid gap-2">
                     <button type="button" id="btcVoltarMarcacao" class="btn btn-warning btn-lg btn-block">Voltar</button>
@@ -176,8 +170,7 @@ get_header('marcacao');
                 <div class="d-grid gap-2">
                     <button type="button" id="btcVoltarVazio" class="btn btn-warning btn-lg btn-block">Voltar</button>
                 </div>
-            </div>
-            
+            </div>           
             <div class="col-6"> 
                 <div class="d-grid gap-2">
                     <button type="button" id="btcContinuarMarcacao" class="btn btn-secondary btn-lg btn-block" <?= (!$tipoMarcacao) ? "disabled" : "" ?>>Continuar</button>

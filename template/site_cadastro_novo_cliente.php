@@ -5,9 +5,7 @@ get_header('sitetmpl4');
 $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";  
 ?>
 <style>
-    /* -------------------------  */
-    /* Forms */
-    /* -------------------------  */
+
     .mobile-form {
         border:none;
         border-bottom: 1px solid #213c57;        
@@ -28,9 +26,6 @@ $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";
                 <p class="lead text-white">
                     Tenha seu webi fidelidade. Cadastro de clientes
                 </p>
-                <!--
-                <img src="<?php bloginfo('template_url') ?>/dist/4/assets/img/tnw-logo.svg" alt="..." style="height: 3rem" />
-                -->
                 <br/>
             </div>
             <div class="col-xl-4 text-end">            

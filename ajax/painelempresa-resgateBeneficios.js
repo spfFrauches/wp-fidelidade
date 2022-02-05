@@ -1,3 +1,4 @@
+/*
 $("body").on("click",".modalResgateBeneficio",function () {
     
     $.ajax({ 
@@ -11,4 +12,6 @@ $("body").on("click",".modalResgateBeneficio",function () {
         });      
    
 });
+ * 
+ */
 
