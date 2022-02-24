@@ -26,7 +26,7 @@ function carregarDadosCliente()
     $cnpj = $_REQUEST['cnpjempresa'];
     
     $sqlClientes = "SELECT * FROM $tabelaClientes WHERE cpf = '$cpf' ";
-    $sqlMarcacoes = "SELECT * FROM $tabelaMarcacoes WHERE cnpjemp = '$cnpj' AND cpfcli = '$cpf' ";
+    $sqlMarcacoes = "SELECT * FROM $tabelaMarcacoes WHERE cnpjemp = '$cnpj' AND cpfcli = '$cpf' ORDER BY datamarcacao DESC ";
        
     $resultadoCadastroCliente =  $wpdb->get_results( $sqlClientes );
     $resutadoMarcacoes = $wpdb->get_results( $sqlMarcacoes );

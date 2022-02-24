@@ -74,42 +74,47 @@ $listagemBeneficios = listarBeneficiosPorEmpresa($_SESSION['dados_empresa'][0]->
     </div>
     -->
     
-    <div class="row mt-5">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <?php foreach ($listagemBeneficios as $key => $value): ?>
-        <div class="col-lg-6 mb-1">  
-            <div class="card">
-                <div class="row g-0">
-                    <div class="col-md-3">
-                        <img src="<?= $value->imgsrcbeneficio ?>" class="img-fluid rounded-start" alt="">
-                    </div>
-                    <div class="col-md-9">
-                        <div class="card-body descricaoBeneficio">
-                            <h5 class="card-title"><?= $value->qtdpontos ?> Pontos</h5>
-                            <p class="card-text" >
-                                <?= $value->descricao ?>
-                                &nbsp;
-                                <a href="#" class="modaldetalhesBeneficio" data-bs-toggle="modal"  data-id="<?= $value->id ?>" data-bs-target="#staticBackdrop" >
-                                    <span class="badge bg-success">Editar <i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 
-                                </a>
-                            </p>
-                            <p class="card-text" style="min-height: 40px">
-                                <small class="text-muted"><?= $value->obsadicional ?></small>
-                            </p>
-                            <p class="card-text">
-                                
-                                <span class="badge bg-primary">Detalhes</span>
-                                <span class="badge bg-secondary">Valido até.: 01/01/2999</span>
-                                
-                            </p>
+        <div class="col">
+            <div class="card shadow-sm">
+                
+                <div class="text-center">
+                    <img src="<?= $value->imgsrcbeneficio ?>" 
+                        class="rounded-start" 
+                        alt="" 
+                        height="120px">
+                </div>
+
+                <div class="card-body">
+                    <p class="card-text">
+                        
+                         <?=  substr_replace($value->descricao, " ... ", 20)  ?>
+                    </p>
+                    <p class="card-text" style="min-height: 40px">
+                        <?php 
+                        
+                            //list($output)=explode("\n",wordwrap(strip_tags($value->descricao),20),1);
+                            //echo $output. ' ...';
+                        ?>
+                        <small class="text-muted"><?= substr_replace($value->obsadicional, " ... ", 80)  ?></small>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="#" class="modaldetalhesBeneficio" data-bs-toggle="modal"  data-id="<?= $value->id ?>" data-bs-target="#staticBackdrop" >
+                                <span class="badge bg-success">Editar <i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 
+                            </a>
+                            
                         </div>
+                    <small class="text-muted">Validade: 30 dias</small>
                     </div>
                 </div>
-            </div>         
+            </div>
         </div>
-         <?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
     
-  
+    
 </main>
 
 <!-- Modal -->

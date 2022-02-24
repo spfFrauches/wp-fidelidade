@@ -1,6 +1,8 @@
 <?php 
 /* Template Name: Painel Cliente Extrato*/ 
+
 $_SESSION['url_referencia'] = '';
+$_SESSION['jaInserido'] = 'nao'; 
 get_header('painel');
 
 if (!isset($_SESSION['login_painel']) && $_SESSION['login_painel'] != 'cliente') :
@@ -15,23 +17,16 @@ include( get_template_directory() . '/models/model_ligacaoEmpresa.php' );
 include( get_template_directory() . '/models/model_beneficio.php' ); 
 include( get_template_directory() . '/models/model_solicitacao_resgate.php' ); 
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $_SESSION['postdata'] = $_POST;
-    $cnpj = $_REQUEST["cnpj"];
-    $url = get_bloginfo('url')."/painel-cliente/extrato-pontos/?cnpj=$cnpj";
-    if (isset($_POST['solicitacao_resgate'])):
-        $inserirSolicitacao = inserirSolicitacao($_POST);  
-    endif;
-    unset($_POST);
-    echo "<script>window.location.href = '$url' </script>";
-    exit;
-}
+$cpfCliente = $_SESSION['dados_cliente'][0]->cpf;
+$cnpjemp = $_REQUEST["cnpj"];
     
-$minhasEmpresas = buscarEmpresaLigadaAoCliente($_SESSION['dados_cliente'][0]->cpf);
+
+$minhasEmpresas = buscarEmpresaLigadaAoCliente($cpfCliente);
 $totalPontos = 0;
 $listarMarcacoes = listarMarcacaoEmpresaCliente2($_SESSION['dados_cliente'][0]->cpf, $_REQUEST["cnpj"]); 
 $dadosEmpresa = buscarEmpresa($_REQUEST["cnpj"]);
+
+$solicitacaoEmAberto = solicitacaoRestageEmAberto($cpfCliente,$cnpjemp);
 
 ?>
 
@@ -58,34 +53,59 @@ $dadosEmpresa = buscarEmpresa($_REQUEST["cnpj"]);
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     
+    <?php 
+        /*
+        echo "<pre>";
+        var_dump($listarMarcacoes);
+        echo "</pre>";
+        */
+    ?>
+    
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Meu Extrato <small></small></h1>  
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <a href="<?= get_bloginfo('url') ?>/painel-cliente" class="btn btn-sm btn-outline-secondary btn-nav-forload">Voltar</a>
             </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary btnDetalhesBeneficioBrinde" data-cnpjemp="<?= $listarMarcacoes[0]->cnpjemp ?>" data-bs-toggle="modal" data-bs-target="#modalBeneficio" >
+            <button type="button" class="btn btn-sm btn btn-success btnDetalhesBeneficioBrinde" data-cnpjemp="<?= $listarMarcacoes[0]->cnpjemp ?>" data-bs-toggle="modal" data-bs-target="#modalBeneficio" >
                 <i class="fa fa-gift" aria-hidden="true"></i>
                 Ver Benefícios
             </button>
         </div>
     </div> 
-     
-    <?php if ($inserirSolicitacao == true): ?>
-    <div class="alert alert-success" role="alert">
-        A simple success alert—check it out!
-    </div>   
-    <?php endif; ?>
-        
-    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-secondary rounded shadow-sm">
-        <div class="lh-100"> 
-            <h6 class="mb-0 text-white lh-100">
-                Local das marcações.: <?= $dadosEmpresa[0]->razao_social ?>
-            </h6>
-            <small>Detalhes das marcações</small>
+      
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="div-resolut2">
+                                <img class="img-resolut2" src="<?= $listarMarcacoes[0]->logoempsrc ?>" >
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <h6 class="mb-0 text-black-50 lh-100"><?= $dadosEmpresa[0]->razao_social ?></h6>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
     
+    
+    <?php if ($solicitacaoEmAberto): ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <b>Que massa!</b> Você tem brindes a resgatar...
+                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>  
+    <?php endif; ?>
     <!-- ------------------------------------------------------ -->
     <!-- Listando os detalhes da marcação para cada empresa     -->
     <!-- ------------------------------------------------------ -->
@@ -101,13 +121,29 @@ $dadosEmpresa = buscarEmpresa($_REQUEST["cnpj"]);
         
         <?php foreach ($listarMarcacoes as $key => $value): ?>
         <div class="d-flex text-muted pt-3">
-            <div class="div-resolut2">
-                <img class="img-resolut2" src="<?= $value->logoempsrc ?>" >
+            <div class="display-6">
+                
+                <?php if ($value->tipomarcacao == 'retirada'):   ?>
+                <i style="color: red" class="fa fa-gift" aria-hidden="true"></i>
+                <?php endif; ?> 
+                
+                <?php if ($value->tipomarcacao == 'cash'):   ?>    
+                <i class="fa fa-check-square-o text-primary" aria-hidden="true"></i>
+                <?php endif; ?> 
+                
             </div>
             <div class="small lh-sm border-bottom w-100" style="margin-left: 10px; margin-top: 10px">
                 <div class="d-flex justify-content-between">
-                    <strong class="text-gray-dark"><?= date("d/m/Y H:i", strtotime($value->datamarcacao)) ; ?></strong>
                     
+                    <?php if ($value->tipomarcacao == 'retirada'):   ?> 
+                        <strong class="text-danger"><?= date("d/m/Y H:i", strtotime($value->datamarcacao)) ; ?></strong>
+                    <?php endif; ?> 
+                        
+                    <?php if ($value->tipomarcacao == 'cash'):   ?>         
+                    
+                        <strong class="text-primary"><?= date("d/m/Y H:i", strtotime($value->datamarcacao)) ; ?></strong>
+                    <?php endif; ?> 
+                        
                     <?php if ($value->tipomarcacao == 'retirada'):   ?>                    
                     <a href="#">
                         <span class="badge rounded-pill bg-danger">Resgate <?= $value->pontos ?> </span>
@@ -121,13 +157,22 @@ $dadosEmpresa = buscarEmpresa($_REQUEST["cnpj"]);
                     <?php endif; ?>   
                                         
                 </div>
-                <span class="d-block">Local marcação.: <?=$value->nome_fantasia ?></span>
+                <span class="d-block">
+                    <?php if ($value->tipomarcacao == 'retirada'):   ?>
+                        <p class="text-danger">Parabens pelo seu resgate.</p>
+                    <?php endif; ?> 
+                    
+                    <?php if ($value->tipomarcacao == 'cash'):   ?>
+                        
+                        <p class="text-primary">Expira em: 00/00/0000</p>
+                    <?php endif; ?>    
+                </span>
             </div>
         </div>
         <?php  $totalPontos = $totalPontos + $value->pontos; ?>
         <?php endforeach; ?>
         <small class="d-block text-end mt-3">       
-            <a href="#" style="text-decoration: none; font-size: 16px">Total Pontos.: <?= $totalPontos ?> </a>
+            <a href="#" style="text-decoration: none; font-size: 16px">Pontos expirados.: 0 </a>
         </small>            
     </div>
      

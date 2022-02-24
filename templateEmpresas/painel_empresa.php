@@ -14,14 +14,16 @@ require ( get_template_directory() . '/models/model_empresa_config.php' );
 require ( get_template_directory() . '/models/model_clientes.php' );
 require ( get_template_directory() . '/models/model_marcacao.php' );
 require ( get_template_directory() . '/models/model_empresa.php' );
-    
+require ( get_template_directory() . '/models/model_solicitacao_resgate.php' );
+
 $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+$cnpj = $_SESSION['dados_empresa'][0]->cnpj;
 
-$totalClientes  = listarClientesPorEmpresa($_SESSION['dados_empresa'][0]->cnpj);
-$totalMarcacoes = listarTotalMarcacoes($_SESSION['dados_empresa'][0]->cnpj);
-
-$dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
-         
+$totalClientes  = listarClientesPorEmpresa($cnpj);
+$totalMarcacoes = listarTotalMarcacoes($cnpj);
+$dadosEmpresa =  buscarEmpresa($cnpj);
+$clienteResgateVencido = verificarDataVencimento($cnpj);
+        
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
@@ -36,6 +38,15 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             <h5 class="h5">Bem vindo ao <?= NOME_APLICACAO ?></h5>              
         </div>            
     </div>
+    
+    <?php 
+    /*
+    echo "<pre>";
+    var_dump($clienteResgateVencido);
+    echo "</pre>";
+     * 
+     */
+    ?>
        
     <div class="row">
         <?php if (!$config) : ?>
@@ -70,7 +81,7 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     <br/>
         
     <div class="row">  
-        <div class="col-lg-4 col-12">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
                     <a href="<?= get_bloginfo('url')."/empresa-meus-clientes/" ?>">Meus clientes </a>
@@ -78,7 +89,7 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-12">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
                     Total Marcações 
@@ -87,6 +98,18 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             </div>
         </div>
     </div>
+    
+    <div class="row mt-2">  
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between align-items-center">                        
+                    <a href="#">Aniversariantes do Dia <i class="fa fa-birthday-cake" aria-hidden="true"></i></a>
+                    <span class="badge rounded-pill bg-info text-dark">3</span>                  
+                </div>
+            </div>
+        </div>        
+    </div>
+    
     <br/>
               
 </main>

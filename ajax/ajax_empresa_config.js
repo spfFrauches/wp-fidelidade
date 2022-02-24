@@ -28,7 +28,8 @@ $('.btnSalvarAction').click(function(){
    
     var tipoMarcacao = $('#tipoMarcacao').val();
     var percentual = $('#percentual').val();
-    var idBeneficio =  $('#idBeneficio').val();    
+    var tempoExpiracao =  $('#tempoExpiracao').val();
+    var tempoExpiracaoResgate = $('#tempoExpiracaoResgate').val()
     var update = $('#update').val() ;
           
     if (tipoMarcacao == "cash") {
@@ -48,7 +49,7 @@ $('.btnSalvarAction').click(function(){
     var xmlhttp = new XMLHttpRequest();   
     xmlhttp.open("POST", "../wp-content/themes/fidelidade/ajax/ajax_empresa_config.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
-    xmlhttp.send("tipo_marcacao="+tipoMarcacao+"&percentual="+percentual+"&update="+update+"&idBeneficio="+idBeneficio);
+    xmlhttp.send("tipo_marcacao="+tipoMarcacao+"&percentual="+percentual+"&update="+update+"&tempoExpiracao="+tempoExpiracao+'&tempoExpiracaoResgate='+tempoExpiracaoResgate);
     
     xmlhttp.onreadystatechange = function() {
          

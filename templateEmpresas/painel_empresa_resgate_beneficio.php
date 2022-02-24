@@ -30,9 +30,9 @@ $brindePontosMinimos = brindeMenorPonto($_SESSION['dados_empresa'][0]->cnpj);
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
       
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h2 class="h2">Resgate de Pontos e Beneficios <small></small></h2>
+        <h2 class="h2">Pontos de Clientes <small></small></h2>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="<?= get_bloginfo('url') ?>/painel-empresa/beneficios-por-pontos/" class="btn btn-sm btn-outline-secondary btn-nav-forload">              
+            <a href="<?= get_bloginfo('url') ?>/painel-empresa" class="btn btn-sm btn-outline-secondary btn-nav-forload">              
                 Voltar
             </a>
         </div>
@@ -68,7 +68,7 @@ $brindePontosMinimos = brindeMenorPonto($_SESSION['dados_empresa'][0]->cnpj);
                 <tbody>
                     <?php foreach ($listarCliente as $key => $value):?> 
                     <tr>
-                        <td><?= $value->NOME ?></td>
+                        <td><?= strtoupper($value->NOME) ?></td>
                         <td><?= $value->CPF ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($value->ULTMARC)) ?></td>
                         <td><?= $value->SOMAPONTOS ?></td>

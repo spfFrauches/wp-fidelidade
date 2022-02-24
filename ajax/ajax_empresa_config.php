@@ -4,7 +4,6 @@
     require ( get_template_directory() . '/models/model_empresa_config.php' );
     require ( get_template_directory() . '/functions/functions_empresa.php' );
     
-    
     if (empty($_POST['tipo_marcacao'])):
         exit("Nenhum tipo de marcação informado");
     endif;

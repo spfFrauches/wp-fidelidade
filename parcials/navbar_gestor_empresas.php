@@ -100,6 +100,14 @@
 
                         </a>
                     </h6>
+    
+                     <li class="nav-item">
+                        <?php $url_swp2 = get_bloginfo('url')."/painel-empresa/estorno-movimentos" ?> 
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
+                           <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            &nbsp; Estorno de movimentos
+                         </a>
+                    </li>
                     
                     <li class="nav-item">
                         <?php $url_swp5 = get_bloginfo('url')."/minha-empresa-alterar-senha" ?> 

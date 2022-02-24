@@ -45,13 +45,9 @@
                             &nbsp; Meus Resgates <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <?php $url_swp2 = get_bloginfo('url')."/cliente-meus-dados" ?>  
-                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            &nbsp; Meus dados
-                        </a>
-                    </li>
+                    
+                    
+                    
                     
                     <?php $url_swp3 = get_bloginfo('url')."/painel-cliente-resgate-beneficios" ?> 
                     <!--
@@ -62,9 +58,18 @@
                     -->
                    
                 </ul>
-                                
+                <hr/>                
                 <ul class="nav flex-column">
-                     <li class="nav-item">
+                    
+                    <li class="nav-item">
+                        <?php $url_swp2 = get_bloginfo('url')."/cliente-meus-dados" ?>  
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            &nbsp; Meus dados
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
                         <?php $url_swp3 = get_bloginfo('url')."/cliente-alterar-senha" ?>  
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>" href="<?= $url_swp3 ?>">
                             <i class="fa fa-key" aria-hidden="true"></i>
@@ -72,6 +77,10 @@
                             Alterar Senha
                         </a>
                     </li>
+                    
+                </ul>
+                <hr/>
+                <ul class="nav flex-column">    
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fa fa-handshake-o" aria-hidden="true"></i>

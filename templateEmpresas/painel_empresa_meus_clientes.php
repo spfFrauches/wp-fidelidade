@@ -1,9 +1,17 @@
 <?php 
 /* Template Name: Painel Empresa - Meus Clientes */
-$_SESSION['url_referencia'] = '';
-get_header('painelcliente');
+ if ($_SESSION['login_painel'] != 'empresa'):
+    $url = get_bloginfo('url')."/login";
+    header("Location:$url");
+    exit("A sessão foi expirada ou é invalida");
+endif; 
+
 include( get_template_directory() . '/models/model_clientes.php' );
 include( get_template_directory() . '/models/model_marcacao.php' );
+
+
+$_SESSION['url_referencia'] = '';
+get_header('painelcliente');
 
 $listarCliente = listarDadosCompletosClientesLigados($_SESSION['dados_empresa'][0]->cnpj);
 $configEmpresa = listarConfiguracaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);   
@@ -11,7 +19,6 @@ $percentualDaEmpresa = $configEmpresa[0]->percentual_vlrcompra;
 $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
     
 ?>
-
 
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
@@ -36,7 +43,7 @@ $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
                 <tbody>
                     <?php foreach ($listarCliente as $key => $value):?> 
                     <tr>
-                        <td><?= $value->NOME ?></td>
+                        <td><?= strtoupper($value->NOME) ?></td>
                         <td><?= $value->CPF ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($value->ULTMARC)) ?></td>
                         <td>  
@@ -76,7 +83,10 @@ $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
 <script>
     
     $(document).ready(function() {
-        $('#example').DataTable();
+
+         $('#example').dataTable( {
+            "order": []
+        } );
     } );
     
 </script>

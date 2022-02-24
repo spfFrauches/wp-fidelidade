@@ -36,7 +36,7 @@
 <div class="row">
     <div class="col-lg-12">
            
-        <div class="row">
+        <div class="row formDetalheBeneficio">
             <div class="col-lg-3">
                 <img id="previewImg" class="img-thumbnail" width="150" src="<?= $beneficio[0]->imgsrcbeneficio ?>" alt="imagem ilustrativa do beneficio">       
             </div>
@@ -51,7 +51,7 @@
 
         <input type="hidden" class="form-control idBeneficio"  value="<?= $beneficio[0]->id ?>">
             
-        <div class="row mt-5">
+        <div class="row mt-5 formDetalheBeneficio">
             <div class="col-lg-6 mt-3">
                 <label class="form-label">Descrição do Beneficio</label>
                 <input type="text" class="form-control" name="descricaobeneficio" value="<?= $beneficio[0]->descricao ?>" required>
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-3 formDetalheBeneficio">
             <div class="col-sm-12">
                 <label class="form-label">Observação adicional do Beneficio</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" name="obsadicional" rows="3" required ><?= $beneficio[0]->obsadicional ?></textarea>
@@ -83,7 +83,7 @@
         <div class="row mt-5">
             <div class="col-lg-6">
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary btn-nav-forload updateBeneficio" type="submit">Salvar</button>
+                    <button class="btn btn-primary btn-nav-forload updateBeneficio btn-nav-forload" type="submit">Salvar</button>
                 </div>
             </div>
         </div>
@@ -96,9 +96,13 @@
     $('.dinheiro').mask('#.##0,00', {reverse: true});
     
     $(".loadSalvar").hide();
+    
+    $(".formDetalheBeneficio").show();
+    
 
     $(".updateBeneficio").on("click", function () { 
         $(".loadSalvar").show();
+        $(".formDetalheBeneficio").hide();
         setTimeout(function(){
             $.ajax({ 
             method: "POST",
@@ -106,13 +110,17 @@
             data: { vlrPts: $(".vlrPontos").val(),  idBeneficio: $('.idBeneficio').val() }
             }).done(function( result ) {
                 console.log(result);
+                $(".formDetalheBeneficio").show();
                 if (result == 'updated'){
                     document.location.reload(true);
                 } else {
                    $(".loadSalvar").hide(); 
+                   (".formDetalheBeneficio").show();
                 }
             });              
         }, 1000);
+        
+         
     });
 
 </script>

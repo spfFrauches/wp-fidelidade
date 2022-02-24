@@ -17,7 +17,8 @@ if ($_SESSION['login_painel'] != 'cliente'):
     header("Location:$url");
     exit("A sessão foi expirada ou é invalida");
 endif; 
-  
+
+ 
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -43,25 +44,54 @@ endif;
     ?>
     
     <?php foreach ($solitacaoResgate as $key => $value): ?>
+    
         <div class="d-flex text-muted pt-3">
             <div class="div-resolut2">
                 <img class="img-resolut2" src="" >
             </div>
             <div class="small lh-sm border-bottom w-100" style="margin-left: 10px; margin-top: 10px">
                 <div class="d-flex justify-content-between">
-                    <strong class="text-gray-dark">
-                        Local para resgate.: <?= $value->razao_social ?>
-                    </strong>
+                    
+                    <?php if ($value->status == 'vencido'): ?>
+                        <s>
+                        <strong class="text-warning">
+                    <?php endif; ?>                   
+                        Onde pegar.:
+                        <?= $value->razao_social ?>                          
+                    <?php if ($value->dtvencimento <= date("Y-m-d")): ?>
+                        </strong>
+                        </s>        
+                    <?php endif; ?>
                                    
                     <a href="#" style="text-decoration: none">
                         Status.: &nbsp; 
-                        <span class="badge rounded-pill <?= $value->status == 'solicitado' ? "bg-danger" : "bg-success" ?>" >  
-                            <?= $value->status ?>
+                        <?php if ($value->status == 'solicitado'): ?>
+                        <span class="badge rounded-pill bg-danger" >  
+                        <?php endif; ?>   
+                        <?php if ($value->status == 'entregue'): ?>
+                        <span class="badge rounded-pill bg-success" >  
+                        <?php endif; ?>  
+                        <?php if ($value->status == 'vencido'): ?>
+                        <span class="badge rounded-pill bg-warning" >  
+                        <?php endif; ?>  
+                            <?= ucfirst($value->status); ?>
                         </span>
                     </a>                 
                                                            
                 </div>
-                <span class="d-block"><?= $value->descricao ?> </span>               
+                <span class="d-block"><b>Item.: </b><?= $value->descricao ?> </span>
+                <span class="d-block" style="margin-bottom: 10px">
+                    <b>Solicitado em.: </b>
+                    <?= date('d/m/Y', strtotime($value->dtsolicitacao))  ?> 
+                    
+                    <?php if ($value->status == 'entregue'): ?>
+                        &nbsp;&nbsp<b>Entregue em.:</b>
+                        <?= date('d/m/Y', strtotime($value->dtresgate)) ?>
+                    <?php else: ?>
+                        <b class="text-warning">&nbsp; | Vence em.: <?= date('d/m/Y', strtotime($value->dtvencimento)) ?> </b>
+                    <?php endif; ?>
+                   
+                </span>
             </div>
         </div>
     <?php endforeach; ?>

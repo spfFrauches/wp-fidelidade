@@ -3,19 +3,31 @@
 function inserirSolicitacao($post) 
 {
     
-    global $wpdb;       
+    global $wpdb; 
+    $cnpj = $post['cnpjemp'];
+    
+    $sqlDataVencimentoResgate = "SELECT tempo_expira_resgate "
+            . "FROM empresa_config "
+            . "WHERE cnpjemp = '$cnpj'";
+           
+    $sqlDataVencimentoResgate =  $wpdb->get_results($sqlDataVencimentoResgate);
+    $tempoExiraResgate = $sqlDataVencimentoResgate[0]->tempo_expira_resgate;
+    $data = date("Y-m-d");
+    $moreDays = $tempoExiraResgate;
+    $tempoExiraResgate  = date('Y-m-d', strtotime($data. " + $moreDays days"));
      
     $dadosInput = [
-        'cnpjemp' => $post['cnpjemp'],
+        'cnpjemp' => $cnpj,
         'cpfcliente' =>  $post['cpfcliente'],
         'cdbeneficio' => $post['cdbeneficio'],
         'dtsolicitacao' =>  $post['dtsolicitacao'],
-        'status' => $post['status'] 
+        'status' => $post['status'],
+        'dtvencimento' => $tempoExiraResgate
     ];  
     
     $resultado = $wpdb->insert( 'solicitacao_resgate', 
                 $dadosInput, 
-                array('%s','%s', '%d', '%s', '%s') ) ; 
+                array('%s','%s', '%d', '%s', '%s', '%s') ) ; 
     
     if ($resultado):
         
@@ -26,17 +38,44 @@ function inserirSolicitacao($post)
        
 }
 
+
+function verificarDataVencimento($cnpj)
+{
+    global $wpdb; 
+    $dthoje  = date("Y-m-d");
+    
+    $sql    = "SELECT * FROM solicitacao_resgate "
+            . "WHERE status = 'solicitado' "
+            . "AND dtvencimento <= '$dthoje' "
+            . "AND cnpjemp = '$cnpj' ";
+    
+    $clienteResgateVencimento = $wpdb->get_results($sql);
+    
+    foreach ($clienteResgateVencimento as $key => $value) :
+        
+        $wpdb->update('solicitacao_resgate', 
+            array(
+                'status'=>'vencido',
+            ), 
+            array('idresgate'=>$value->idresgate ));
+    endforeach;
+      
+    return $clienteResgateVencimento;
+       
+}
+
 function listarSolicitacaoRestage($cpf) {
     
     // solicitacao_resgate    
     global $wpdb;
     
     $result1 = $wpdb->get_results("SELECT emp.razao_social,  "
-            . "emp.nome_fantasia, ben.descricao, solRes.status "
+            . "emp.nome_fantasia, ben.descricao, solRes.status,"
+            . "solRes.dtsolicitacao, solRes.dtresgate,  solRes.dtvencimento "
             . "FROM solicitacao_resgate solRes "
             . "INNER JOIN beneficios ben ON solRes.cdbeneficio = ben.id  "
             . "INNER JOIN empresas emp ON solRes.cnpjemp = emp.cnpj "
-            . "WHERE cpfcliente = '$cpf'");
+            . "WHERE cpfcliente = '$cpf' order by solRes.idresgate desc");
     
     // $result  = $wpdb->get_results("SELECT * FROM solicitacao_resgate WHERE cpfcliente = '$cpf'  ORDER BY dtsolicitacao DESC ");
     return $result1;
@@ -75,15 +114,15 @@ function listarSolicitacaoRestageEmpresa($empresa) {
     // solicitacao_resgate    
     global $wpdb;
  
-    $result  = $wpdb->get_results("SELECT solRes.idresgate, solRes.dtsolicitacao,solRes.cnpjemp, ben.id as idbeneficio, "
-            . "ben.descricao, solRes.status, ben.qtdpontos, "
+    $result  = $wpdb->get_results("SELECT solRes.idresgate, solRes.dtsolicitacao ,solRes.cnpjemp, ben.id as idbeneficio, "
+            . "ben.descricao, solRes.status, ben.qtdpontos, solRes.dtvencimento , "
             . "solRes.cpfcliente, cli.nome_completo , cli.src_selfie "
             . "FROM solicitacao_resgate solRes "
             . "INNER JOIN beneficios ben ON solRes.cdbeneficio = ben.id "
             . "INNER JOIN empresas emp ON solRes.cnpjemp = emp.cnpj "
             . "INNER JOIN clientes cli ON solRes.cpfcliente = cli.cpf "
             . "WHERE solRes.cnpjemp = '$empresa' "
-            . "AND solRes.status = 'solicitado' ");   
+            . "ORDER BY solRes.dtsolicitacao DESC");   
     return $result;
            
 }
@@ -102,5 +141,22 @@ function baixaSolicitacaoResgate($idresgate)
     
     return $resultado;
     
+}
+
+function solicitacaoRestageEmAberto($cpf, $emp) {
+    
+    // solicitacao_resgate    
+    global $wpdb;
+    
+    $result1 = $wpdb->get_results("SELECT emp.razao_social,  "
+            . "emp.nome_fantasia, ben.descricao, solRes.status "
+            . "FROM solicitacao_resgate solRes "
+            . "INNER JOIN beneficios ben ON solRes.cdbeneficio = ben.id  "
+            . "INNER JOIN empresas emp ON solRes.cnpjemp = emp.cnpj "
+            . "WHERE cpfcliente = '$cpf' AND solRes.status = 'solicitado' AND solRes.cnpjemp = '$emp' ");
+    
+    // $result  = $wpdb->get_results("SELECT * FROM solicitacao_resgate WHERE cpfcliente = '$cpf'  ORDER BY dtsolicitacao DESC ");
+    return $result1;
+          
 }
 

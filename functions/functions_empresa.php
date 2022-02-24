@@ -2,14 +2,14 @@
 
 function configurarTipoMarcacao() {
     
-    echo "<pre>";
-    var_dump($_POST);
-    echo "</pre>";
    
     $dadosInsert = array();
     $dadosInsert['tipo_marcacao'] = $_POST['tipo_marcacao'];
     $dadosInsert['cnpjemp'] = $_SESSION['dados_empresa'][0]->cnpj ;
     $dadosInsert['dthr_ultima_alteracao'] = date('Y-d-m h:i:s');
+    $dadosInsert['tempoExpiracao'] = $_POST['tempoExpiracao'];
+    $dadosInsert['tempoExpiracaoResgate'] = $_POST['tempoExpiracaoResgate'];
+    
 
     if ($_POST['tipo_marcacao'] == 'cash') {  
         
@@ -17,16 +17,13 @@ function configurarTipoMarcacao() {
         $dadosInsert['percentual']  = str_replace('.', '', $dadosInsert['percentual']);
         $dadosInsert['percentual']  = str_replace(',', '.', $dadosInsert['percentual']);
         
-        echo "<pre>";
-        var_dump($dadosInsert);
-        echo "</pre>";
-        
         if (isset($_POST['update']) && $_POST['update'] == 'sim'):
-            var_dump("Vamos dar UPDATE");
-            $retorno =  updateConfiguracaoEmpresa($dadosInsert['cnpjemp'], $dadosInsert['percentual']);
+            $retorno =  updateConfiguracaoEmpresa($dadosInsert);
+            
+        
             else:
-                var_dump("Vamos dar INSERT");
-                $retorno =  inserirConfiguracao($dadosInsert);    
+            $retorno =  inserirConfiguracao($dadosInsert);
+            
         endif;
            
         return $retorno;

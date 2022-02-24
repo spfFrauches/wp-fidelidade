@@ -2,21 +2,20 @@
 
 function inserirConfiguracao ($arrayDados) {
     
+    
     global $wpdb;     
     $tabela1 = "empresa_config";
         
     $dadosInsert = array(   'cnpjemp'           => $arrayDados['cnpjemp'], 
                             'tipo_marcacao'     => $arrayDados['tipo_marcacao'],
                             'percentual_vlrcompra' => $arrayDados['percentual'],
-                            'dthr_ultima_alteracao' => $arrayDados['dthr_ultima_alteracao']                                         
+                            'dthr_ultima_alteracao' => $arrayDados['dthr_ultima_alteracao'],
+                            'tempoExpirarPontos' => $arrayDados['tempoExpiracao'],
+                            'tempo_expira_resgate' => $arrayDados['tempoExpiracaoResgate'] 
                         );
       
-    $dadosInsertDB   = $wpdb->insert( "$tabela1", $dadosInsert,  array('%s','%s','%f','%s' ) ) ; 
-    echo "<pre>";
-    var_dump($dadosInsert);
-    echo "</pre>";
+    $dadosInsertDB   = $wpdb->insert( "$tabela1", $dadosInsert,  array('%s','%s','%f','%s','%d','%d' ) ) ; 
     
-    var_dump($dadosInsertDB);
     
     if ($dadosInsertDB){
         return true;
@@ -34,11 +33,17 @@ function verConfigMarcacaoEmpresa($cnpj) {
     
 }
 
-function updateConfiguracaoEmpresa($cnpj, $percentual){
+function updateConfiguracaoEmpresa($dados){
     
+    $percentual = $dados['percentual'];
+    $cnpj = $dados['cnpjemp'];
+    $tempoExpiracao = $dados['tempoExpiracao'];
+    $tempoExpiracaoResgate = $dados['tempoExpiracaoResgate'];
     
     global $wpdb; 
-    $resultado = $wpdb->update('empresa_config', array('percentual_vlrcompra'=>$percentual), array('cnpjemp'=>$cnpj));
+    $resultado = $wpdb->update('empresa_config', 
+            array('percentual_vlrcompra'=>$percentual, 'tempoExpirarPontos' => $tempoExpiracao, 'tempo_expira_resgate' => $tempoExpiracaoResgate ), 
+            array('cnpjemp'=>$cnpj));
     return $resultado;
     
 }

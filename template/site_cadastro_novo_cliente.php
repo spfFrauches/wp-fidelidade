@@ -37,54 +37,8 @@ $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";
 
 <div class="container px-5 mt-5">  
     <div class="row gx-5">
-        <div class="col-lg-6 order-lg-0 mb-5 mb-lg-0">
-            <div class="container-fluid px-5">
-                <div class="row gx-5">
-                    <img src="<?php bloginfo('template_url') ?>/img/cashback1.png" class="img-fluid" alt="">
-                </div>
-                
-                <div class="row mt-2">
-                    <div class="col-md-6">
-                        <!-- Feature item-->
-                        <div class="">
-                            <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
-                            <h3 class="font-alt">Cadastre-se</h3>
-                            <p class="text-muted mb-0">Entre no app e acompanhe seu cashback</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <!-- Feature item-->
-                        <div class="">
-                            <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
-                            <h3 class="font-alt">Ganhe pontos</h3>
-                            <p class="text-muted mb-0">Sobre resgatar brindes</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <!-- Feature item-->
-                        <div class="">
-                            <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
-                            <h3 class="font-alt">Brindes</h3>
-                            <p class="text-muted mb-0">Entre no app e acompanhe seu cashback</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <!-- Feature item-->
-                        <div class="">
-                            <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
-                            <h3 class="font-alt">Cashback</h3>
-                            <p class="text-muted mb-0">Sobre resgatar brindes</p>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
         
-        <div class="col-lg-6 order-lg-1">
+        <div class="col-lg-6 order-lg-0">
             <div class="features-device-mockup">                
                 <div  class="mb-5" >
                     <form method="post" action="<?= get_bloginfo('url') ?>/finalizar-cadastro-cliente" class="needs-validation" novalidate enctype="multipart/form-data">             
@@ -211,6 +165,57 @@ $caminhoImgDefault = get_bloginfo('template_url')."/img/default-user-1.png";
                
             </div>
         </div>
+        
+        
+        
+        <div class="col-lg-6 order-lg-1 mb-5">
+            <div class="container-fluid px-5">
+                <div class="row gx-5">
+                    <img src="<?php bloginfo('template_url') ?>/img/cashback1.png" class="img-fluid" alt="">
+                </div>
+                
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <!-- Feature item-->
+                        <div class="">
+                            <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
+                            <h3 class="font-alt">Cadastre-se</h3>
+                            <p class="text-muted mb-0">Entre no app e acompanhe seu cashback</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Feature item-->
+                        <div class="">
+                            <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
+                            <h3 class="font-alt">Ganhe pontos</h3>
+                            <p class="text-muted mb-0">Sobre resgatar brindes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <!-- Feature item-->
+                        <div class="">
+                            <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
+                            <h3 class="font-alt">Brindes</h3>
+                            <p class="text-muted mb-0">Entre no app e acompanhe seu cashback</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Feature item-->
+                        <div class="">
+                            <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
+                            <h3 class="font-alt">Cashback</h3>
+                            <p class="text-muted mb-0">Sobre resgatar brindes</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
     </div>
 </div>
 

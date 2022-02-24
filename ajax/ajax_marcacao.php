@@ -18,28 +18,24 @@
             echo "false";
         }        
     }
-    
-       
+           
     if (isset($_POST['marcar']) && $_POST['marcar']==1 ) {
         
-        date_default_timezone_set('America/Bahia');
+        date_default_timezone_set('America/Bahia');    
         $dataHoraMarcacao = date('Y-m-d H:i');
         $cpfMarcacao  = $_POST['dataCPF'];
         $cnpjMarcacao = $_SESSION['dados_empresa'][0]->cnpj;
         $valorMarcacao = $_POST['valor'];
         $tipoMarcacao = $_POST['tipoMarcacao'];
-               
-               
+                       
         $dadosMarcacao = [
             "cpf"  => $cpfMarcacao,
             'cnpj' => $cnpjMarcacao,
             'datahora' => $dataHoraMarcacao,
             'valor' => $valorMarcacao,
             'tipo' => $tipoMarcacao
-        ];
-                
+        ];              
         echo json_encode($dadosMarcacao);
-  
     }
     
     if (isset($_POST['marcarConfere']) && $_POST['marcarConfere'] == 1 ) {
@@ -55,8 +51,7 @@
         
         $pontos = ($valorMarcacao *  ($percentual /100));
         $pontos = number_format($pontos, 2);
-        
-        
+              
         $valorMarcacaoSemPonto  = str_replace('.', '', $valorMarcacao);
         $valorMarcacaoFormatado  = str_replace(',', '.', $valorMarcacaoSemPonto);
 

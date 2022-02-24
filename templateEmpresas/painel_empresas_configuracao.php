@@ -30,18 +30,28 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
         </div>
     </div>
     
+    <?php 
+        /*
+        echo "<pre>";
+        var_dump($config);
+        echo "<pre>";
+        */
+    ?>
+    
     <br/>
     <div class="row">     
         <?php            
-            if ($config){      
+            if ($config):      
                 $tipoMarcacao = $config[0]->tipo_marcacao; 
-
                 if ($config[0]->tipo_marcacao == 'cash' ) {
                     $percentual = $config[0]->percentual_vlrcompra;
+                    $tempoExpira = $config[0]->tempoExpirarPontos;
+                    $tempoExpiraResgate = $config[0]->tempo_expira_resgate;
+                    $tempoMarcacao = $config[0]->tempo_entre_marcacoes;
                 }
-            } else {
+            else
                 $tipoMarcacao = 'nada';
-            }
+            endif;
         ?>    
     </div>
     <div class="row">    
@@ -89,31 +99,49 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
         <div class="col-lg-6">          
             <label class="my-1 mr-2">Porcentual (%) de conversão</label>
             <input type="text" class='form-control dinheiro' name="percentual" id='percentual' value="<?= ($percentual) ?>">
-            <!--
-            <select class="form-select my-1 mr-sm-2" name="percentual" id="percentual" <?= $config ? "disabled" : ""?>>
-                <option value="0" selected>Selecione o % (percentual)</option>
-                <option value="1" <?= ($percentual=='1') ?  "selected" : "" ?>>1%</option>
-                <option value="2" <?= ($percentual=='2') ?  "selected" : "" ?>>2%</option>
-                <option value="3" <?= ($percentual=='3') ?  "selected" : "" ?>>3%</option>
-                <option value="4" <?= ($percentual=='4') ?  "selected" : "" ?>>4%</option>
-                <option value="5" <?= ($percentual=='5') ?  "selected" : "" ?>>5%</option>
-                <option value="8" <?= ($percentual=='8') ?  "selected" : "" ?>>8%</option>
-                <option value="9" <?= ($percentual=='8') ?  "selected" : "" ?>>9%</option>
-                <option value="10" <?= ($percentual=='10') ? "selected" : "" ?>>10%</option>
-            </select>
-            -->
+           
             <small id="percentualHelp" class="form-text">Este campo é obrigatório</small>
         </div>  
     </div> 
     <br/>
     
+    <div class="row"> 
+        <div class="col-lg-6">           
+            <label class="my-1 mr-2">Tempo expiração pontos</label>
+            <div class="input-group mb-3">
+                <input type="number" name="tempoExpiracao"  id="tempoExpiracao" class="form-control" value="<?= $tempoExpira ?>"  aria-describedby="basic-addon2" required>
+                <span class="input-group-text" id="basic-addon2">Dias</span>              
+            </div>
+            <small id="percentualHelp" class="form-text">Dias calculados com base na última marcação</small>
+        </div>       
+        <div class="col-lg-6">           
+            <label class="my-1 mr-2">Tempo expiração resgates</label>
+            <div class="input-group mb-3">
+                <input type="number" name="tempoExpiracaoResgate"  id="tempoExpiracaoResgate" class="form-control" value="<?= $tempoExpiraResgate ?>"  aria-describedby="basic-addon2" required>
+                <span class="input-group-text" id="basic-addon2">Dias</span>              
+            </div>
+            <small id="percentualHelp" class="form-text">Dias calculados com base na solicitação resgate</small>
+        </div>      
+    </div>
+    
+    <div class="row mt-4"> 
+        <div class="col-lg-6">           
+            <label class="my-1 mr-2">Tempo entre marcações (mesmo cliente)</label>
+            <div class="input-group mb-3">
+                <input type="number" name="tempoMarcacao"  id="tempoMarcacao" class="form-control" value="<?= $tempoMarcacao ?>"  aria-describedby="basic-addon2" required>
+                <span class="input-group-text" id="basic-addon2">Horas</span>              
+            </div>
+            <small id="percentualHelp" class="form-text">Limite de tempo entre marcações do mesmo cliente</small>
+        </div>
+    </div>
+    
     <div class="row  mt-5">
         <div class="col-lg-6">  
             <div class="d-grid gap-2 col-12 mx-auto">
-                <?php if (isset($config)): ?>
+                <?php if ($config): ?>
                 <input type="hidden" name="update" id='update' value="sim">
                 <?php endif; ?>
-                <button  class="btn btn-primary my-1  btn-block btnSalvarAction"  >Salvar</button> 
+                <button  class="btn btn-primary my-1  btn-block btnSalvarAction btn-nav-forload"  >Salvar</button> 
             </div>
         </div>
     </div>
