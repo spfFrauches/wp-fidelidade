@@ -23,6 +23,8 @@ $cnpjemp = $_REQUEST["cnpj"];
 
 $minhasEmpresas = buscarEmpresaLigadaAoCliente($cpfCliente);
 $totalPontos = 0;
+$pontosExpirado = 0;
+$totalPontosExpirado = 0;
 $listarMarcacoes = listarMarcacaoEmpresaCliente2($_SESSION['dados_cliente'][0]->cpf, $_REQUEST["cnpj"]); 
 $dadosEmpresa = buscarEmpresa($_REQUEST["cnpj"]);
 
@@ -124,55 +126,88 @@ $solicitacaoEmAberto = solicitacaoRestageEmAberto($cpfCliente,$cnpjemp);
             <div class="display-6">
                 
                 <?php if ($value->tipomarcacao == 'retirada'):   ?>
-                <i style="color: red" class="fa fa-gift" aria-hidden="true"></i>
+                <i style="color: green" class="fa fa-gift" aria-hidden="true"></i>
                 <?php endif; ?> 
                 
-                <?php if ($value->tipomarcacao == 'cash'):   ?>    
-                <i class="fa fa-check-square-o text-primary" aria-hidden="true"></i>
-                <?php endif; ?> 
+                <?php if ($value->tipomarcacao == 'cash'):   ?> 
                 
+                    <?php if (strtotime($value->data_expiracao) < date('Y-m-d') ):   ?> 
+                    <i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
+                    <?php endif; ?> 
+                    <?php if (strtotime($value->data_expiracao) > date('Y-m-d') ):   ?> 
+                    <i class="fa fa-check-square-o text-primary" aria-hidden="true"></i>
+                    <?php endif; ?> 
+                   
+                <?php endif; ?> 
+                               
             </div>
             <div class="small lh-sm border-bottom w-100" style="margin-left: 10px; margin-top: 10px">
                 <div class="d-flex justify-content-between">
                     
                     <?php if ($value->tipomarcacao == 'retirada'):   ?> 
-                        <strong class="text-danger"><?= date("d/m/Y H:i", strtotime($value->datamarcacao)) ; ?></strong>
+                        <strong class="text-success"><?= date("d/m/Y H:i", strtotime($value->datamarcacao)) ; ?></strong>
                     <?php endif; ?> 
                         
-                    <?php if ($value->tipomarcacao == 'cash'):   ?>         
-                    
+                    <?php if ($value->tipomarcacao == 'cash'):   ?>       
                         <strong class="text-primary"><?= date("d/m/Y H:i", strtotime($value->datamarcacao)) ; ?></strong>
                     <?php endif; ?> 
                         
                     <?php if ($value->tipomarcacao == 'retirada'):   ?>                    
                     <a href="#">
-                        <span class="badge rounded-pill bg-danger">Resgate <?= $value->pontos ?> </span>
+                        <span class="badge rounded-pill bg-success">Resgate <?= $value->pontos ?> </span>
                     </a>                   
                     <?php endif; ?>   
                     
-                    <?php if ($value->tipomarcacao == 'cash'):   ?>                    
-                    <a href="#">
-                        <span class="badge rounded-pill bg-primary"><?= $value->pontos ?> Pts</span>
-                    </a>                 
+                    <?php if ($value->tipomarcacao == 'cash'):   ?> 
+                        
+                        <?php if (strtotime($value->data_expiracao) < date('Y-m-d') ):   ?>
+                        <a href="#">
+                            <span class="badge rounded-pill bg-danger">
+                                <s><?= $value->pontos ?> Pts</s>
+                                <?php $pontosExpirado = $value->pontos ?>
+                            </span>
+                        </a> 
+                        <?php endif; ?>   
+                        
+                        <?php if (strtotime($value->data_expiracao) > date('Y-m-d') ):   ?>
+                        <a href="#">
+                            <span class="badge rounded-pill bg-primary"><?= $value->pontos ?> Pts</span>
+                           
+                        </a> 
+                        <?php endif; ?>   
+                                  
                     <?php endif; ?>   
                                         
                 </div>
                 <span class="d-block">
                     <?php if ($value->tipomarcacao == 'retirada'):   ?>
-                        <p class="text-danger">Parabens pelo seu resgate.</p>
+                        <p class="text-success">Parabens pelo seu resgate.</p>
                     <?php endif; ?> 
                     
-                    <?php if ($value->tipomarcacao == 'cash'):   ?>
+                    <?php if ($value->tipomarcacao == 'cash'):   ?> 
                         
-                        <p class="text-primary">Expira em: 00/00/0000</p>
+                        <?php if (strtotime($value->data_expiracao) < date('Y-m-d') ):   ?>                         
+                        <p class="text-danger">Expirado em: <?= date("d/m/Y", strtotime($value->data_expiracao)) ?></p>             
+                        <?php endif; ?>
+                        
+                        <?php if (strtotime($value->data_expiracao) >= date('Y-m-d') ):   ?>                         
+                        <p class="text-primary">Expira em: <?= date("d/m/Y", strtotime($value->data_expiracao)) ?></p>                   
+                        <?php endif; ?>
+                        
                     <?php endif; ?>    
                 </span>
             </div>
         </div>
-        <?php  $totalPontos = $totalPontos + $value->pontos; ?>
+        <?php  
+            $totalPontos = $totalPontos + $value->pontos;
+            
+            $totalPontosExpirado = $totalPontosExpirado + $pontosExpirado ;
+            
+            $totalPontosFinal = $totalPontos - $totalPontosExpirado;
+         ?>
         <?php endforeach; ?>
         <small class="d-block text-end mt-3">       
-            <a href="#" style="text-decoration: none; font-size: 16px">Pontos expirados.: 0 </a>
+            <a href="#" style="text-decoration: none; font-size: 16px">Pontos expirados.: <?= $totalPontosExpirado ?> </a>
         </small>            
     </div>
      

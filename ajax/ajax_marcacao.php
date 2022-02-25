@@ -4,6 +4,7 @@
     require ( get_template_directory() . '/models/model_marcacao.php' );
     require ( get_template_directory() . '/models/model_clientes.php' );
     require ( get_template_directory() . '/models/model_empresa_config.php' );
+    
     $configuracaoEmpresa = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
     /* 1 tela/load da marcação - ao clicar em Continuar na tela de Marcações */
@@ -47,10 +48,13 @@
         $protocolo = 'teste';
         $tipo_marcacao = $_POST['tipoMarcacao'];
         
-        $percentual = $configuracaoEmpresa[0]->percentual_vlrcompra;
+        $percentual = $configuracaoEmpresa[0]->percentual_vlrcompra;       
+        $expiraPontos = $configuracaoEmpresa[0]->tempoExpirarPontos;
         
         $pontos = ($valorMarcacao *  ($percentual /100));
         $pontos = number_format($pontos, 2);
+        
+        $dataExpiracao = date('Y-m-d', strtotime("+{$expiraPontos} days",strtotime($datahora)));
               
         $valorMarcacaoSemPonto  = str_replace('.', '', $valorMarcacao);
         $valorMarcacaoFormatado  = str_replace(',', '.', $valorMarcacaoSemPonto);
@@ -68,7 +72,9 @@
             'protocolomarcacao' => $protocolo,
             'tipomarcacao' => $tipo_marcacao,
             'porcentagemPontos' => $percentual,
-            'pontos' => $pontos
+            'pontos' => $pontos,
+            'dias_expirar' => $expiraPontos,
+            'data_expiracao' => $dataExpiracao
         ];
        
         $marcarCartao = marcarCliente($arrayLigacao, $arrayMarcacao);
