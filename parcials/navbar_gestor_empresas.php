@@ -42,30 +42,15 @@
                             &nbsp; Configurações
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <?php $url_swp2 = get_bloginfo('url')."/minha-empresa" ?> 
-                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
-                            <i class="fa fa-industry" aria-hidden="true"></i>
-                            &nbsp; Minha empresa
-                         </a>
-                    </li>
-
+                    
                     <li class="nav-item">
                         <?php $url_swp3 = get_bloginfo('url')."/empresa-meus-clientes" ?> 
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>"href="<?= $url_swp3 ?>">
                             <i class="fa fa-users" aria-hidden="true"></i>
-                            &nbsp; Meus Cliente
+                            &nbsp; Meus Clientes
                         </a>
                     </li>
-                    
-                    <li class="nav-item">
-                        <?php $url_swp5 = get_bloginfo('url')."/minha-empresa-alterar-senha" ?> 
-                        <a class="btn-nav-forload nav-link <?= ($url == $url_swp5 ) ? "active" : "" ?>" href="<?= $url_swp5 ?>">
-                            <i class="fa fa-key" aria-hidden="true"></i>
-                            &nbsp; Alterar Senha
-                        </a>
-                    </li>
-                                       
+                                                          
                     <li class="nav-item">
                         <a  target="_blank" class="nav-link" href="<?= get_bloginfo('url')  ?>/site-marcacao/">
                             <i class="fa fa-gift" aria-hidden="true"></i>
@@ -91,6 +76,63 @@
                             <i class="fa fa-gift" aria-hidden="true"></i>
                             &nbsp; Benefícios
                         </a>
+                        
+                        <?php $url_swp7 = get_bloginfo('url')."/painel-empresa/painel-empresa-resgate-pontos" ?> 
+                         
+                        <!--
+                        <a class="btn-nav-forload nav-link <?= ($url == $url_swp7 ) ? "active" : "" ?>" href="<?= $url_swp7 ?>">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Pontos de Clientes
+                        </a>
+                        -->
+                        
+                         <?php $url_swp8 = get_bloginfo('url')."/painel-empresa/empresa-solicitacao-resgate" ?> 
+                        
+                        
+                        <a class="btn-nav-forload nav-link <?= ($url == $url_swp8 ) ? "active" : "" ?>" href="<?= $url_swp8 ?>">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Solicitações Resgate
+                        </a>
+                        
+                    </li>
+                    
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Empresa</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+
+                        </a>
+                    </h6>
+    
+                    <li class="nav-item">
+                        <?php $url_swp2 = get_bloginfo('url')."/painel-empresa/estorno-movimentos" ?> 
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
+                           <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            &nbsp; Estorno Marcação
+                         </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <?php $url_swp99 = get_bloginfo('url')."/painel-empresa/painel-empresa-estorno-resgate" ?> 
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp99 ) { echo "active";}?>" href="<?= $url_swp99 ?>">
+                           <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            &nbsp; Estorno Solicitações e Resgate
+                         </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <?php $url_swp5 = get_bloginfo('url')."/minha-empresa-alterar-senha" ?> 
+                        <a class="btn-nav-forload nav-link <?= ($url == $url_swp5 ) ? "active" : "" ?>" href="<?= $url_swp5 ?>">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                            &nbsp; Alterar Senha
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <?php $url_swp2 = get_bloginfo('url')."/minha-empresa" ?> 
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
+                            <i class="fa fa-industry" aria-hidden="true"></i>
+                            &nbsp; Minha empresa
+                         </a>
                     </li>
                     
                     <li class="nav-item">

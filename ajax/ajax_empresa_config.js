@@ -1,8 +1,7 @@
 $(".confMarcacao").hide();
 $("#percentualHelp").hide();
 
-    
-/* var itemSelecionado = $("#tipoMarcacao option:selected"); */
+    /* var itemSelecionado = $("#tipoMarcacao option:selected"); */
 var itemSelecionado = $('#tipoMarcacao').val();
 
 if (itemSelecionado == 'cash') {
@@ -29,7 +28,11 @@ $('.btnSalvarAction').click(function(){
    
     var tipoMarcacao = $('#tipoMarcacao').val();
     var percentual = $('#percentual').val();
-       
+    var tempoExpiracao =  $('#tempoExpiracao').val();
+    var tempoExpiracaoResgate = $('#tempoExpiracaoResgate').val()
+    var update = $('#update').val() ;
+    var tempoEntreMarcacao = $('#tempoEntreMarcacao').val();
+          
     if (tipoMarcacao == "cash") {
         
         if (percentual == "0") {
@@ -47,15 +50,15 @@ $('.btnSalvarAction').click(function(){
     var xmlhttp = new XMLHttpRequest();   
     xmlhttp.open("POST", "../wp-content/themes/fidelidade/ajax/ajax_empresa_config.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
-    xmlhttp.send("tipo_marcacao="+tipoMarcacao+"&percentual="+percentual);
+    xmlhttp.send("tipo_marcacao="+tipoMarcacao+
+        "&percentual="+percentual+"&update="+update+
+        "&tempoExpiracao="+tempoExpiracao+'&tempoExpiracaoResgate='+tempoExpiracaoResgate+'&tempoEntreMarcacao='+tempoEntreMarcacao);
     
     xmlhttp.onreadystatechange = function() {
          
         if (this.readyState == 4 && this.status == 200) {
-            console.log (this.responseText);
-            
+            console.log (this.responseText);          
             if (this.responseText == 1) {
-                
                 Swal.fire({
                     icon: 'success',
                     title: 'Configuração aplicada com sucesso!',
@@ -65,13 +68,9 @@ $('.btnSalvarAction').click(function(){
                     if (result.isConfirmed) {
                         location.reload();
                     } 
-                });
-                
-            }
-            
-        }
-        
-        
+                });   
+            }            
+        }       
     }; 
     
 });

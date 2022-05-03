@@ -14,14 +14,16 @@ require ( get_template_directory() . '/models/model_empresa_config.php' );
 require ( get_template_directory() . '/models/model_clientes.php' );
 require ( get_template_directory() . '/models/model_marcacao.php' );
 require ( get_template_directory() . '/models/model_empresa.php' );
-    
+require ( get_template_directory() . '/models/model_solicitacao_resgate.php' );
+
 $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
+$cnpj = $_SESSION['dados_empresa'][0]->cnpj;
 
-$totalClientes  = listarClientesPorEmpresa($_SESSION['dados_empresa'][0]->cnpj);
-$totalMarcacoes = listarTotalMarcacoes($_SESSION['dados_empresa'][0]->cnpj);
-
-$dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
-         
+$totalClientes  = listarClientesPorEmpresa($cnpj);
+$totalMarcacoes = listarTotalMarcacoes($cnpj);
+$dadosEmpresa =  buscarEmpresa($cnpj);
+$clienteResgateVencido = verificarDataVencimento($cnpj);
+        
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-3">
@@ -36,6 +38,15 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             <h5 class="h5">Bem vindo ao <?= NOME_APLICACAO ?></h5>              
         </div>            
     </div>
+    
+    <?php 
+    /*
+    echo "<pre>";
+    var_dump($clienteResgateVencido);
+    echo "</pre>";
+     * 
+     */
+    ?>
        
     <div class="row">
         <?php if (!$config) : ?>
@@ -43,10 +54,7 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             <div class="alert alert-danger" role="alert">
                 <h4 class="alert-heading">Atenção!</h4>
                 <p>
-                    É necessário configurar a forma de pontuação de seus clientes.
-                    <br/>
-                    Após configuração sua empresa estará pronta para usar e disponibilizar o Wibi Club Fidelide
-                    para seus clientes. 
+                    Em Configurações defina a porcentagens de pontos de seus Clientes.
                 </p>
                 <hr>
                 <p class="mb-0">Acesse [Configurações] e defina a forma de marcação</p>
@@ -72,9 +80,8 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
         
     <br/>
         
-    <div class="row">
-        
-        <div class="col-lg-4 col-12">
+    <div class="row">  
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
                     <a href="<?= get_bloginfo('url')."/empresa-meus-clientes/" ?>">Meus clientes </a>
@@ -82,7 +89,7 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-12">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">                        
                     Total Marcações 
@@ -91,24 +98,20 @@ $dadosEmpresa =  buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             </div>
         </div>
     </div>
-    <br/>
-    <div class="row"> 
+    
+    <div class="row mt-2">  
         <div class="col-lg-12">
-            <div class="my-3 p-3 bg-white rounded shadow-sm">
-                <h6 class="border-bottom border-gray pb-2 mb-0">Pendências Técnica de desenvolvimento</h6>
-                
-                 <div class="media text-muted pt-3">
-                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <strong class="d-block text-gray-dark">wp-admin</strong>
-                        saulopf | 102030 (Retirar isso depois de pronto)
-                    </p>
+            <div class="card">
+                <div class="card-body d-flex justify-content-between align-items-center">                        
+                    <a href="#">Aniversariantes do Dia <i class="fa fa-birthday-cake" aria-hidden="true"></i></a>
+                    <span class="badge rounded-pill bg-info text-dark">3</span>                  
                 </div>
-
-            </div>  
-        </div>
+            </div>
+        </div>        
     </div>
-   <br/>                
+    
+    <br/>
+              
 </main>
 
 <?php get_footer('painel') ?>

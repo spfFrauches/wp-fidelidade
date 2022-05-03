@@ -11,6 +11,7 @@ endif;
 function carregarDadosCliente()
 {
     require '../../../../wp-load.php';
+    include( get_template_directory() . '/functions/functions_global.php' );
     global $wpdb; 
     
     /*
@@ -19,61 +20,53 @@ function carregarDadosCliente()
     echo "</pre>";
     * 
     */
-   
+    
     $tabelaClientes = 'clientes';
     $tabelaMarcacoes = 'marcacao';
+    $empresa_config = 'empresa_config';
+
     $cpf = $_REQUEST['cpfcliente'];
     $cnpj = $_REQUEST['cnpjempresa'];
+
+    $sqlConfigEmpresa = "SELECT  * FROM $empresa_config  WHERE cnpjemp = '$cnpj' ";
     
     $sqlClientes = "SELECT * FROM $tabelaClientes WHERE cpf = '$cpf' ";
-    $sqlMarcacoes = "SELECT * FROM $tabelaMarcacoes WHERE cnpjemp = '$cnpj' AND cpfcli = '$cpf' ";
+
+    $sqlMarcacoes = "SELECT * FROM $tabelaMarcacoes WHERE cnpjemp = '$cnpj' AND cpfcli = '$cpf' order by datamarcacao desc";
        
     $resultadoCadastroCliente =  $wpdb->get_results( $sqlClientes );
     $resutadoMarcacoes = $wpdb->get_results( $sqlMarcacoes );
+    $resutadoConfiguracaoEmpresa = $wpdb->get_results( $sqlConfigEmpresa );
     
-    $totalPontos = 0;
-    foreach ($resutadoMarcacoes as $key => $value) :
-        $totalPontos = $totalPontos + $value->pontos;     
-    endforeach;
-   
     /*
-    echo "<pre>".
+    echo "<pre>";
     var_dump($resutadoMarcacoes);
     echo "</pre>";
-     * 
-     */
+    */
     
-    echo "<h3>".$resultadoCadastroCliente[0]->nome_completo."</h3>";
-    echo "CPF.: $cpf";
-    echo "<br/><br/>";
+    $totalPontos = 0;
+    $totalPontosExpirados = 0;
+    $totalPontosEstornados = 0;
+    $totalPontosRetirada = 0;
     
-    echo '<ol class="list-group ">';
-    echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
-    echo '<div class="ms-2 me-auto">';
-    echo '<div class="fw-bold">Total de Pontos disponiveis.: </div>';
-    /* echo 'Cras justo odio'; */
-    echo '</div>';
-    echo '<span class="badge bg-primary rounded-pill">'.$totalPontos.'</span>';
-    echo '</li>';
-    echo '</ol>';
-    
-    echo "<p class='mt-2 mb-3' style='font-size:21px'>Detalhes</p>";
-    
-    echo '<ol class="list-group list-group-numbered">';
-    foreach ($resutadoMarcacoes as $key1 => $value1) :
-        
-        echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
-        echo '<div class="ms-2 me-auto">';
-        echo "Pontos em.: ".date('d/m/Y H:i:s', strtotime($value1->datamarcacao)); 
-        echo '<div style="font-size: 11px">Valor R$.: '.$value1->valormarcacao.' |-> '.$value1->porcentagemPontos.' % para conversão em pontos   </div>';
-
-        echo '</div>';
-        echo '<span class="badge bg-info text-dark rounded-pill">'.$value1->pontos.'</span>';
-        echo '</li>';
-        
+    foreach ($resutadoMarcacoes as $key => $value) :        
+        if ( $value->data_expiracao >= date("Y-m-d")  || $value->data_expiracao == null  ):  
+            $totalPontos = $totalPontos + $value->pontos;  
+        endif;   
     endforeach;
+    
+    foreach ($resutadoMarcacoes as $key => $value1) :        
+        if ( $value1->estorno == 's' ):  
+            $totalPontosEstornados = $totalPontosEstornados + $value1->pontos;  
+        endif;   
+    endforeach;
+    
+    $totalPontosEstornados = $totalPontosEstornados * ($resutadoConfiguracaoEmpresa[0]->vlrSimuladorMoedaApp);
+        
+    $totalPontos = $totalPontos * ($resutadoConfiguracaoEmpresa[0]->vlrSimuladorMoedaApp);
+    $totalPontos = $totalPontos - $totalPontosEstornados;
    
-    echo '</ol>';
+    require ('../../../../wp-content/themes/fidelidade/inc/include_modalPainelEmpresa_meusClientes.php');
  
 }
 

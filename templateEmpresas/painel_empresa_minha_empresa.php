@@ -5,7 +5,7 @@ $_SESSION['url_referencia'] = '';
 get_header('painel'); 
     
 include( get_template_directory() . '/models/model_empresa.php' );
-
+$checkImg = 'none';
 /* REFATORAR ISSO E COLOCAR DENTRO DE UM MODEL / FUNCAO */
 if(!empty($_FILES['logoempresa'])){  
     
@@ -19,18 +19,48 @@ if(!empty($_FILES['logoempresa'])){
     $datahr  = str_replace(":", "", $datahr); 
     $extension = explode(".", $_FILES["logoempresa"]["name"]);
     $renomearArquivo = $datahr.".".$extension[1];
-    
-    
+        
     $dir = get_bloginfo('template_url')."/uploadfidelidade/empresas_logos/".basename($_FILES["logoempresa"].$renomearArquivo);
-    $target_file = $targetDir . basename($_FILES["logoempresa"].$renomearArquivo);  
+    $target_file = $targetDir . basename($_FILES["logoempresa"].$renomearArquivo); 
     
-    if(move_uploaded_file($_FILES['logoempresa']['tmp_name'], $target_file)){         
-        global $wpdb; 
-        $wpdb->update('empresas', array('logoempsrc'=>$dir ,'logopath'=>$target_file), array('id'=>$id));
-        $msgPosUpload = "Dados atualizados com sucesso!";  
-    } else {
-        $msgPosUpload = "Erro ao processar arquivo!";
-    }
+    /* Uma simples camada de proteção para envio de imagens...*/
+    $filename = $_FILES['logoempresa']['name'];
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);    
+    $allowed =  array('gif','png' ,'jpg', 'jpeg');
+    
+    /*
+    Trabalhar em função para redimencionar imagens grandes
+    echo "<pre>";
+    var_dump($_FILES['logoempresa']);
+    echo "</pre>";
+    
+    echo "<pre>";
+    echo "tamanho em bytes.: ";
+    var_dump($_FILES['logoempresa']['size']);
+    echo "</pre>";
+    
+    echo "<pre>";
+    echo "Tamanho em kb.: ";
+    var_dump($_FILES['logoempresa']['size'] / 1024);
+    echo "</pre>";
+    
+    list($width, $height) = getimagesize($filename);
+    */
+       
+    if(!in_array($ext, $allowed) ) :
+        $checkImg = 'invalido';
+    else:
+        $checkImg = 'valido';
+        if(move_uploaded_file($_FILES['logoempresa']['tmp_name'], $target_file)){         
+            global $wpdb; 
+            $wpdb->update('empresas', array('logoempsrc'=>$dir ,'logopath'=>$target_file), array('id'=>$id));
+            $msgPosUpload = "Dados atualizados com sucesso!";  
+        } else {
+            $msgPosUpload = "Erro ao processar arquivo!";
+        }
+    endif;
+    
+
 }
 
 $caminhoImgDefault = get_bloginfo('template_url')."/img/uploadYourLogo.png";  
@@ -47,6 +77,15 @@ $dadosEmpresa = buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             </div>      
         </div>
     </div>
+    
+    <?php if ($checkImg == 'invalido'): ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <?= $checkImg ?>
+        <strong>Ops! Imagem invalida</strong> <br/>
+        A logo enviada parece não ter um formato valido de imagem, envie apenas nos formatos .jpg | .png | .jpeg | .gif
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php endif;?>
 
     <form class="needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
         <br/>     
@@ -245,6 +284,3 @@ $dadosEmpresa = buscarEmpresa($_SESSION['dados_empresa'][0]->cnpj);
     
 <?php get_footer('painel'); ?>
 
-
-    
-<?php get_footer('painel'); ?>

@@ -96,10 +96,27 @@ function listarDadosCompletosClientesLigados($cnpj) {
     
     global $wpdb; 
     
-    $sql = "SELECT a.id , a.cnpjemp CNPJCPF, a.cpfcli CPF, b.nome_completo NOME, "
-            . "(SELECT max(datamarcacao) FROM marcacao WHERE cpfcli = a.cpfcli) ULTMARC "
+    $sql = "SELECT  a.cnpjemp CNPJCPF, a.cpfcli CPF, b.nome_completo NOME, "
+            . "(SELECT max(datamarcacao) FROM marcacao WHERE cpfcli = a.cpfcli and estorno is null or estorno <> 's') ULTMARC "
             . "FROM ligacaoclienteempresa a JOIN clientes b ON a.cpfcli = b.cpf "
-            . "WHERE 1=1 AND a.cnpjemp = '$cnpj' ";
+            . "WHERE 1=1 AND a.cnpjemp = '$cnpj'"
+            . "ORDER BY ULTMARC DESC";
+    
+    $resultado =  $wpdb->get_results($sql);    
+    return $resultado;
+    
+}
+
+function listarDadosCompletosClientesLigadosCalculandoPontosAtuais($cnpj) {
+    
+    global $wpdb; 
+    
+    $sql = "SELECT  a.cnpjemp CNPJCPF, a.cpfcli CPF, b.nome_completo NOME, "
+            . "(SELECT max(datamarcacao) FROM marcacao WHERE cpfcli = a.cpfcli) ULTMARC , "
+            . "(select sum(pontos) FROM marcacao WHERE cpfcli = a.cpfcli) SOMAPONTOS "
+            . "FROM ligacaoclienteempresa a JOIN clientes b ON a.cpfcli = b.cpf "
+            . "WHERE 1=1 AND a.cnpjemp = '$cnpj' ORDER BY ULTMARC desc ";
+    
     $resultado =  $wpdb->get_results($sql);    
     return $resultado;
     

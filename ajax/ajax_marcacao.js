@@ -8,6 +8,8 @@ $('#btnMarcarConfere').hide();
 $('#btcVoltarVazio').hide();
 $('#confirma_marcacaoConfereSucesso').hide();
 $('#btnNovaMarcacao').hide();
+$('#tempoLimiteMarcacao').hide();
+
 
 $('.dinheiro').mask('#.##0,00', {reverse: true});
 document.getElementById('cpfHelp').style.color = "gray"; 
@@ -33,6 +35,7 @@ $( "#btcContinuarMarcacao" ).click(function() {
         $('#load_form_marcacao').show(); 
         $('#btcContinuarMarcacao').hide();
         $('#btnMarcar').show();
+        $('#tempoLimiteMarcacao').hide();
         setTimeout(function(){ 
             /* Analisar o CPF no banco e retorna json */
             verificaSeExisteCPF();
@@ -72,8 +75,9 @@ $( "#btnMarcar" ).click(function() {
     
     xmlhttp.onreadystatechange = function() { 
         if (this.readyState == 4 && this.status == 200) {
-            // console.log(this.responseText);
+            console.log(this.responseText);
             var objMarcacao  = JSON.parse(this.responseText);
+            console.log(objMarcacao);
             
             sessionStorage.setItem('valorMarcacao', objMarcacao['valor']);
             sessionStorage.setItem('datahoraMarcacao', objMarcacao['datahora']);
@@ -105,12 +109,16 @@ $( "#btnMarcar" ).click(function() {
 
 $( "#btnMarcarConfere" ).click(function() {
     
+    console.log("ultima etapa");
+       
     var marcarConfere = '1';
     var valorMarcacao    = sessionStorage.getItem('valorMarcacao');
     var datahoraMarcacao = sessionStorage.getItem('datahoraMarcacao');
     var cnpjMarcacao =  sessionStorage.getItem('cnpjMarcacao');
     var cpfMarcacao = sessionStorage.getItem('cpf');
     var tipoMarcacao = sessionStorage.getItem('tipoMarcacao');
+    
+    console.log("marcarconfere = "+marcarConfere);
     
     var xmlhttp = new XMLHttpRequest(); 
     
@@ -121,7 +129,9 @@ $( "#btnMarcarConfere" ).click(function() {
     xmlhttp.onreadystatechange = function() { 
         if (this.readyState == 4 && this.status == 200) {
             
+            console.log("retorno do PHP");
             console.log(this.responseText);
+            
             $('#load_form_marcacao').show();
             
             document.getElementById("selfie2").src = sessionStorage.getItem('src_selfie');
@@ -130,7 +140,6 @@ $( "#btnMarcarConfere" ).click(function() {
                 $('#confirma_marcacaoConfere').hide();
                 $('#confirma_marcacaoConfereSucesso').show();
                 $('#load_form_marcacao').hide();
-
                 $('#btnsMarcarVoltar').hide();
                 $('#btnNovaMarcacao').show();
 
@@ -159,6 +168,7 @@ $( "#btcVoltarMarcacao" ).click(function() {
     $('#btcContinuarMarcacao').show();
     $('#btnMarcar').hide();
     $('#confirma_marcacaoNaoExiste').hide();
+    $('#tempoLimiteMarcacao').hide();
     
     sessionStorage.removeItem('src_selfie'); 
     document.getElementById("selfie").src = 'http://restaurantemegachic.com/fidelidade/wp-content/themes/fidelidade/img/default-user-1.png';
@@ -166,6 +176,7 @@ $( "#btcVoltarMarcacao" ).click(function() {
     setTimeout(function(){         
         $('.cpf_form_marcacao').show();
         $('#load_form_marcacao').hide();
+        $('#tempoLimiteMarcacao').hide();
     },1000);  
         
 });
@@ -176,6 +187,8 @@ $( "#btcVoltarMarcacaoConfere" ).click(function() {
     $('#confirma_marcacaoConfere').hide();
     $('#btnMarcarConfere').hide();
     $('#btcVoltarMarcacaoConfere').hide();
+    $('#tempoLimiteMarcacao').hide();
+
     
     sessionStorage.removeItem('valorMarcacao');
     sessionStorage.removeItem('datahoraMarcacao');
@@ -212,12 +225,18 @@ function verificaSeExisteCPF() {
                 
                 $('#load_form_marcacao').hide(); 
                 $('#confirma_marcacao').show();
-                
+               
                 var objVerificarCliente  = JSON.parse(this.responseText);
+                //objVerificarCliente  = (this.responseText);
+
+                if (objVerificarCliente == 'tempoLimiteMarcacao') {
+                    $('#tempoLimiteMarcacao').show();
+                    $('#confirma_marcacao').hide();
+                }
                 
-                /* Armazenando os dados cadastrai do cliente */
-                
+                /* Armazenando os dados cadastrai do cliente */               
                 console.log(objVerificarCliente);  
+                console.log(objVerificarCliente[0]['nome_completo']);
                 
                 document.getElementById("confirma_marcacaoNome").innerHTML = objVerificarCliente[0]['nome_completo'];
                 document.getElementById("confirma_marcacaoCPF").innerHTML = objVerificarCliente[0]['cpf'];
@@ -229,8 +248,7 @@ function verificaSeExisteCPF() {
                     document.getElementById("selfie").src = objVerificarCliente[0]['src_selfie'];
                     sessionStorage.setItem('src_selfie', objVerificarCliente[0]['src_selfie']);
                 }
-                               
-                
+                                               
                 sessionStorage.setItem('cpf', objVerificarCliente[0]['cpf']);
                 sessionStorage.setItem('data_nascimento', objVerificarCliente[0]['data_nascimento']);
                 sessionStorage.setItem('nome_completo', objVerificarCliente[0]['nome_completo']);
@@ -238,7 +256,6 @@ function verificaSeExisteCPF() {
                 sessionStorage.setItem('fone', objVerificarCliente[0]['fone']);
                                                 
             }
-
         };     
     }
 }

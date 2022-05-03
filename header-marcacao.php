@@ -15,7 +15,7 @@
         <?php wp_head(); ?> 
         
     </head>
-    <?php  include( get_template_directory() . '/inc/functions_global.php' ); ?>
+    <?php  include( get_template_directory() . '/functions/functions_global.php' ); ?>
     <body>
         
         <div class="collapse" id="navbarToggleExternalContent">

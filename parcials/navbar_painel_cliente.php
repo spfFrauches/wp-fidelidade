@@ -30,40 +30,68 @@
                 ?>
                 
                 <ul class="nav flex-column">
+                    
                     <li class="nav-item">
                         <?php $url_swp1 = get_bloginfo('url')."/painel-cliente" ?>     
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
-                            <span data-feather="home"></span>
-                            Home <span class="sr-only">(current)</span>
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            &nbsp; Home <span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <?php $url_swp1 = get_bloginfo('url')."/resgates-cliente" ?>     
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp1 ) { echo "active";}?>" href="<?= $url_swp1 ?>">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Meus Resgates <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <?php $url_swp3 = get_bloginfo('url')."/painel-cliente-resgate-beneficios" ?> 
+                    <!--
+                    <a class="btn-nav-forload nav-link <?= $active ?>" href="<?= $url_swp3 ?>">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            &nbsp; Resgatar Pontos
+                    </a>
+                    -->
+                   
+                </ul>
+                <hr/>                
+                <ul class="nav flex-column">
+                    
                     <li class="nav-item">
                         <?php $url_swp2 = get_bloginfo('url')."/cliente-meus-dados" ?>  
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
-                            <span data-feather="shopping-cart"></span>
-                            Meus dados
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            &nbsp; Meus dados
                         </a>
                     </li>
+                    
                     <li class="nav-item">
                         <?php $url_swp3 = get_bloginfo('url')."/cliente-alterar-senha" ?>  
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp3 ) { echo "active";}?>" href="<?= $url_swp3 ?>">
-                            <span data-feather="shopping-cart"></span>
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                            &nbsp; 
                             Alterar Senha
                         </a>
                     </li>
+                    
                 </ul>
-                                
-                <ul class="nav flex-column">
+                <hr/>
+                <ul class="nav flex-column">    
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart"></span>
+                            <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                            &nbsp; 
                             Termos de uso
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart"></span>
-                            Não quero mais 
+                            <i class="fa fa-user-times" aria-hidden="true"></i>
+                            &nbsp; Não quero mais 
                         </a>
                     </li>
                 </ul>

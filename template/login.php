@@ -1,9 +1,9 @@
 <?php
     /* Template Name: Login */ 
     get_header('login');
-    include( get_template_directory() . '/inc/functions_empresa.php' );
+    include( get_template_directory() . '/functions/functions_empresa.php' );
     include( get_template_directory() . '/models/model_empresa.php' );
-    include( get_template_directory() . '/inc/functions_login.php' );
+    include( get_template_directory() . '/functions/functions_login.php' );
     
     if ($_POST) :    
         $msg = autenticacaoCompleta();
@@ -17,9 +17,7 @@
             <i class="fa fa-fire fa-4x" aria-hidden="true"></i>
             <h1 class="h3 mb-3 mt-2 font-weight-normal"><?= NOME_APLICACAO ?></h1>
             <?php if (isset($msg)) : echo  msgLoginInvalido($msg) ; endif;?>            
-            <p>
-                <a  class="btn btn-secondary btn-sm" href="<?= get_bloginfo('url') ?>"> Voltar ao site </a>
-            </p>
+            
         </div>
 
         <div class="form-label-group">
@@ -48,22 +46,20 @@
         
         <div class="row mt-5">  
             <div class="col-6 d-flex flex-row">
-                <a href="#" style="text-decoration: none; font-size: 12px">Cadastrar Empresa</a>
+                <a href="http://restaurantemegachic.com/fidelidade/nova-empresa/" style="text-decoration: none; font-size: 12px">Cadastrar Empresa</a>
             </div>
             <div class="col-6 d-flex flex-row-reverse">
-                <a href="#" style="text-decoration: none; font-size: 12px">Cadastrar Cliente</a>
+                <a href="http://restaurantemegachic.com/fidelidade/novo-cliente/" style="text-decoration: none; font-size: 12px">Cadastrar Cliente</a>
             </div>
         </div>
         
         <p class="mt-5 mb-3 text-muted text-center">&copy; <?= NOME_APLICACAO ?> <?=  date("Y"); ?></p>
                
-
     </form>
-
-    
+  
 
 <?php
-    include( get_template_directory() . '/inc/functions_loads.php' );
+    include( get_template_directory() . '/functions/functions_loads.php' );
     get_footer('login');  
 ?>
 

@@ -7,7 +7,7 @@ if (trim($_POST['cpf_cliente']) == '' || empty($_POST['cpf_cliente'])):
 endif; 
 
 if (trim($_POST['cpf_cliente']) != '') :
-    $buscarDuplicadoBancoDados = verificarSeExiste($_POST['cnpj']);
+    $buscarDuplicadoBancoDados = verificarSeExiste($_POST['cpf_cliente']);
     if (!$buscarDuplicadoBancoDados) {
         $prosseguir = "sim";
     } else {
@@ -73,8 +73,8 @@ endif;
 
 
 if (isset($_POST) && $prosseguir == "sim" ) {
-        
-   $insertCliente = cadastroClienteViaSite();
+          
+    $insertCliente = cadastroClienteViaSite();
    
 }
 

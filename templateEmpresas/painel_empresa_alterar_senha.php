@@ -2,9 +2,9 @@
 /* Template Name: Painel Empresa - Alterar Senha */ 
 $_SESSION['url_referencia'] = '';
 get_header('painel');
-include( get_template_directory() . '/inc/functions_login.php' ); 
+include( get_template_directory() . '/functions/functions_login.php' ); 
 include( get_template_directory() . '/models/model_empresa.php' );
-include( get_template_directory() . '/inc/functions_empresa.php' );
+include( get_template_directory() . '/functions/functions_empresa.php' );
 
 if(!isset($_SESSION['login_painel'])):
     $url = get_bloginfo('url')."/login";
