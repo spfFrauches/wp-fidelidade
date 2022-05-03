@@ -35,17 +35,7 @@ function ultimaMarcacaoCliente($cpf)
 
 
 
-function listarMarcacaoEmpresaCliente2($cliente, $empresa) 
-{
-    global $wpdb;
-    $result  = $wpdb->get_results("SELECT * FROM marcacao tbsmarcacao "
-            . "JOIN empresas tbsempresa ON tbsempresa.cnpj = tbsmarcacao.cnpjemp "
-            . "WHERE tbsmarcacao.cpfcli = '$cliente' AND tbsmarcacao.cnpjemp = '$empresa' "
-            . "ORDER BY tbsmarcacao.datamarcacao DESC ");
-    return $result;
-}
-
-function listarMarcacaoEmpresaCliente2OLD($cliente, $empresa) {
+function listarMarcacaoEmpresaCliente2($cliente, $empresa) {
     global $wpdb;
     $result  = $wpdb->get_results("SELECT * FROM marcacao tbsmarcacao "
             . "JOIN empresas tbsempresa ON tbsempresa.cnpj = tbsmarcacao.cnpjemp "
@@ -97,7 +87,7 @@ function listarTotalMarcacoes($cnpj){
     return $resultado[0]-> qtdTotalMarcacao;   
 }
 
-function descontarSaldo_ResgateBeneficio($qtdPontos, $cpf, $cnpj, $idResgate){
+function descontarSaldo_ResgateBeneficio($qtdPontos, $cpf, $cnpj){
     
     global $wpdb;
     $tabela2 = "marcacao";
@@ -109,7 +99,7 @@ function descontarSaldo_ResgateBeneficio($qtdPontos, $cpf, $cnpj, $idResgate){
         'cpfcli' => $cpf,
         'datamarcacao' => $dataHoraMarcacao,
         'valormarcacao' => 0,
-        'protocolomarcacao' => $idResgate,
+        'protocolomarcacao' => "retirada-01",
         'tipomarcacao' => "retirada",
         'porcentagemPontos' => 0,
         'pontos' => $qtdPontos * (-1)
@@ -119,14 +109,5 @@ function descontarSaldo_ResgateBeneficio($qtdPontos, $cpf, $cnpj, $idResgate){
     $_SESSION['jaInseridoRegistro'] = false;
     return $inserirMarcacao;
        
-}
-
-function listarMovimentoMarcacao($id)
-{
-    
-    global $wpdb;
-    $result  = $wpdb->get_results("SELECT * FROM marcacao WHERE id = '$id' ");
-    return $result;
-    
 }
     

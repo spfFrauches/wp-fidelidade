@@ -1,6 +1,6 @@
 <?php 
 /* Template Name: Painel Empresa - Meus Clientes */
- if ($_SESSION['login_painel'] != 'empresa'):
+if ($_SESSION['login_painel'] != 'empresa'):
     $url = get_bloginfo('url')."/login";
     header("Location:$url");
     exit("A sessão foi expirada ou é invalida");
@@ -9,14 +9,17 @@ endif;
 include( get_template_directory() . '/models/model_clientes.php' );
 include( get_template_directory() . '/models/model_marcacao.php' );
 
-
 $_SESSION['url_referencia'] = '';
 get_header('painelcliente');
 
 $listarCliente = listarDadosCompletosClientesLigados($_SESSION['dados_empresa'][0]->cnpj);
 $configEmpresa = listarConfiguracaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);   
 $percentualDaEmpresa = $configEmpresa[0]->percentual_vlrcompra;
-$cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
+$cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj;
+
+
+//var_dump($listarCliente);
+
     
 ?>
 
@@ -32,6 +35,7 @@ $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
     <div class="row mt-5">   
         <div class="col-lg-12">
             <table id="example" class="table table-hover" >
+                
                 <thead>
                     <tr>
                         <th>Cliente</th>
@@ -39,22 +43,23 @@ $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
                         <th>Últ. Marcação</th>
                         <th>Detalhes</th>
                     </tr>
-                </thead>               
+                </thead> 
+                
                 <tbody>
                     <?php foreach ($listarCliente as $key => $value):?> 
                     <tr>
                         <td><?= strtoupper($value->NOME) ?></td>
                         <td><?= $value->CPF ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($value->ULTMARC)) ?></td>
-                        <td>  
-                            
+                        <td>                              
                             <a href="#" class="modaldetalhes"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-modal="<?= $value->CPF ?>" data-cnpj="<?= $cnpjempresa ?>" >
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>                            
                         </td>
                     </tr>
-                     <?php endforeach;  ?> 
-                </tbody>              
+                    <?php endforeach;  ?> 
+                </tbody>  
+                
             </table>
         </div> 
     </div>
@@ -80,15 +85,12 @@ $cnpjempresa = $_SESSION['dados_empresa'][0]->cnpj
 
 <br/>
 
-<script>
-    
+<script>   
     $(document).ready(function() {
-
          $('#example').dataTable( {
             "order": []
         } );
-    } );
-    
+    } );    
 </script>
 
 <?php get_footer('painelcliente'); ?>

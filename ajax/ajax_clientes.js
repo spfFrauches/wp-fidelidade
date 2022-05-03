@@ -112,15 +112,6 @@ $( "#btnContinuarCadastroCliente" ).click(function() {
 
 
 /* ----------------------------------------------------  */
-/* Validando campos em branco              */
-/* ----------------------------------------------------  */
-
-function validarCamposEmBranco() {
-    
-       
-}
-
-/* ----------------------------------------------------  */
 /* Buscando no banco campos duplicados ...               */
 /* ----------------------------------------------------  */
 

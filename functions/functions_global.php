@@ -1,6 +1,7 @@
 <?php
 
 define ("NOME_APLICACAO", 'Webi Club Fidelidade');
+define ('VLRSIMULADORMOEDAAPP' , '10');
 
 function checkLogadoEmpresa()
 {

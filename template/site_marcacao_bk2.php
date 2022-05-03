@@ -93,6 +93,8 @@ get_header('marcacao');
                 <p style="margin-top: -15px;" class="text-danger">Não pode ser marcado até o tempo limite expirar</p>
             </div>    
         </div>
+
+
         
         <div class="form-group card p-2" id="confirma_marcacao">     
             <div class="row text-center">

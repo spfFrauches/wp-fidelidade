@@ -9,6 +9,7 @@ function configurarTipoMarcacao() {
     $dadosInsert['dthr_ultima_alteracao'] = date('Y-d-m h:i:s');
     $dadosInsert['tempoExpiracao'] = $_POST['tempoExpiracao'];
     $dadosInsert['tempoExpiracaoResgate'] = $_POST['tempoExpiracaoResgate'];
+    $dadosInsert['tempoEntreMarcacao'] = $_POST['tempoEntreMarcacao'];
     
 
     if ($_POST['tipo_marcacao'] == 'cash') {  
@@ -18,6 +19,7 @@ function configurarTipoMarcacao() {
         $dadosInsert['percentual']  = str_replace(',', '.', $dadosInsert['percentual']);
         
         if (isset($_POST['update']) && $_POST['update'] == 'sim'):
+            
             $retorno =  updateConfiguracaoEmpresa($dadosInsert);
             
         

@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
     $cnpj = $_REQUEST["cnpjemp"];
 endif;
     
-
 if ($_SESSION['jaInserido'] == 'sim'):
     $urlRedirect = get_bloginfo('url')."/painel-cliente/extrato-pontos/?cnpj=$cnpj";
     echo "<script>window.location.href = '$urlRedirect'</script>";

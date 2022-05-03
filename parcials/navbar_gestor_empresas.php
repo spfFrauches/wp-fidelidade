@@ -78,11 +78,13 @@
                         </a>
                         
                         <?php $url_swp7 = get_bloginfo('url')."/painel-empresa/painel-empresa-resgate-pontos" ?> 
-                                      
+                         
+                        <!--
                         <a class="btn-nav-forload nav-link <?= ($url == $url_swp7 ) ? "active" : "" ?>" href="<?= $url_swp7 ?>">
                             <i class="fa fa-gift" aria-hidden="true"></i>
                             &nbsp; Pontos de Clientes
                         </a>
+                        -->
                         
                          <?php $url_swp8 = get_bloginfo('url')."/painel-empresa/empresa-solicitacao-resgate" ?> 
                         
@@ -101,11 +103,19 @@
                         </a>
                     </h6>
     
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <?php $url_swp2 = get_bloginfo('url')."/painel-empresa/estorno-movimentos" ?> 
                         <a class="btn-nav-forload nav-link <?php if ($url == $url_swp2 ) { echo "active";}?>" href="<?= $url_swp2 ?>">
                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            &nbsp; Estorno de movimentos
+                            &nbsp; Estorno Marcação
+                         </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <?php $url_swp99 = get_bloginfo('url')."/painel-empresa/painel-empresa-estorno-resgate" ?> 
+                        <a class="btn-nav-forload nav-link <?php if ($url == $url_swp99 ) { echo "active";}?>" href="<?= $url_swp99 ?>">
+                           <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            &nbsp; Estorno Solicitações e Resgate
                          </a>
                     </li>
                     

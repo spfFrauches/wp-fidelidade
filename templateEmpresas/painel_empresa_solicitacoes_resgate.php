@@ -2,7 +2,7 @@
 
 /* Template Name: Painel Empresa - Solicitações Resgate */ 
 $_SESSION['url_referencia'] = 'painel-empresa-resgate-pontos';
-get_header('painel');
+get_header('painelcliente');
 
 include( get_template_directory() . '/models/model_solicitacao_resgate.php' );
 include( get_template_directory() . '/models/model_marcacao.php' );
@@ -16,12 +16,27 @@ if(!isset($_SESSION['login_painel'])):
     exit("Sessão expirada ou invalida");
 endif; 
 
-$solitacaoResgate = listarSolicitacaoRestageEmpresa($cnpjempresa);
+$solitacaoResgate = listarSolicitacaoRestageEmpresaApenasSolicitado($cnpjempresa);
+
+if (isset($_POST['filtroStatus'])):
+    if ($_POST['filtroStatus'] == 'solicitado'){
+        $solitacaoResgate = listarSolicitacaoRestageEmpresaApenasSolicitado($cnpjempresa);
+    }
+    if ($_POST['filtroStatus'] == 'entregue'){
+        $solitacaoResgate = listarSolicitacaoRestageEmpresaApenasEntregue($cnpjempresa);
+    }
+    if ($_POST['filtroStatus'] == 'estornado'){
+        $solitacaoResgate = listarSolicitacaoRestageEmpresaApenasEstornado($cnpjempresa);
+    }
+    if ($_POST['filtroStatus'] == 'todos') {
+        $solitacaoResgate = listarSolicitacaoRestageEmpresa($cnpjempresa);
+    }
+endif;
 
 if (isset($_POST['idResgate'])):
     $baixa1 = baixaSolicitacaoResgate($_POST['idResgate']);
     if ($baixa1):
-        $baixa2 = descontarSaldo_ResgateBeneficio($_POST['qtdpontos'], $_POST['cpfcliente'], $cnpjempresa);
+        $baixa2 = descontarSaldo_ResgateBeneficio($_POST['qtdpontos'], $_POST['cpfcliente'], $cnpjempresa, $_POST['idResgate']);
         $nomeCliente = $_POST['nomeCliente'];
     endif;
     $solitacaoResgate = listarSolicitacaoRestageEmpresa($cnpjempresa);
@@ -33,7 +48,7 @@ endif;
     
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">              
         <h2 class="h2">
-            Resgate de Pontos e Beneficios <small></small>
+            Solicitações de Resgate<small></small>
         </h2>       
         <div class="btn-toolbar mb-2 mb-md-0">
             <a href="<?= get_bloginfo('url') ?>/painel-empresa" class="btn btn-sm btn-outline-secondary btn-nav-forload">              
@@ -71,10 +86,26 @@ endif;
             <?php endif; ?>
         </div>
     </div>
+
+    <form class="row g-3" action="" id="formFiltros" method="POST" style="margin-top: -50px">
+          <p style="margin-bottom:-5px">Filtro por Status</p>
+          <div class="col-auto">
+                <select class="form-select" name="filtroStatus">
+                    <option value="solicitado" >Solicitados</option>
+                    <option value="entregue" <?= isset($_POST['filtroStatus']) && $_POST['filtroStatus'] == 'entregue' ? "selected" : "" ?> >Entregues</option>
+                    <option value="estornado" <?= isset($_POST['filtroStatus']) && $_POST['filtroStatus'] == 'estornado' ? "selected" : "" ?> >Estornados</option>
+                    <option value="todos" <?= isset($_POST['filtroStatus']) && $_POST['filtroStatus'] == 'todos' ? "selected" : "" ?> >Todos</option>
+                </select>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Pesquisar</button>
+          </div>
+    </form>
+
         
     <div class="row mt-5">   
         <div class="col-lg-12">
-            <table id="example" class="table table-hover" >               
+            <table id="example" class="table table-hover" >             
                 <thead>
                     <tr>
                         <th>Cliente</th>
@@ -109,7 +140,14 @@ endif;
                         <td><?= $value->nome_completo ?></td>
                         <td><?= $value->cpfcliente ?></td>
                         <td><?= $value->descricao ?></td>
-                        <td><?= date("d/m/Y" , strtotime($value->dtvencimento)) ?></td>
+                        <td>
+                            <?php if ($value->dtvencimento > '2099-01-01'): ?>
+                                Não expira
+                            <?php else: ?>
+                                <?= date("d/m/Y" , strtotime($value->dtvencimento)) ?>
+                            <?php endif; ?>
+                            
+                        </td>
                         <td><?= ucfirst($value->status) ?></td>
                         <td>                           
                             <a href="#" class="modalResgateBeneficio"  data-bs-toggle="modal" data-bs-target="#exampleModal<?= $value->idresgate ?>" data-cpf="" >
@@ -141,9 +179,7 @@ endif;
                                         <div class="col-lg-6">
                                             <img src="<?= $value->src_selfie ?>" class="img-thumbnail" width="200px">
                                         </div>
-                                        
-                                        
-                                        
+                                                                                
                                         <div class="col-lg-6">
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">Data da solicitação.: <?= date("d/m/Y ",strtotime($value->dtsolicitacao)) ?></li>
@@ -160,8 +196,7 @@ endif;
                                             </ul>
                                              <?php endif; ?>
                                         </div> 
-                                        
-                                        
+                                                                                
                                     </div>                                   
                                 </div>
                             </div>
@@ -178,3 +213,14 @@ endif;
 <?php get_footer('painel'); ?>
 
 <script src="<?php bloginfo('template_url') ?>/ajax/painelempresa-resgateBeneficios.js"> </script>
+
+<script>
+    
+    $(document).ready(function() {
+        $('#example').dataTable( {
+            "order": []
+        } );
+    } );
+   
+    
+</script>

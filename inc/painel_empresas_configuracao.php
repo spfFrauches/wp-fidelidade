@@ -48,7 +48,6 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
                     $tempoExpira = $config[0]->tempoExpirarPontos;
                     $tempoExpiraResgate = $config[0]->tempo_expira_resgate;
                     $tempoEntreMarcacao = $config[0]->tempoEntreMarcacao;
-                    $vlrSimuladorMoedaApp = $config[0]->vlrSimuladorMoedaApp;
                 }
             else
                 $tipoMarcacao = 'nada';
@@ -104,8 +103,8 @@ $config = verConfigMarcacaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);
             <small id="percentualHelp" class="form-text">Este campo é obrigatório</small>
         </div>  
         <div class="col-lg-6">          
-            <label class="my-1 mr-2">Variavel MoedaApp</label>
-            <input type="number" class='form-control' name="variavelSimuladorMoedaApp" id='variavelSimuladorMoedaApp' value="<?= $vlrSimuladorMoedaApp ?>" readonly>
+            <label class="my-1 mr-2">Variavel Simulação Moeda</label>
+            <input type="text" class='form-control dinheiro' name="percentual" id='percentual' value="<?= $percentual ?>">
            
             <small id="percentualHelp" class="form-text">Este campo é obrigatório</small>
         </div>  

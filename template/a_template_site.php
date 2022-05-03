@@ -188,50 +188,19 @@ get_header('sitetmpl4');
         </aside>
         <div class="container px-5">
              
-            <div class="row">                    
-                <div class="col-lg-4">
-                    <div class="container-fluid px-5">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- Feature item-->
-                                <div class="text-center">
-                                    <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>                                    
-                                    <p class="text-muted mb-0">Engaje-se com seus clientes...</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <!-- Feature item-->
-                                <div class="text-center">
-                                    <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>   
-                                    <p class="text-muted mb-0">
-                                        Fidelize dando brindes em suas compras...
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- Feature item-->
-                                <div class="text-center">
-                                    <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
-                                    <p class="text-muted mb-0">Acompanhe de perto o consumo dos clientes mais fieis...</p>
-                                </div>
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div>               
-            </div>
-            
-            
+           
+                        
             <div class="row">
-                
-                <div class="col-lg-8">
-                    
-                    <img src="<?php bloginfo('template_url') ?>/img/img-dashboarOnPC.png" class="img-fluid"/>
-                    
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <img src="<?php bloginfo('template_url') ?>/img/img-dashboarOnPC.png" class="img-fluid"/>
+                    </div>
                 </div>
-            </div>  
+            </div>
+                        
+                              
+
+            
             
             
         </div>

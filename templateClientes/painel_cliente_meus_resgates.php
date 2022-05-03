@@ -18,6 +18,11 @@ if ($_SESSION['login_painel'] != 'cliente'):
     exit("A sessão foi expirada ou é invalida");
 endif; 
 
+$cnpjemp = $_REQUEST["cnpj"];
+
+$sqlConfigEmpresa = "SELECT  * FROM empresa_config  WHERE cnpjemp = '$cnpjemp' ";
+$resutadoConfiguracaoEmpresa = $wpdb->get_results( $sqlConfigEmpresa );
+
  
 ?>
 

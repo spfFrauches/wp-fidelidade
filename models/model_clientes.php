@@ -97,9 +97,10 @@ function listarDadosCompletosClientesLigados($cnpj) {
     global $wpdb; 
     
     $sql = "SELECT  a.cnpjemp CNPJCPF, a.cpfcli CPF, b.nome_completo NOME, "
-            . "(SELECT max(datamarcacao) FROM marcacao WHERE cpfcli = a.cpfcli) ULTMARC "
+            . "(SELECT max(datamarcacao) FROM marcacao WHERE cpfcli = a.cpfcli and estorno is null or estorno <> 's') ULTMARC "
             . "FROM ligacaoclienteempresa a JOIN clientes b ON a.cpfcli = b.cpf "
-            . "WHERE 1=1 AND a.cnpjemp = '$cnpj' ORDER BY ULTMARC DESC";
+            . "WHERE 1=1 AND a.cnpjemp = '$cnpj'"
+            . "ORDER BY ULTMARC DESC";
     
     $resultado =  $wpdb->get_results($sql);    
     return $resultado;

@@ -82,17 +82,6 @@ get_header('marcacao');
         <!-- ---------------------------------------------------------------------------------- -->
         <!-- Parte 2 - Informações do Cliente e registrando compra                              -->
         <!-- ---------------------------------------------------------------------------------- -->
-
-
-        <div class="form-group card p-2" id="tempoLimiteMarcacao">     
-            <div class="row text-center mt-3">
-                <h1 class="text-danger"><i class="fa fa-clock-o" aria-hidden="true"></i></h1>
-                <h1 class="text-danger">Limite de tempo entre marcações</h1>
-                <p style="margin-top: -5px;" class="text-danger">Limite tempo configurado</p>
-                <p style="margin-top: -15px;" class="text-danger">Este cliente marcou há pouco tempo.</p>
-                <p style="margin-top: -15px;" class="text-danger">Não pode ser marcado até o tempo limite expirar</p>
-            </div>    
-        </div>
         
         <div class="form-group card p-2" id="confirma_marcacao">     
             <div class="row text-center">

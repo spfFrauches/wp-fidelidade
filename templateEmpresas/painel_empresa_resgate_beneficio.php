@@ -7,8 +7,6 @@ include( get_template_directory() . '/models/model_beneficio.php' );
 include( get_template_directory() . '/models/model_clientes.php' );
 include( get_template_directory() . '/models/model_marcacao.php' );
 
-
-
 $listarCliente = listarDadosCompletosClientesLigadosCalculandoPontosAtuais($_SESSION['dados_empresa'][0]->cnpj);
 $configEmpresa = listarConfiguracaoEmpresa($_SESSION['dados_empresa'][0]->cnpj);   
 
